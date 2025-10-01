@@ -6,5 +6,5 @@ Machine Learning 1 Project
 2. Assess which players are undervalued/overvalued in order to build a new team and predict transfers.
 
 ### **DATA SOURCES**
-1. *NBA API: * https://github.com/swar/nba_api
+1. *NBA API:* https://github.com/swar/nba_api
 2. `2012-2023 NBA Stats.csv`
