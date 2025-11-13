@@ -14,7 +14,7 @@ Using all of the models we have used this semester, we will analyze NBA player d
 5. Create a trade analysis model based on projected evaluated salaries + other evaluative metrics.
 6. Predict win/loss for next season based on current roster and player statistics.
 
-#### **MODELS**:
+### **MODELS**:
 1. Multiple Linear Regression
 2. Logistic Regression
 3. KNN: K-Nearest Neighbors

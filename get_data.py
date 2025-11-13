@@ -34,3 +34,6 @@ if 'PLAYER_NAME_adv' in nba_df.columns:
     nba_df.rename(columns={'PLAYER_NAME_base': 'PLAYER_NAME'}, inplace=True)
 
 nba_df.head()
+
+# Save to CSV
+nba_df.to_csv('DATA/nba_base_data.csv', index=False)
