@@ -20,6 +20,8 @@ time.sleep(1)
 
 stats_base['PLAYER_NAME'] = stats_base['PLAYER_NAME'].apply(unidecode)
 stats_adv['PLAYER_NAME'] = stats_adv['PLAYER_NAME'].apply(unidecode)
+
+#merge
 nba_df = stats_base.merge(
     stats_adv,
     on='PLAYER_ID',
