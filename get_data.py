@@ -4,6 +4,10 @@ from unidecode import unidecode
 import pandas as pd
 import os
 
+# Made DATA FOLDER
+if not os.path.exists('DATA'):
+    os.makedirs('DATA')
+
 #base per-game stats
 stats_base = LeagueDashPlayerStats(
     season='2024-25',
