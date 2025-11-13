@@ -12,6 +12,7 @@ dependencies:
   - scikit-learn
   - matplotlib
   - seaborn
+  - plotly
   - requests
   - beautifulsoup4
   - lxml
@@ -20,3 +21,5 @@ dependencies:
   - pip:
       - streamlit
       - xgboost
+      - nba_api
+      - unidecode
