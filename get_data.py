@@ -2,6 +2,7 @@ from nba_api.stats.endpoints import LeagueDashPlayerStats
 import time
 from unidecode import unidecode
 import pandas as pd
+import os
 
 #base per-game stats
 stats_base = LeagueDashPlayerStats(
@@ -38,6 +39,9 @@ nba_df.head()
 # Confirm the data
 print(nba_df.head())
 
-# Save to CSV
-nba_df.to_csv('DATA/nba_base_data.csv', index=False)
-print("Data saved to DATA/nba_base_data.csv")
+# Get the directory where this script is located
+project_dir = os.path.dirname(os.path.abspath(__file__))
+output_path = os.path.join(project_dir, "player_stats.csv")
+nba_df.to_csv(output_path, index=False)
+
+print(f"Saved data to: {output_path}")
