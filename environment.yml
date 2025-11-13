@@ -1,0 +1,22 @@
+name: nba_ml_project
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - python=3.11
+  - numpy
+  - pandas
+  - scipy
+  - statsmodels
+  - scikit-learn
+  - matplotlib
+  - seaborn
+  - requests
+  - beautifulsoup4
+  - lxml
+  - jupyter
+  - pip
+  - pip:
+      - streamlit
+      - xgboost
