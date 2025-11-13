@@ -34,3 +34,13 @@ if 'PLAYER_NAME_adv' in nba_df.columns:
     nba_df.rename(columns={'PLAYER_NAME_base': 'PLAYER_NAME'}, inplace=True)
 
 nba_df.head()
+
+# Confirm the data
+print(nba_df.head())
+
+# Get the directory where this script is located
+project_dir = os.path.dirname(os.path.abspath(__file__))
+output_path = os.path.join(project_dir, "player_stats.csv")
+nba_df.to_csv(output_path, index=False)
+
+print(f"Saved data to: {output_path}")
