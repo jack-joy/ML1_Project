@@ -16,7 +16,6 @@ def spider(url):
   for i in range(len(player_list)):
     name = player_list[i].find("a").get_text(strip=True)
     players.append(name)
-
   salaries = mysoup.select('td[style*="text-align:right"]:not([width])')
   salaries = [td.get_text(strip=True) for td in salaries]
 
@@ -24,7 +23,6 @@ def spider(url):
     "PLAYER_NAME": players,
     "SALARY": salaries
   })
-
   return df
 
 if __name__ == "__main__":
@@ -35,6 +33,4 @@ if __name__ == "__main__":
     df = spider(url)
     new_df = pd.concat([new_df, df], ignore_index=True)
 
-  new_df.to_csv("24-25_salaries.csv", index=False)
-
-  
+  new_df.to_csv("DATA/24-25_salaries.csv", index=False)
