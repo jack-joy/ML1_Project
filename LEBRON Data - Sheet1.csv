@@ -1,0 +1,442 @@
+Rank,Season,Player,Age,Team(s),Minutes,Rotation Role,Offensive Archetype,Defensive Role,LEBRON WAR,LEBRON,O-LEBRON,D-LEBRON
+1,2024-25,Shai Gilgeous-Alexander,26,OKC,2598,Star,Shot Creator,Helper,14.58,6.78,5.91,0.87
+2,2024-25,Nikola Jokić,29,DEN,2571,Star,Post Scorer,Mobile Big,13.87,6.38,5.91,0.47
+3,2024-25,Jayson Tatum,26,BOS,2624,Star,Shot Creator,Helper,11.19,4.39,3.49,0.9
+4,2024-25,Giannis Antetokounmpo,30,MIL,2289,Star,Post Scorer,Helper,11.04,5.36,4.42,0.94
+5,2024-25,James Harden,35,LAC,2789,Star,Shot Creator,Helper,10.6,3.62,2.97,0.65
+6,2024-25,Tyrese Haliburton,24,IND,2451,Star,Shot Creator,Low Activity,9.42,3.69,3.8,-0.11
+7,2024-25,Anthony Edwards,23,MIN,2871,Star,Shot Creator,Helper,9.06,2.57,2.88,-0.31
+8,2024-25,Donovan Mitchell,28,CLE,2232,Star,Shot Creator,Chaser,8.44,3.59,3.93,-0.34
+9,2024-25,Ivica Zubac,27,LAC,2624,Starter,Post Scorer,Anchor Big,8.34,2.6,0.85,1.76
+10,2024-25,Karl-Anthony Towns,29,NYK,2517,Starter,Post Scorer,Anchor Big,8.18,2.72,2.12,0.6
+11,2024-25,Derrick White,30,BOS,2574,Starter,Primary Ball Handler,Chaser,8.16,2.59,1.67,0.92
+12,2024-25,Jarrett Allen,26,CLE,2296,Star,Athletic Finisher,Mobile Big,8.06,3.14,1.36,1.78
+13,2024-25,Jalen Williams,23,OKC,2237,Starter,Shot Creator,Helper,8.01,3.26,2.35,0.91
+14,2024-25,Evan Mobley,23,CLE,2167,Star,Shot Creator,Mobile Big,8,3.44,1.74,1.7
+15,2024-25,Stephen Curry,36,GSW,2252,Star,Primary Ball Handler,Low Activity,7.57,2.9,3.4,-0.5
+16,2024-25,Luka Dončić,25,DAL/LAL,1769,Star,Shot Creator,Helper,7.31,4.18,4.15,0.03
+17,2024-25,LeBron James,40,LAL,2444,Star,Shot Creator,Helper,7.29,2.28,2.62,-0.34
+18,2024-25,Josh Hart,29,NYK,2897,Starter,Primary Ball Handler,Helper,7.13,1.45,0.41,1.05
+19,2024-25,Darius Garland,25,CLE,2301,Starter,Primary Ball Handler,Point of Attack,7.06,2.43,3.22,-0.79
+20,2024-25,Domantas Sabonis,28,SAC,2429,Star,Roll + Cut Big,Mobile Big,6.89,2.05,1.59,0.47
+21,2024-25,Payton Pritchard,27,BOS,2271,Key Rotation,Primary Ball Handler,Point of Attack,6.83,2.33,2.4,-0.07
+22,2024-25,Anthony Davis,31,LAL/DAL,1706,Star,Shot Creator,Mobile Big,6.81,3.94,2.38,1.56
+23,2024-25,Alperen Sengun,22,HOU,2394,Star,Shot Creator,Mobile Big,6.6,1.92,1.01,0.91
+24,2024-25,Bam Adebayo,27,MIA,2674,Star,Shot Creator,Mobile Big,6.51,1.41,0.26,1.15
+25,2024-25,Trae Young,26,ATL,2739,Star,Primary Ball Handler,Low Activity,6.49,1.31,2.89,-1.58
+26,2024-25,Tyler Herro,25,MIA,2725,Starter,Primary Ball Handler,Chaser,6.48,1.32,1.99,-0.66
+27,2024-25,Damian Lillard,34,MIL,2093,Star,Primary Ball Handler,Low Activity,6.4,2.41,3.33,-0.93
+28,2024-25,Cade Cunningham,23,DET,2452,Starter,Shot Creator,Helper,6.32,1.64,2.06,-0.42
+29,2024-25,Jaren Jackson Jr.,25,MEM,2207,Star,Shot Creator,Mobile Big,6.23,2.03,1.27,0.76
+30,2024-25,Jalen Brunson,28,NYK,2301,Star,Shot Creator,Low Activity,6.2,1.83,3.19,-1.36
+31,2024-25,Pascal Siakam,30,IND,2548,Star,Shot Creator,Helper,6.18,1.39,1.52,-0.12
+32,2024-25,Austin Reaves,26,LAL,2550,Starter,Primary Ball Handler,Chaser,6.16,1.38,2.06,-0.68
+33,2024-25,Rudy Gobert,32,MIN,2388,Starter,Athletic Finisher,Anchor Big,6.14,1.63,-0.21,1.84
+34,2024-25,Victor Wembanyama,21,SAS,1527,Star,Shot Creator,Mobile Big,5.97,3.8,1.45,2.35
+35,2024-25,Amen Thompson,22,HOU,2225,Starter,Athletic Finisher,Point of Attack,5.64,1.57,-0.19,1.76
+36,2024-25,Dyson Daniels,21,ATL,2571,Starter,Primary Ball Handler,Point of Attack,5.62,1.02,-0.46,1.48
+37,2024-25,OG Anunoby,27,NYK,2706,Starter,Movement Shooter,Wing Stopper,5.55,0.81,0.43,0.37
+38,2024-25,Jalen Duren,21,DET,2035,Key Rotation,Roll + Cut Big,Mobile Big,5.49,1.83,0.33,1.51
+39,2024-25,Jaylen Brown,28,BOS,2158,Starter,Shot Creator,Wing Stopper,5.46,1.56,1.56,0
+40,2024-25,Jamal Murray,27,DEN,2418,Star,Shot Creator,Chaser,5.45,1.12,1.99,-0.86
+41,2024-25,Jimmy Butler,35,MIA/GSW,1746,Star,Shot Creator,Wing Stopper,5.4,2.46,2.34,0.12
+42,2024-25,DeMar DeRozan,35,SAC,2768,Starter,Shot Creator,Low Activity,5.36,0.62,1.36,-0.74
+43,2024-25,Myles Turner,28,IND,2174,Star,Versatile Big,Mobile Big,5.3,1.42,0.15,1.27
+44,2024-25,Naz Reid,25,MIN,2200,Starter,Movement Shooter,Helper,5.27,1.35,0.57,0.78
+45,2024-25,Desmond Bane,26,MEM,2205,Starter,Shot Creator,Chaser,5.26,1.33,1.44,-0.11
+46,2024-25,Jaden McDaniels,24,MIN,2614,Starter,Stationary Shooter,Point of Attack,5.17,0.69,-0.59,1.28
+47,2024-25,Devin Booker,28,PHO,2795,Star,Primary Ball Handler,Chaser,5.15,0.48,2.95,-2.48
+48,2024-25,Franz Wagner,23,ORL,2023,Starter,Shot Creator,Helper,5.14,1.58,1.66,-0.08
+49,2024-25,Nikola Vučević,34,CHI,2278,Starter,Versatile Big,Mobile Big,5.11,1.11,1.16,-0.05
+50,2024-25,Josh Giddey,22,CHI,2117,Starter,Primary Ball Handler,Helper,4.94,1.25,0.89,0.36
+51,2024-25,De'Aaron Fox,27,SAC/SAS,2241,Star,Shot Creator,Point of Attack,4.9,1.02,1.46,-0.44
+52,2024-25,Fred VanVleet,30,HOU,2113,Star,Primary Ball Handler,Point of Attack,4.85,1.19,0.49,0.7
+53,2024-25,Brook Lopez,36,MIL,2546,Starter,Versatile Big,Anchor Big,4.64,0.44,-0.48,0.92
+54,2024-25,Onyeka Okongwu,24,ATL,2064,Starter,Roll + Cut Big,Mobile Big,4.61,1.09,0.33,0.76
+55,2024-25,Isaiah Hartenstein,26,OKC,1590,Starter,Slasher,Mobile Big,4.53,2.08,0.05,2.03
+56,2024-25,Kevin Durant,36,PHO,2265,Star,Shot Creator,Wing Stopper,4.5,0.71,1.7,-1
+57,2024-25,Deni Avdija,24,POR,2161,Key Rotation,Shot Creator,Helper,4.47,0.83,0.72,0.1
+58,2024-25,Christian Braun,23,DEN,2675,Starter,Athletic Finisher,Point of Attack,4.47,0.2,0.44,-0.23
+59,2024-25,Jalen Green,22,HOU,2697,Starter,Shot Creator,Chaser,4.46,0.18,0.61,-0.44
+60,2024-25,Michael Porter Jr.,26,DEN,2593,Starter,Off Screen Shooter,Low Activity,4.36,0.22,1.2,-0.98
+61,2024-25,Draymond Green,34,GSW,1983,Starter,Stationary Shooter,Mobile Big,4.31,0.99,-1.42,2.42
+62,2024-25,Kristaps Porziņģis,29,BOS,1210,Star,Versatile Big,Anchor Big,4.23,3.12,2.14,0.97
+63,2024-25,Scottie Barnes,23,TOR,2134,Starter,Shot Creator,Wing Stopper,4.11,0.6,0.13,0.47
+64,2024-25,Norman Powell,31,LAC,1958,Starter,Secondary Ball Handler,Chaser,4.06,0.84,1.28,-0.45
+65,2024-25,Julius Randle,30,MIN,2226,Starter,Shot Creator,Helper,4.02,0.42,1.16,-0.74
+66,2024-25,Tobias Harris,32,DET,2306,Starter,Shot Creator,Helper,3.92,0.25,-0.65,0.9
+67,2024-25,Ty Jerome,27,CLE,1393,Key Rotation,Primary Ball Handler,Chaser,3.91,2.01,2.33,-0.32
+68,2024-25,Paolo Banchero,22,ORL,1582,Star,Shot Creator,Helper,3.89,1.46,1.78,-0.33
+69,2024-25,Keon Ellis,25,SAC,1948,Key Rotation,Movement Shooter,Point of Attack,3.88,0.71,-0.71,1.42
+70,2024-25,Malik Monk,26,SAC,2054,Key Rotation,Primary Ball Handler,Chaser,3.87,0.54,0.82,-0.28
+71,2024-25,Santi Aldama,24,MEM,1660,Starter,Movement Shooter,Helper,3.87,1.25,1.17,0.08
+72,2024-25,Goga Bitadze,25,ORL,1430,Rotation,Roll + Cut Big,Mobile Big,3.86,1.84,-0.73,2.57
+73,2024-25,Luguentz Dort,25,OKC,2073,Starter,Stationary Shooter,Point of Attack,3.86,0.51,-0.27,0.78
+74,2024-25,Cason Wallace,21,OKC,1876,Starter,Stationary Shooter,Point of Attack,3.84,0.79,-0.51,1.31
+75,2024-25,Scotty Pippen Jr.,24,MEM,1683,Key Rotation,Primary Ball Handler,Point of Attack,3.79,1.12,0.41,0.71
+76,2024-25,Mikal Bridges,28,NYK,3036,Starter,Movement Shooter,Point of Attack,3.78,-0.47,0.26,-0.72
+77,2024-25,Mike Conley,37,MIN,1756,Key Rotation,Primary Ball Handler,Chaser,3.77,0.95,0.51,0.44
+78,2024-25,Luke Kornet,29,BOS,1361,Rotation,Athletic Finisher,Anchor Big,3.73,1.9,0.31,1.6
+79,2024-25,Ja Morant,25,MEM,1519,Star,Shot Creator,Point of Attack,3.7,1.41,2.42,-1.01
+80,2024-25,Malik Beasley,28,DET,2283,Starter,Off Screen Shooter,Chaser,3.69,0.11,1.32,-1.2
+81,2024-25,Chris Paul,39,SAS,2292,Starter,Shot Creator,Low Activity,3.68,0.1,0.25,-0.15
+82,2024-25,Kris Dunn,30,LAC,1783,Key Rotation,Primary Ball Handler,Point of Attack,3.66,0.8,-1.26,2.06
+83,2024-25,Tyrese Maxey,24,PHI,1960,Starter,Shot Creator,Chaser,3.63,0.49,2.26,-1.77
+84,2024-25,Al Horford,38,BOS,1659,Key Rotation,Stationary Shooter,Helper,3.63,1.02,-0.22,1.24
+85,2024-25,Jrue Holiday,34,BOS,1896,Starter,Shot Creator,Point of Attack,3.53,0.51,-0.06,0.57
+86,2024-25,Coby White,24,CHI,2450,Starter,Primary Ball Handler,Chaser,3.52,-0.17,0.96,-1.12
+87,2024-25,Aaron Wiggins,26,OKC,1744,Key Rotation,Shot Creator,Chaser,3.51,0.75,1.04,-0.3
+88,2024-25,Tari Eason,23,HOU,1420,Key Rotation,Stationary Shooter,Wing Stopper,3.49,1.45,-0.14,1.59
+89,2024-25,Donte DiVincenzo,28,MIN,1606,Key Rotation,Off Screen Shooter,Chaser,3.34,0.85,0.84,0
+90,2024-25,Brandin Podziemski,21,GSW,1716,Starter,Primary Ball Handler,Point of Attack,3.34,0.64,-0.01,0.65
+91,2024-25,Kyrie Irving,32,DAL,1804,Star,Shot Creator,Chaser,3.32,0.47,1.9,-1.43
+92,2024-25,Keegan Murray,24,SAC,2610,Starter,Movement Shooter,Wing Stopper,3.3,-0.44,-0.72,0.28
+93,2024-25,Daniel Gafford,26,DAL,1226,Rotation,Roll + Cut Big,Mobile Big,3.29,1.81,0.65,1.16
+94,2024-25,Walker Kessler,23,UTA,1740,Starter,Athletic Finisher,Anchor Big,3.28,0.54,-0.72,1.26
+95,2024-25,Jonathan Isaac,27,ORL,1090,Rotation,Stretch Big,Helper,3.27,2.31,-0.24,2.55
+96,2024-25,Isaiah Joe,25,OKC,1604,Key Rotation,Movement Shooter,Low Activity,3.12,0.64,1.17,-0.54
+97,2024-25,Kawhi Leonard,33,LAC,1180,Star,Shot Creator,Helper,3.1,1.71,1.57,0.14
+98,2024-25,Ausar Thompson,22,DET,1328,Key Rotation,Roll + Cut Big,Point of Attack,3.08,1.23,-0.32,1.55
+99,2024-25,Royce O'Neale,31,PHO,1837,Starter,Stationary Shooter,Wing Stopper,3.01,0.15,0.1,0.06
+100,2024-25,Jonas Valančiūnas,32,WAS/SAC,1524,Key Rotation,Post Scorer,Anchor Big,3.01,0.69,0.07,0.62
+101,2024-25,D'Angelo Russell,28,LAL/BRK,1481,Key Rotation,Primary Ball Handler,Chaser,3,0.76,1.16,-0.39
+102,2024-25,Obi Toppin,26,IND,1545,Key Rotation,Versatile Big,Helper,2.98,0.61,0.87,-0.26
+103,2024-25,Russell Westbrook,36,DEN,2092,Key Rotation,Shot Creator,Wing Stopper,2.98,-0.18,0.11,-0.29
+104,2024-25,Zach LaVine,29,CHI/SAC,2603,Starter,Shot Creator,Chaser,2.98,-0.63,0.84,-1.47
+105,2024-25,Tyus Jones,28,PHO,2174,Starter,Primary Ball Handler,Point of Attack,2.95,-0.29,1.1,-1.39
+106,2024-25,Dennis Schröder,31,BRK/GSW/DET,2106,Key Rotation,Shot Creator,Point of Attack,2.94,-0.23,0.3,-0.53
+107,2024-25,Andrew Wiggins,29,GSW/MIA,1842,Starter,Secondary Ball Handler,Wing Stopper,2.92,0.07,0.26,-0.19
+108,2024-25,Sam Hauser,27,BOS,1541,Rotation,Movement Shooter,Chaser,2.86,0.5,0.27,0.23
+109,2024-25,Kel'el Ware,20,MIA,1422,Key Rotation,Athletic Finisher,Anchor Big,2.81,0.68,-1.24,1.93
+110,2024-25,Anfernee Simons,25,POR,2292,Starter,Shot Creator,Low Activity,2.77,-0.52,1.05,-1.57
+111,2024-25,LaMelo Ball,23,CHO,1505,Star,Primary Ball Handler,Chaser,2.76,0.46,2.11,-1.65
+112,2024-25,Caris LeVert,30,CLE/ATL,1596,Key Rotation,Shot Creator,Chaser,2.75,0.28,0.44,-0.16
+113,2024-25,Donovan Clingan,20,POR,1324,Rotation,Athletic Finisher,Anchor Big,2.75,0.85,-1.31,2.16
+114,2024-25,Jakob Poeltl,29,TOR,1686,Starter,Roll + Cut Big,Mobile Big,2.74,0.13,-1.08,1.21
+115,2024-25,Jalen Johnson,23,ATL,1284,Starter,Primary Ball Handler,Wing Stopper,2.71,0.9,-0.03,0.93
+116,2024-25,Zach Edey,22,MEM,1416,Key Rotation,Post Scorer,Mobile Big,2.71,0.59,-0.44,1.03
+117,2024-25,Kevin Porter Jr.,24,LAC/MIL,1482,Rotation,Shot Creator,Point of Attack,2.69,0.43,0.15,0.29
+118,2024-25,Toumani Camara,24,POR,2548,Starter,Stationary Shooter,Wing Stopper,2.69,-0.76,-1.23,0.47
+119,2024-25,Alex Caruso,30,OKC,1041,Rotation,Low Minute,Wing Stopper,2.68,1.64,0.01,1.64
+120,2024-25,Wendell Carter Jr.,25,ORL,1758,Starter,Stretch Big,Mobile Big,2.68,-0.03,-1.17,1.14
+121,2024-25,Nickeil Alexander-Walker,26,MIN,2073,Key Rotation,Primary Ball Handler,Point of Attack,2.68,-0.39,-0.43,0.04
+122,2024-25,Jalen Smith,24,CHI,962,Rotation,Stretch Big,Mobile Big,2.66,1.94,1.07,0.87
+123,2024-25,Buddy Hield,32,GSW,1864,Key Rotation,Off Screen Shooter,Chaser,2.64,-0.19,-0.11,-0.08
+124,2024-25,T.J. McConnell,32,IND,1415,Rotation,Slasher,Point of Attack,2.64,0.52,0.39,0.13
+125,2024-25,Mark Williams,23,CHO,1171,Key Rotation,Athletic Finisher,Anchor Big,2.63,1.11,-0.01,1.12
+126,2024-25,De'Andre Hunter,27,ATL/CLE,1740,Starter,Shot Creator,Wing Stopper,2.6,-0.08,0.66,-0.74
+127,2024-25,Cameron Johnson,28,BRK,1800,Starter,Movement Shooter,Helper,2.57,-0.18,0.95,-1.13
+128,2024-25,Miles McBride,24,NYK,1593,Key Rotation,Secondary Ball Handler,Point of Attack,2.53,0.08,0.15,-0.07
+129,2024-25,Derrick Jones Jr.,27,LAC,1873,Key Rotation,Stationary Shooter,Point of Attack,2.52,-0.31,-0.79,0.48
+130,2024-25,Kevon Looney,28,GSW,1142,Rotation,Roll + Cut Big,Anchor Big,2.5,1.03,-0.65,1.68
+131,2024-25,Mason Plumlee,34,PHO,1300,Rotation,Athletic Finisher,Anchor Big,2.49,0.59,-1.15,1.74
+132,2024-25,Sam Merrill,28,CLE,1401,Key Rotation,Off Screen Shooter,Chaser,2.44,0.32,0.26,0.06
+133,2024-25,Isaiah Stewart,23,DET,1434,Rotation,Roll + Cut Big,Mobile Big,2.43,0.24,-1.81,2.05
+134,2024-25,Bobby Portis,29,MIL,1244,Key Rotation,Shot Creator,Mobile Big,2.42,0.64,0.23,0.41
+135,2024-25,Quentin Grimes,24,DAL/PHI,2013,Key Rotation,Secondary Ball Handler,Chaser,2.42,-0.54,0.41,-0.95
+136,2024-25,Miles Bridges,26,CHO,2029,Starter,Shot Creator,Wing Stopper,2.4,-0.56,0.24,-0.8
+137,2024-25,Chet Holmgren,22,OKC,877,Key Rotation,Off Screen Shooter,Mobile Big,2.38,1.86,0.22,1.65
+138,2024-25,Jusuf Nurkić,30,PHO/CHO,1063,Rotation,Post Scorer,Anchor Big,2.34,1.04,-0.54,1.58
+139,2024-25,Moses Moody,22,GSW,1649,Key Rotation,Off Screen Shooter,Chaser,2.33,-0.21,-0.57,0.36
+140,2024-25,Trey Lyles,29,SAC,1349,Rotation,Movement Shooter,Helper,2.28,0.23,-0.34,0.57
+141,2024-25,Spencer Dinwiddie,31,DAL,2136,Key Rotation,Shot Creator,Chaser,2.28,-0.75,0.02,-0.77
+142,2024-25,Andrew Nembhard,25,IND,1881,Starter,Primary Ball Handler,Point of Attack,2.23,-0.56,-0.66,0.09
+143,2024-25,RJ Barrett,24,TOR,1869,Starter,Primary Ball Handler,Helper,2.23,-0.55,0.17,-0.72
+144,2024-25,P.J. Washington,26,DAL,1835,Starter,Shot Creator,Wing Stopper,2.2,-0.54,-0.87,0.33
+145,2024-25,Kevin Huerter,26,SAC/CHI,1679,Rotation,Movement Shooter,Chaser,2.13,-0.43,-0.41,-0.02
+146,2024-25,Rui Hachimura,26,LAL,1869,Starter,Stationary Shooter,Wing Stopper,2.13,-0.63,-0.43,-0.2
+147,2024-25,Zion Williamson,24,NOP,857,Key Rotation,Shot Creator,Wing Stopper,2.13,1.49,2.25,-0.75
+148,2024-25,Grayson Allen,29,PHO,1544,Key Rotation,Movement Shooter,Chaser,2.11,-0.27,0.38,-0.66
+149,2024-25,Gary Trent Jr.,26,MIL,1893,Key Rotation,Off Screen Shooter,Point of Attack,2.09,-0.69,-0.19,-0.51
+150,2024-25,Brandon Clarke,28,MEM,1207,Rotation,Athletic Finisher,Mobile Big,2.09,0.3,-0.38,0.67
+151,2024-25,Nic Claxton,25,BRK,1880,Key Rotation,Roll + Cut Big,Mobile Big,2.08,-0.68,-1.82,1.13
+152,2024-25,Bennedict Mathurin,22,IND,2149,Starter,Shot Creator,Chaser,2.07,-0.91,-0.18,-0.73
+153,2024-25,Jabari Smith Jr.,21,HOU,1716,Key Rotation,Stationary Shooter,Helper,2.05,-0.55,-1.02,0.47
+154,2024-25,Clint Capela,30,ATL,1176,Rotation,Athletic Finisher,Anchor Big,2.05,0.32,-0.63,0.95
+155,2024-25,Cameron Payne,30,NYK,1090,Rotation,Primary Ball Handler,Low Activity,2.02,0.49,0.74,-0.25
+156,2024-25,Dillon Brooks,29,HOU,2388,Starter,Movement Shooter,Wing Stopper,2.01,-1.1,-0.95,-0.16
+157,2024-25,Dean Wade,28,CLE,1252,Key Rotation,Stationary Shooter,Wing Stopper,2.01,0.09,-0.89,0.99
+158,2024-25,Jaylin Williams,22,OKC,784,Rotation,Stretch Big,Anchor Big,2,1.61,0.27,1.33
+159,2024-25,Max Strus,28,CLE,1273,Starter,Movement Shooter,Wing Stopper,1.99,0.04,0.35,-0.31
+160,2024-25,Anthony Black,21,ORL,1887,Key Rotation,Primary Ball Handler,Point of Attack,1.97,-0.78,-1.75,0.96
+161,2024-25,Shaedon Sharpe,21,POR,2252,Starter,Shot Creator,Chaser,1.95,-1.07,0.08,-1.15
+162,2024-25,Immanuel Quickley,25,TOR,918,Starter,Primary Ball Handler,Chaser,1.92,0.86,1.92,-1.06
+163,2024-25,Luke Kennard,28,MEM,1472,Key Rotation,Movement Shooter,Low Activity,1.9,-0.4,0.15,-0.55
+164,2024-25,Devin Vassell,24,SAS,1983,Starter,Secondary Ball Handler,Chaser,1.89,-0.93,-0.19,-0.74
+165,2024-25,Jonathan Kuminga,22,GSW,1144,Key Rotation,Shot Creator,Wing Stopper,1.87,0.15,0.26,-0.11
+166,2024-25,Day'Ron Sharpe,23,BRK,909,Rotation,Roll + Cut Big,Mobile Big,1.87,0.81,-0.13,0.94
+167,2024-25,Cole Anthony,24,ORL,1234,Rotation,Primary Ball Handler,Point of Attack,1.86,-0.06,-0.26,0.21
+168,2024-25,Dereck Lively II,20,DAL,833,Key Rotation,Athletic Finisher,Mobile Big,1.86,1.09,-0.47,1.56
+169,2024-25,Lauri Markkanen,27,UTA,1476,Starter,Off Screen Shooter,Wing Stopper,1.82,-0.49,1.11,-1.6
+170,2024-25,Nicolas Batum,36,LAC,1367,Rotation,Stationary Shooter,Helper,1.82,-0.33,-1.6,1.28
+171,2024-25,Naji Marshall,27,DAL,1919,Key Rotation,Stationary Shooter,Helper,1.79,-0.96,-0.15,-0.82
+172,2024-25,Jalen Suggs,23,ORL,1002,Starter,Primary Ball Handler,Point of Attack,1.79,0.39,-0.04,0.44
+173,2024-25,Bradley Beal,31,PHO,1702,Starter,Primary Ball Handler,Point of Attack,1.77,-0.79,0.14,-0.93
+174,2024-25,Zach Collins,27,SAS/CHI,976,Rotation,Stretch Big,Mobile Big,1.75,0.4,-0.29,0.69
+175,2024-25,Nikola Jović,21,MIA,1156,Key Rotation,Stationary Shooter,Helper,1.75,-0.04,-0.44,0.4
+176,2024-25,Aaron Gordon,29,DEN,1447,Starter,Shot Creator,Wing Stopper,1.75,-0.52,0.59,-1.11
+177,2024-25,Deandre Ayton,26,POR,1206,Starter,Roll + Cut Big,Anchor Big,1.74,-0.16,-0.77,0.61
+178,2024-25,Trey Murphy III,24,NOP,1854,Starter,Movement Shooter,Wing Stopper,1.74,-0.95,0.61,-1.57
+179,2024-25,Peyton Watson,22,DEN,1657,Key Rotation,Stretch Big,Point of Attack,1.74,-0.78,-1.79,1.01
+180,2024-25,Jaxson Hayes,24,LAL,1093,Rotation,Athletic Finisher,Anchor Big,1.73,0.06,-1.52,1.58
+181,2024-25,Tim Hardaway Jr.,32,DET,2153,Starter,Off Screen Shooter,Chaser,1.73,-1.17,-0.39,-0.78
+182,2024-25,Chris Boucher,32,TOR,862,Rotation,Movement Shooter,Low Activity,1.72,0.72,0.84,-0.12
+183,2024-25,Jaime Jaquez Jr.,23,MIA,1368,Rotation,Shot Creator,Helper,1.72,-0.45,-0.83,0.38
+184,2024-25,Dejounte Murray,28,NOP,1012,Starter,Shot Creator,Point of Attack,1.71,0.24,0.27,-0.03
+185,2024-25,John Collins,27,UTA,1220,Starter,Athletic Finisher,Helper,1.71,-0.23,-0.17,-0.06
+186,2024-25,Klay Thompson,34,DAL,1965,Key Rotation,Off Screen Shooter,Chaser,1.71,-1.06,0.42,-1.47
+187,2024-25,Matas Buzelis,20,CHI,1511,Rotation,Movement Shooter,Helper,1.7,-0.65,-1.16,0.51
+188,2024-25,Paul George,34,PHI,1334,Starter,Shot Creator,Helper,1.7,-0.42,-0.33,-0.08
+189,2024-25,Thomas Bryant,27,MIA/IND,963,Rotation,Stretch Big,Mobile Big,1.69,0.33,0.08,0.25
+190,2024-25,Kentavious Caldwell-Pope,31,ORL,2279,Starter,Off Screen Shooter,Wing Stopper,1.69,-1.26,-2.07,0.81
+191,2024-25,Scoot Henderson,20,POR,1759,Key Rotation,Shot Creator,Chaser,1.68,-0.93,-0.31,-0.61
+192,2024-25,Kyle Anderson,31,GSW/MIA,1002,Rotation,Shot Creator,Helper,1.67,0.19,-0.91,1.1
+193,2024-25,Jay Huff,26,MEM,748,Rotation,Stretch Big,Mobile Big,1.66,1.07,0.28,0.79
+194,2024-25,Kenrich Williams,30,OKC,1132,Rotation,Stretch Big,Helper,1.65,-0.13,-0.39,0.25
+195,2024-25,Trayce Jackson-Davis,24,GSW,967,Rotation,Athletic Finisher,Mobile Big,1.65,0.27,-0.5,0.77
+196,2024-25,Jerami Grant,30,POR,1524,Starter,Shot Creator,Wing Stopper,1.61,-0.76,-0.73,-0.03
+197,2024-25,Lonzo Ball,27,CHI,777,Key Rotation,Movement Shooter,Point of Attack,1.6,0.81,0.04,0.77
+198,2024-25,Duncan Robinson,30,MIA,1786,Key Rotation,Off Screen Shooter,Low Activity,1.6,-1.02,-0.36,-0.66
+199,2024-25,Joel Embiid,30,PHI,574,Key Rotation,Shot Creator,Anchor Big,1.6,1.98,2.38,-0.41
+200,2024-25,Keldon Johnson,25,SAS,1838,Key Rotation,Movement Shooter,Helper,1.59,-1.07,0.13,-1.2
+201,2024-25,Nick Richards,27,CHO/PHO,1256,Key Rotation,Athletic Finisher,Anchor Big,1.58,-0.45,-1.26,0.81
+202,2024-25,Jaylen Wells,21,MEM,2043,Starter,Movement Shooter,Wing Stopper,1.57,-1.22,-0.35,-0.88
+203,2024-25,Jake LaRavia,23,MEM/SAC,1349,Key Rotation,Movement Shooter,Helper,1.56,-0.61,-0.94,0.33
+204,2024-25,Khris Middleton,33,MIL/WAS,843,Key Rotation,Shot Creator,Helper,1.54,0.45,0.39,0.06
+205,2024-25,Taurean Prince,30,MIL,2166,Starter,Movement Shooter,Chaser,1.53,-1.32,-1.58,0.26
+206,2024-25,Tre Jones,25,SAS/CHI,905,Rotation,Slasher,Point of Attack,1.51,0.21,-0.13,0.34
+207,2024-25,Sandro Mamukelashvili,25,SAS,681,Rotation,Stretch Big,Mobile Big,1.5,1.04,1.14,-0.09
+208,2024-25,Dalano Banton,25,POR,1120,Rotation,Secondary Ball Handler,Low Activity,1.5,-0.32,-0.12,-0.2
+209,2024-25,Ryan Dunn,22,PHO,1410,Rotation,Stretch Big,Point of Attack,1.5,-0.75,-0.6,-0.15
+210,2024-25,Gary Payton II,32,GSW,927,Rotation,Stretch Big,Wing Stopper,1.48,0.09,-0.86,0.95
+211,2024-25,Dalton Knecht,23,LAL,1494,Rotation,Movement Shooter,Helper,1.48,-0.87,0.2,-1.07
+212,2024-25,Haywood Highsmith,28,MIA,1818,Key Rotation,Stretch Big,Point of Attack,1.46,-1.17,-2.18,1.01
+213,2024-25,Precious Achiuwa,25,NYK,1170,Key Rotation,Roll + Cut Big,Mobile Big,1.46,-0.46,-1.67,1.21
+214,2024-25,Max Christie,21,LAL/DAL,2127,Key Rotation,Movement Shooter,Point of Attack,1.44,-1.37,-1.22,-0.15
+215,2024-25,Bogdan Bogdanović,32,ATL/LAC,1348,Starter,Movement Shooter,Chaser,1.44,-0.75,-0.31,-0.44
+216,2024-25,Vít Krejčí,24,ATL,1153,Rotation,Movement Shooter,Chaser,1.42,-0.49,-0.88,0.39
+217,2024-25,Jarace Walker,21,IND,1187,Rotation,Movement Shooter,Helper,1.41,-0.56,-1.39,0.83
+218,2024-25,Jared Butler,24,WAS/PHI,1044,Rotation,Shot Creator,Point of Attack,1.39,-0.33,0.49,-0.82
+219,2024-25,Aaron Nesmith,25,IND,1123,Key Rotation,Stationary Shooter,Wing Stopper,1.37,-0.51,-0.27,-0.24
+220,2024-25,Neemias Queta,25,BOS,863,Garbage Time,Athletic Finisher,Helper,1.33,0,-1.3,1.3
+221,2024-25,Ronald Holland II,19,DET,1266,Rotation,Stationary Shooter,Chaser,1.33,-0.78,-1.23,0.45
+222,2024-25,Julian Champagnie,23,SAS,1932,Key Rotation,Movement Shooter,Chaser,1.32,-1.36,-0.55,-0.8
+223,2024-25,Terry Rozier,30,MIA,1658,Key Rotation,Primary Ball Handler,Point of Attack,1.31,-1.19,-0.83,-0.36
+224,2024-25,Georges Niang,31,CLE/ATL,1697,Key Rotation,Movement Shooter,Helper,1.31,-1.22,-0.58,-0.64
+225,2024-25,Ayo Dosunmu,25,CHI,1394,Starter,Primary Ball Handler,Point of Attack,1.31,-0.95,-0.57,-0.38
+226,2024-25,Mouhamed Gueye,22,ATL,533,Rotation,Stretch Big,Helper,1.31,1.46,-0.59,2.04
+227,2024-25,Kyle Filipowski,21,UTA,1522,Key Rotation,Stretch Big,Mobile Big,1.31,-1.07,-0.83,-0.24
+228,2024-25,Josh Okogie,26,PHO/CHO,625,Rotation,Stationary Shooter,Wing Stopper,1.26,0.76,0.02,0.74
+229,2024-25,Kelly Olynyk,33,TOR/NOP,891,Rotation,Post Scorer,Helper,1.24,-0.24,-0.62,0.38
+230,2024-25,Ziaire Williams,23,BRK,1541,Key Rotation,Movement Shooter,Wing Stopper,1.23,-1.18,-1.22,0.05
+231,2024-25,Amir Coffey,27,LAC,1748,Key Rotation,Stationary Shooter,Chaser,1.22,-1.33,-0.92,-0.41
+232,2024-25,AJ Green,25,MIL,1659,Key Rotation,Movement Shooter,Chaser,1.22,-1.28,-1.1,-0.18
+233,2024-25,Cam Thomas,23,BRK,781,Starter,Shot Creator,Chaser,1.2,-0.01,2.12,-2.13
+234,2024-25,Moussa Diabate,23,CHO,1241,Rotation,Roll + Cut Big,Mobile Big,1.19,-0.91,-1.69,0.77
+235,2024-25,Alec Burks,33,MIA,863,Rotation,Secondary Ball Handler,Chaser,1.19,-0.26,-0.4,0.15
+236,2024-25,Jeremy Sochan,21,SAS,1367,Key Rotation,Roll + Cut Big,Wing Stopper,1.18,-1.08,-0.74,-0.34
+237,2024-25,Drew Eubanks,27,UTA/LAC,746,Rotation,Roll + Cut Big,Anchor Big,1.17,0.03,-1.25,1.29
+238,2024-25,Stephon Castle,20,SAS,2162,Key Rotation,Shot Creator,Point of Attack,1.16,-1.59,0,-1.59
+239,2024-25,Ben Simmons,28,BRK/LAC,1120,Key Rotation,Shot Creator,Helper,1.15,-0.81,-1.77,0.96
+240,2024-25,Dorian Finney-Smith,31,BRK/LAL,1821,Key Rotation,Stationary Shooter,Wing Stopper,1.14,-1.45,-1.35,-0.1
+241,2024-25,Paul Reed,25,DET,436,Garbage Time,Low Minute,Mobile Big,1.14,1.72,-0.95,2.67
+242,2024-25,Jose Alvarado,26,NOP,1366,Key Rotation,Primary Ball Handler,Point of Attack,1.12,-1.14,-0.12,-1.01
+243,2024-25,Cam Whitmore,20,HOU,827,Rotation,Movement Shooter,Low Activity,1.12,-0.3,0.1,-0.4
+244,2024-25,Jordan Clarkson,32,UTA,962,Key Rotation,Shot Creator,Chaser,1.12,-0.59,0.85,-1.44
+245,2024-25,Cody Martin,29,CHO/PHO,1173,Key Rotation,Movement Shooter,Point of Attack,1.1,-0.96,-1.75,0.79
+246,2024-25,Davion Mitchell,26,TOR/MIA,2027,Key Rotation,Shot Creator,Point of Attack,1.1,-1.58,-1.77,0.19
+247,2024-25,Collin Gillespie,25,PHO,461,Rotation,Shot Creator,Point of Attack,1.09,1.3,1.3,0
+248,2024-25,Isaac Okoro,24,CLE,1053,Key Rotation,Stretch Big,Point of Attack,1.07,-0.83,-0.89,0.06
+249,2024-25,Marcus Sasser,24,DET,811,Rotation,Primary Ball Handler,Point of Attack,1.07,-0.36,0.12,-0.47
+250,2024-25,Zaccharie Risacher,19,ATL,1843,Key Rotation,Movement Shooter,Helper,1.07,-1.52,-0.75,-0.78
+251,2024-25,Steven Adams,31,HOU,795,Rotation,Athletic Finisher,Anchor Big,1.07,-0.32,-0.75,0.43
+252,2024-25,Terance Mann,28,LAC/ATL,1414,Rotation,Movement Shooter,Chaser,1.06,-1.25,-0.86,-0.38
+253,2024-25,Quinten Post,24,GSW,686,Rotation,Stationary Shooter,Mobile Big,1.06,0.01,-0.29,0.29
+254,2024-25,Harrison Barnes,32,SAS,2228,Starter,Shot Creator,Helper,1.04,-1.7,0.03,-1.74
+255,2024-25,Richaun Holmes,31,WAS,534,Rotation,Athletic Finisher,Anchor Big,1.02,0.58,-0.35,0.92
+256,2024-25,Garrison Mathews,28,ATL,830,Rotation,Off Screen Shooter,Low Activity,1.01,-0.52,-0.33,-0.19
+257,2024-25,Kelly Oubre Jr.,29,PHI,2078,Starter,Stationary Shooter,Helper,1,-1.68,-1.03,-0.64
+258,2024-25,Ryan Rollins,22,MIL,820,Rotation,Shot Creator,Point of Attack,1,-0.51,-1,0.5
+259,2024-25,Andre Drummond,31,PHI,751,Rotation,Roll + Cut Big,Mobile Big,0.99,-0.35,-1.15,0.79
+260,2024-25,Talen Horton-Tucker,24,CHI,724,Rotation,Secondary Ball Handler,Chaser,0.97,-0.31,-0.03,-0.28
+261,2024-25,Brandon Miller,22,CHO,924,Starter,Primary Ball Handler,Helper,0.97,-0.77,0.03,-0.81
+262,2024-25,Justin Champagnie,23,WAS,1340,Key Rotation,Movement Shooter,Helper,0.96,-1.3,-1.36,0.05
+263,2024-25,Jabari Walker,22,POR,749,Rotation,Stationary Shooter,Helper,0.96,-0.41,-1.07,0.66
+264,2024-25,DeAndre Jordan,36,DEN,691,Rotation,Athletic Finisher,Mobile Big,0.96,-0.24,-1.65,1.41
+265,2024-25,Bol Bol,25,PHO,448,Rotation,Movement Shooter,Helper,0.95,0.91,0.25,0.67
+266,2024-25,Marcus Smart,30,MEM/WAS,680,Key Rotation,Secondary Ball Handler,Wing Stopper,0.93,-0.28,-0.05,-0.22
+267,2024-25,Jonathan Mogbo,23,TOR,1286,Key Rotation,Athletic Finisher,Helper,0.92,-1.3,-2.06,0.76
+268,2024-25,Tristan Vukcevic,21,WAS,513,Rotation,Stretch Big,Mobile Big,0.91,0.35,0,0.36
+269,2024-25,Guerschon Yabusele,29,PHI,1896,Key Rotation,Stretch Big,Mobile Big,0.9,-1.69,-0.55,-1.13
+270,2024-25,Robert Williams III,27,POR,351,Rotation,Athletic Finisher,Anchor Big,0.89,1.56,-1.46,3.03
+271,2024-25,Mo Bamba,26,LAC/NOP,413,Rotation,Stretch Big,Anchor Big,0.88,0.92,-1.19,2.11
+272,2024-25,Jordan Poole,25,WAS,2001,Starter,Primary Ball Handler,Low Activity,0.88,-1.74,0.29,-2.03
+273,2024-25,Jaden Ivey,22,DET,898,Starter,Primary Ball Handler,Point of Attack,0.88,-0.88,0.16,-1.03
+274,2024-25,Adem Bona,21,PHI,902,Rotation,Roll + Cut Big,Mobile Big,0.87,-0.91,-2.33,1.43
+275,2024-25,Jarred Vanderbilt,25,LAL,581,Rotation,Athletic Finisher,Helper,0.85,-0.13,-1.26,1.13
+276,2024-25,Simone Fontecchio,29,DET,1237,Rotation,Movement Shooter,Low Activity,0.85,-1.35,-1.23,-0.12
+277,2024-25,Patrick Williams,23,CHI,1576,Key Rotation,Movement Shooter,Wing Stopper,0.83,-1.61,-1.57,-0.04
+278,2024-25,Jeff Dowtin Jr.,27,PHI,621,Rotation,Shot Creator,Chaser,0.81,-0.38,0.08,-0.46
+279,2024-25,Ricky Council IV,23,PHI,1250,Rotation,Movement Shooter,Helper,0.8,-1.43,-0.18,-1.25
+280,2024-25,Larry Nance Jr.,32,ATL,463,Rotation,Stretch Big,Mobile Big,0.79,0.24,-0.68,0.92
+281,2024-25,Malcolm Brogdon,32,WAS,564,Key Rotation,Slasher,Chaser,0.79,-0.23,0.35,-0.58
+282,2024-25,Monté Morris,29,PHO,571,Rotation,Secondary Ball Handler,Point of Attack,0.78,-0.27,0.15,-0.42
+283,2024-25,Olivier-Maxence Prosper,22,DAL,584,Rotation,Athletic Finisher,Helper,0.78,-0.32,-0.4,0.07
+284,2024-25,Oso Ighodaro,22,PHO,1045,Rotation,Athletic Finisher,Mobile Big,0.78,-1.26,-2.12,0.86
+285,2024-25,Keyonte George,21,UTA,2108,Starter,Primary Ball Handler,Point of Attack,0.77,-1.86,0.33,-2.19
+286,2024-25,Julian Phillips,21,CHI,1123,Rotation,Stationary Shooter,Helper,0.77,-1.35,-1.34,-0.01
+287,2024-25,Kyle Lowry,38,PHI,659,Rotation,Movement Shooter,Helper,0.77,-0.6,-1.23,0.63
+288,2024-25,Charles Bassey,24,SAS,376,Rotation,Athletic Finisher,Mobile Big,0.75,0.71,-1.31,2.02
+289,2024-25,John Konchar,28,MEM,558,Rotation,Low Minute,Chaser,0.74,-0.35,-1.88,1.53
+290,2024-25,Pelle Larsson,23,MIA,782,Rotation,Stationary Shooter,Chaser,0.74,-0.94,-1.47,0.53
+291,2024-25,Kai Jones,24,LAC/DAL,468,Garbage Time,Athletic Finisher,Mobile Big,0.73,0.02,-0.65,0.66
+292,2024-25,Cory Joseph,33,ORL,612,Rotation,Stationary Shooter,Point of Attack,0.73,-0.55,-0.7,0.16
+293,2024-25,Lindy Waters III,27,GSW/DET,777,Rotation,Off Screen Shooter,Chaser,0.72,-0.97,-1.15,0.18
+294,2024-25,Brandon Williams,25,DAL,487,Rotation,Shot Creator,Point of Attack,0.71,-0.14,0.31,-0.46
+295,2024-25,Devin Carter,22,SAC,396,Garbage Time,Secondary Ball Handler,Point of Attack,0.7,0.35,-0.39,0.74
+296,2024-25,Matisse Thybulle,27,POR,312,Rotation,Stationary Shooter,Point of Attack,0.69,1.03,-0.44,1.47
+297,2024-25,Johnny Juzang,23,UTA,1270,Key Rotation,Off Screen Shooter,Chaser,0.69,-1.58,-0.6,-0.98
+298,2024-25,Ben Sheppard,23,IND,1228,Rotation,Stationary Shooter,Chaser,0.69,-1.54,-1.47,-0.07
+299,2024-25,Pat Connaughton,32,MIL,603,Rotation,Movement Shooter,Helper,0.68,-0.66,-0.78,0.12
+300,2024-25,Kevin Love,36,MIA,251,Rotation,Versatile Big,Helper,0.68,1.85,1.09,0.76
+301,2024-25,Jordan Goodwin,26,LAL,543,Rotation,Stationary Shooter,Chaser,0.67,-0.48,-1.18,0.7
+302,2024-25,Tristan da Silva,23,ORL,1629,Key Rotation,Movement Shooter,Helper,0.65,-1.81,-1.62,-0.19
+303,2024-25,Aaron Holiday,28,HOU,792,Rotation,Off Screen Shooter,Point of Attack,0.63,-1.18,-0.7,-0.48
+304,2024-25,Colby Jones,22,SAC/WAS,515,Garbage Time,Movement Shooter,Chaser,0.62,-0.53,-1.15,0.62
+305,2024-25,Gui Santos,22,GSW,762,Rotation,Movement Shooter,Helper,0.61,-1.17,-1.25,0.08
+306,2024-25,Tosan Evbuomwan,23,BRK,665,Key Rotation,Stationary Shooter,Helper,0.61,-1,-1.11,0.12
+307,2024-25,Duop Reath,28,POR,469,Rotation,Stretch Big,Helper,0.61,-0.38,-0.11,-0.27
+308,2024-25,Collin Sexton,26,UTA,1758,Starter,Shot Creator,Chaser,0.59,-1.91,0.5,-2.41
+309,2024-25,Zeke Nnaji,24,DEN,608,Rotation,Stretch Big,Helper,0.59,-0.9,-2.22,1.32
+310,2024-25,Karlo Matković,23,NOP,791,Rotation,Roll + Cut Big,Mobile Big,0.59,-1.27,-2.07,0.81
+311,2024-25,Alex Len,31,SAC/LAL,380,Garbage Time,Athletic Finisher,Mobile Big,0.59,0.02,-1.15,1.17
+312,2024-25,CJ McCollum,33,NOP,1832,Starter,Primary Ball Handler,Chaser,0.59,-1.93,0.54,-2.47
+313,2024-25,Delon Wright,32,MIL/NYK,634,Rotation,Secondary Ball Handler,Chaser,0.58,-1,-1.42,0.43
+314,2024-25,A.J. Lawson,24,TOR,486,Rotation,Movement Shooter,Point of Attack,0.57,-0.57,-0.17,-0.4
+315,2024-25,Dalen Terry,22,CHI,987,Rotation,Stationary Shooter,Point of Attack,0.57,-1.52,-1.9,0.38
+316,2024-25,Elfrid Payton,30,NOP/CHO,511,Key Rotation,Slasher,Point of Attack,0.57,-0.68,-1.29,0.61
+317,2024-25,Dwight Powell,33,DAL,551,Rotation,Athletic Finisher,Mobile Big,0.57,-0.79,-2.06,1.26
+318,2024-25,Oscar Tshiebwe,25,UTA,255,Rotation,Athletic Finisher,Mobile Big,0.56,1.05,0.24,0.81
+319,2024-25,Daniel Theis,32,NOP,621,Rotation,Athletic Finisher,Anchor Big,0.55,-1.04,-2.05,1.01
+320,2024-25,Javonte Green,31,NOP/CLE,1258,Key Rotation,Stationary Shooter,Wing Stopper,0.55,-1.74,-2.1,0.36
+321,2024-25,Keaton Wallace,25,ATL,501,Rotation,Primary Ball Handler,Point of Attack,0.54,-0.74,-1.15,0.41
+322,2024-25,Noah Clowney,20,BRK,1042,Key Rotation,Movement Shooter,Helper,0.54,-1.61,-1.27,-0.34
+323,2024-25,Dominick Barlow,21,ATL,375,Rotation,Athletic Finisher,Mobile Big,0.53,-0.21,-0.92,0.72
+324,2024-25,Shake Milton,28,BRK/LAL,836,Rotation,Secondary Ball Handler,Chaser,0.52,-1.45,-0.96,-0.48
+325,2024-25,Mitchell Robinson,26,NYK,290,Rotation,Athletic Finisher,Mobile Big,0.52,0.38,-0.66,1.04
+326,2024-25,Jevon Carter,29,CHI,321,Garbage Time,Low Minute,Point of Attack,0.51,0.06,0.23,-0.17
+327,2024-25,Trevelin Queen,27,ORL,430,Rotation,Secondary Ball Handler,Chaser,0.51,-0.57,-0.69,0.11
+328,2024-25,Reed Sheppard,20,HOU,653,Rotation,Secondary Ball Handler,Chaser,0.5,-1.24,-1.58,0.34
+329,2024-25,Kyle Kuzma,29,WAS/MIL,1936,Starter,Shot Creator,Helper,0.49,-2.04,-1.33,-0.71
+330,2024-25,Trendon Watford,24,BRK,913,Key Rotation,Shot Creator,Helper,0.49,-1.59,-1.14,-0.45
+331,2024-25,Alex Sarr,19,WAS,1814,Starter,Stretch Big,Mobile Big,0.49,-2.02,-1.65,-0.37
+332,2024-25,Gabe Vincent,28,LAL,1525,Key Rotation,Movement Shooter,Point of Attack,0.48,-1.94,-1.53,-0.41
+333,2024-25,Jaden Springer,22,BOS/UTA,365,Garbage Time,Movement Shooter,Point of Attack,0.48,-0.34,-0.69,0.35
+334,2024-25,Kessler Edwards,24,DAL,608,Rotation,Stationary Shooter,Helper,0.47,-1.22,-2.2,0.98
+335,2024-25,Baylor Scheierman,24,BOS,384,Garbage Time,Off Screen Shooter,Low Activity,0.47,-0.51,-0.3,-0.21
+336,2024-25,Bismack Biyombo,32,SAS,528,Rotation,Athletic Finisher,Mobile Big,0.47,-1.03,-2.66,1.63
+337,2024-25,Jalen Pickett,25,DEN,666,Rotation,Secondary Ball Handler,Point of Attack,0.46,-1.35,-0.94,-0.42
+338,2024-25,Julian Strawther,22,DEN,1384,Rotation,Movement Shooter,Low Activity,0.46,-1.92,-1.27,-0.65
+339,2024-25,Torrey Craig,34,CHI/BOS,314,Garbage Time,Movement Shooter,Helper,0.45,-0.17,-0.37,0.21
+340,2024-25,Brandon Boston,23,NOP,993,Key Rotation,Primary Ball Handler,Point of Attack,0.45,-1.72,-1.21,-0.51
+341,2024-25,Brandon Ingram,27,NOP,595,Starter,Shot Creator,Helper,0.44,-1.27,0.07,-1.34
+342,2024-25,Lonnie Walker IV,26,PHI,477,Key Rotation,Secondary Ball Handler,Chaser,0.44,-0.97,0.22,-1.19
+343,2024-25,Jordan McLaughlin,28,SAC/SAS,314,Garbage Time,Low Minute,Point of Attack,0.44,-0.22,-0.58,0.36
+344,2024-25,Jae'Sean Tate,29,HOU,588,Rotation,Stationary Shooter,Helper,0.44,-1.27,-1.62,0.35
+345,2024-25,Quenton Jackson,26,IND,381,Rotation,Secondary Ball Handler,Point of Attack,0.44,-0.6,-0.47,-0.13
+346,2024-25,Ja'Kobe Walter,20,TOR,1103,Key Rotation,Movement Shooter,Chaser,0.44,-1.8,-1.19,-0.61
+347,2024-25,Orlando Robinson,24,SAC/TOR,770,Key Rotation,Roll + Cut Big,Mobile Big,0.42,-1.58,-1.32,-0.26
+348,2024-25,Vince Williams Jr.,24,MEM,499,Rotation,Movement Shooter,Wing Stopper,0.42,-1.12,-0.76,-0.36
+349,2024-25,Jock Landale,29,HOU,500,Rotation,Athletic Finisher,Mobile Big,0.41,-1.12,-1.13,0.01
+350,2024-25,Tyrese Martin,25,BRK,1315,Key Rotation,Movement Shooter,Chaser,0.41,-1.95,-1.04,-0.91
+351,2024-25,Marvin Bagley III,25,WAS/MEM,265,Garbage Time,Low Minute,Anchor Big,0.4,-0.06,-0.16,0.09
+352,2024-25,Grant Williams,26,CHO,479,Starter,Movement Shooter,Anchor Big,0.4,-1.12,-1.97,0.85
+353,2024-25,Jared McCain,20,PHI,592,Key Rotation,Secondary Ball Handler,Chaser,0.4,-1.37,0.45,-1.82
+354,2024-25,Kris Murray,24,POR,1040,Rotation,Movement Shooter,Helper,0.39,-1.85,-1.67,-0.18
+355,2024-25,Bruce Brown,28,TOR/NOP,921,Key Rotation,Secondary Ball Handler,Chaser,0.38,-1.79,-1.7,-0.09
+356,2024-25,Brice Sensabaugh,21,UTA,1432,Key Rotation,Movement Shooter,Low Activity,0.38,-2.03,-0.51,-1.52
+357,2024-25,Jaylen Clark,23,MIN,522,Rotation,Stationary Shooter,Point of Attack,0.38,-1.28,-1.47,0.2
+358,2024-25,Craig Porter Jr.,24,CLE,513,Rotation,Secondary Ball Handler,Point of Attack,0.38,-1.26,-1.34,0.08
+359,2024-25,Caleb Martin,29,PHI/DAL,1218,Starter,Shot Creator,Point of Attack,0.37,-1.96,-1.85,-0.11
+360,2024-25,Wendell Moore Jr.,23,DET/CHO,499,Rotation,Movement Shooter,Chaser,0.36,-1.28,-1.46,0.17
+361,2024-25,Cam Spencer,24,MEM,252,Rotation,Movement Shooter,Low Activity,0.36,-0.18,0.51,-0.69
+362,2024-25,Marcus Bagley,23,PHI,253,Key Rotation,Stretch Big,Low Activity,0.35,-0.26,-0.87,0.61
+363,2024-25,David Roddy,23,ATL/PHI/HOU,410,Rotation,Low Minute,Helper,0.35,-1.09,-1.76,0.68
+364,2024-25,Tyler Kolek,23,NYK,296,Garbage Time,Low Minute,Low Activity,0.34,-0.63,-0.58,-0.05
+365,2024-25,Tristan Thompson,33,CLE,328,Garbage Time,Low Minute,Mobile Big,0.34,-0.81,-2.26,1.45
+366,2024-25,Cam Reddish,25,LAL,589,Rotation,Stationary Shooter,Point of Attack,0.33,-1.56,-2.48,0.91
+367,2024-25,Blake Wesley,21,SAS,683,Rotation,Secondary Ball Handler,Point of Attack,0.33,-1.67,-1.68,0.01
+368,2024-25,Caleb Houstan,22,ORL,788,Rotation,Movement Shooter,Low Activity,0.33,-1.77,-1.35,-0.42
+369,2024-25,Patty Mills,36,UTA/LAC,321,Rotation,Secondary Ball Handler,Chaser,0.33,-0.79,-0.81,0.02
+370,2024-25,Svi Mykhailiuk,27,UTA,760,Key Rotation,Secondary Ball Handler,Chaser,0.32,-1.78,-0.55,-1.24
+371,2024-25,Josh Minott,22,MIN,276,Garbage Time,Low Minute,Helper,0.32,-0.63,-1.2,0.57
+372,2024-25,Trey Jemison III,25,NOP/LAL,392,Rotation,Athletic Finisher,Mobile Big,0.32,-1.13,-1.67,0.54
+373,2024-25,Jamal Shead,22,TOR,1467,Rotation,Primary Ball Handler,Point of Attack,0.32,-2.1,-1.55,-0.55
+374,2024-25,Colin Castleton,24,MEM/TOR/PHI,432,Key Rotation,Athletic Finisher,Mobile Big,0.31,-1.29,-1.33,0.04
+375,2024-25,Eric Gordon,36,PHI,768,Rotation,Stationary Shooter,Helper,0.31,-1.8,-1.08,-0.72
+376,2024-25,Ochai Agbaji,24,TOR,1739,Key Rotation,Stretch Big,Wing Stopper,0.3,-2.17,-2.08,-0.09
+377,2024-25,Keon Johnson,22,BRK,1925,Key Rotation,Shot Creator,Point of Attack,0.3,-2.2,-1.72,-0.48
+378,2024-25,Dru Smith,27,MIA,268,Rotation,Movement Shooter,Point of Attack,0.3,-0.65,-1.59,0.94
+379,2024-25,Ajay Mitchell,22,OKC,597,Rotation,Stationary Shooter,Point of Attack,0.3,-1.64,-1.1,-0.53
+380,2024-25,Danté Exum,29,DAL,372,Rotation,Primary Ball Handler,Point of Attack,0.3,-1.17,-0.49,-0.67
+381,2024-25,GG Jackson,20,MEM,459,Rotation,Movement Shooter,Helper,0.29,-1.43,-0.38,-1.05
+382,2024-25,Maxwell Lewis,22,LAL/BRK,328,Rotation,Movement Shooter,Helper,0.29,-1.05,-1.04,-0.01
+383,2024-25,Christian Koloko,24,LAL,342,Garbage Time,Low Minute,Mobile Big,0.28,-1.14,-2.4,1.26
+384,2024-25,Drew Timme,24,BRK,254,Starter,Stretch Big,Mobile Big,0.28,-0.68,-0.52,-0.16
+385,2024-25,Reece Beekman,23,GSW/BRK,469,Rotation,Secondary Ball Handler,Point of Attack,0.28,-1.51,-1.99,0.48
+386,2024-25,Jeff Green,38,HOU,396,Rotation,Stationary Shooter,Helper,0.28,-1.33,-1.01,-0.33
+387,2024-25,Reggie Jackson,34,PHI,384,Rotation,Secondary Ball Handler,Chaser,0.28,-1.3,-0.83,-0.47
+388,2024-25,KJ Martin,24,PHI/UTA,912,Rotation,Athletic Finisher,Helper,0.27,-1.97,-2.29,0.32
+389,2024-25,Herbert Jones,26,NOP,648,Starter,Stationary Shooter,Wing Stopper,0.25,-1.84,-2.05,0.21
+390,2024-25,Keion Brooks Jr.,24,NOP,332,Key Rotation,Stationary Shooter,Wing Stopper,0.25,-1.26,-1.58,0.32
+391,2024-25,Jamal Cain,25,NOP,502,Rotation,Movement Shooter,Wing Stopper,0.25,-1.66,-1.48,-0.18
+392,2024-25,Ousmane Dieng,21,OKC,405,Rotation,Secondary Ball Handler,Helper,0.24,-1.5,-1.18,-0.32
+393,2024-25,Gradey Dick,21,TOR,1587,Starter,Off Screen Shooter,Chaser,0.24,-2.21,-1.25,-0.96
+394,2024-25,Kobe Brown,25,LAC,272,Garbage Time,Low Minute,Helper,0.24,-1.06,-1.2,0.14
+395,2024-25,Dillon Jones,23,OKC,552,Rotation,Stationary Shooter,Low Activity,0.24,-1.75,-1.55,-0.2
+396,2024-25,Tre Mann,23,CHO,319,Key Rotation,Shot Creator,Chaser,0.23,-1.3,-0.35,-0.95
+397,2024-25,Isaiah Wong,24,CHO,265,Rotation,Shot Creator,Chaser,0.22,-1.14,-0.8,-0.35
+398,2024-25,Isaac Jones,24,SAC,304,Garbage Time,Low Minute,Helper,0.22,-1.27,-1.76,0.49
+399,2024-25,Jericho Sims,26,NYK/MIL,631,Garbage Time,Athletic Finisher,Mobile Big,0.21,-1.91,-2.68,0.77
+400,2024-25,Johnny Furphy,20,IND,379,Garbage Time,Low Minute,Chaser,0.21,-1.54,-2.17,0.63
+401,2024-25,Jamison Battle,23,TOR,1042,Rotation,Off Screen Shooter,Low Activity,0.21,-2.12,-1.32,-0.81
+402,2024-25,Terrence Shannon Jr.,24,MIN,339,Rotation,Athletic Finisher,Helper,0.18,-1.6,-1.16,-0.44
+403,2024-25,Jordan Miller,25,LAC,420,Rotation,Shot Creator,Chaser,0.18,-1.75,-1.15,-0.59
+404,2024-25,Jalen Hood-Schifino,21,LAL/PHI,315,Key Rotation,Shot Creator,Point of Attack,0.17,-1.56,-1.05,-0.51
+405,2024-25,Jaylon Tyson,22,CLE,453,Garbage Time,Low Minute,Chaser,0.17,-1.86,-1.34,-0.52
+406,2024-25,Gary Harris,30,ORL,711,Rotation,Stationary Shooter,Chaser,0.16,-2.1,-2.34,0.24
+407,2024-25,Micah Potter,26,UTA,705,Rotation,Stationary Shooter,Helper,0.15,-2.1,-2.37,0.27
+408,2024-25,Jett Howard,21,ORL,701,Rotation,Off Screen Shooter,Low Activity,0.15,-2.12,-1.12,-0.99
+409,2024-25,Damion Baugh,24,CHO,370,Key Rotation,Primary Ball Handler,Chaser,0.14,-1.83,-1.53,-0.3
+410,2024-25,Taj Gibson,39,CHO,409,Rotation,Athletic Finisher,Anchor Big,0.12,-1.99,-2.99,1.01
+411,2024-25,Doug McDermott,33,SAC,342,Garbage Time,Low Minute,Chaser,0.09,-2.04,-1.39,-0.65
+412,2024-25,Anthony Gill,32,WAS,397,Garbage Time,Low Minute,Helper,0.08,-2.12,-2.18,0.06
+413,2024-25,Hunter Tyson,24,DEN,400,Garbage Time,Low Minute,Helper,0.08,-2.13,-1.96,-0.17
+414,2024-25,KJ Simpson,22,CHO,842,Key Rotation,Primary Ball Handler,Point of Attack,0.08,-2.3,-1.65,-0.65
+415,2024-25,Landry Shamet,27,NYK,762,Rotation,Movement Shooter,Chaser,0.07,-2.29,-1.48,-0.81
+416,2024-25,Rob Dillingham,20,MIN,516,Rotation,Secondary Ball Handler,Low Activity,0.07,-2.24,-1.05,-1.19
+417,2024-25,Jordan Walsh,20,BOS,403,Garbage Time,Low Minute,Low Activity,0.05,-2.25,-2.73,0.48
+418,2024-25,Yves Missi,20,NOP,1956,Key Rotation,Athletic Finisher,Mobile Big,0.05,-2.41,-1.87,-0.53
+419,2024-25,Malaki Branham,21,SAS,427,Garbage Time,Low Minute,Low Activity,0.04,-2.29,-1.34,-0.95
+420,2024-25,Andre Jackson Jr.,23,MIL,980,Rotation,Stationary Shooter,Point of Attack,0.03,-2.4,-2.71,0.31
+421,2024-25,Justin Edwards,21,PHI,1156,Key Rotation,Movement Shooter,Chaser,0.03,-2.41,-1.38,-1.04
+422,2024-25,Jaden Hardy,22,DAL,907,Rotation,Secondary Ball Handler,Chaser,0.01,-2.43,-1.19,-1.24
+423,2024-25,Jeremiah Robinson-Earl,24,NOP,1239,Rotation,Stationary Shooter,Helper,-0.01,-2.47,-1.46,-1.01
+424,2024-25,Seth Curry,34,CHO,1062,Rotation,Movement Shooter,Low Activity,-0.03,-2.49,-1.65,-0.85
+425,2024-25,Rayan Rupert,20,POR,460,Garbage Time,Low Minute,Point of Attack,-0.05,-2.63,-2.28,-0.34
+426,2024-25,Maxi Kleber,33,DAL,637,Rotation,Stationary Shooter,Wing Stopper,-0.07,-2.63,-2.97,0.34
+427,2024-25,AJ Johnson,20,MIL/WAS,638,Key Rotation,Shot Creator,Low Activity,-0.08,-2.66,-1.69,-0.97
+428,2024-25,Antonio Reeves,24,NOP,660,Rotation,Movement Shooter,Low Activity,-0.1,-2.7,-1.32,-1.38
+429,2024-25,Tidjane Salaun,19,CHO,1244,Key Rotation,Stretch Big,Helper,-0.13,-2.62,-2.56,-0.06
+430,2024-25,Kyshawn George,21,WAS,1802,Key Rotation,Movement Shooter,Helper,-0.26,-2.68,-2.56,-0.13
+431,2024-25,Vasilije Micić,31,CHO/PHO,785,Key Rotation,Primary Ball Handler,Chaser,-0.3,-3.08,-1.91,-1.17
+432,2024-25,Jordan Hawkins,22,NOP,1321,Key Rotation,Off Screen Shooter,Chaser,-0.31,-2.83,-1.08,-1.74
+433,2024-25,DaQuan Jeffries,27,CHO,1071,Key Rotation,Movement Shooter,Helper,-0.32,-2.94,-2.74,-0.2
+434,2024-25,Isaiah Collier,20,UTA,1839,Key Rotation,Shot Creator,Point of Attack,-0.43,-2.83,-1.8,-1.02
+435,2024-25,Jalen Wilson,24,BRK,2031,Key Rotation,Stationary Shooter,Helper,-0.6,-2.93,-1.72,-1.21
+436,2024-25,Cody Williams,20,UTA,1060,Key Rotation,Stationary Shooter,Chaser,-0.8,-3.68,-3.15,-0.53
+437,2024-25,Corey Kispert,25,WAS,1602,Key Rotation,Off Screen Shooter,Low Activity,-0.84,-3.3,-1.53,-1.77
+438,2024-25,Bilal Coulibaly,20,WAS,1948,Starter,Secondary Ball Handler,Point of Attack,-1.04,-3.32,-2.46,-0.86
+439,2024-25,Nick Smith Jr.,20,CHO,1369,Key Rotation,Secondary Ball Handler,Chaser,-1.16,-3.83,-2.1,-1.73
+440,2024-25,Josh Green,24,CHO,1887,Starter,Off Screen Shooter,Point of Attack,-1.66,-3.89,-3.45,-0.44
+441,2024-25,Bub Carrington,19,WAS,2458,Starter,Primary Ball Handler,Point of Attack,-3.01,-4.47,-2.86,-1.6
