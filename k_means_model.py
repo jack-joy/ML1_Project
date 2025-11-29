@@ -53,7 +53,7 @@ nba = nba[[key for key in feature_map.keys()]]
 
 ###########################################################################
 # ML PIPELINE AND MODEL
-FEATURES = ['PTS', 'AST', 'REB', 'TS_PCT', 'USG_PCT']
+FEATURES = ['PTS', 'AST', 'REB', 'DREB', 'TS_PCT', 'USG_PCT']
 X = nba[FEATURES]
 
 # Pipeline
@@ -74,9 +74,10 @@ for k in K_VALS:
     pipeline.set_params(kmeans__n_clusters=k)
     pipeline.fit(X)
     labels = pipeline['kmeans'].labels_
-    intertia = pipeline['kmeans'].inertia_
-    wcss.append(intertia)
-    sil_score = silhouette_score(X, labels)
+    inertia = pipeline['kmeans'].inertia_
+    wcss.append(inertia)
+    scaled_x = pipeline['scaler'].transform(X)
+    sil_score = silhouette_score(scaled_x, labels)
     silhouette_scores.append(sil_score)
 
 # Plot Elbow: Based on this, it looks like optimal K is 5
@@ -89,6 +90,10 @@ plt.xticks(K_VALS)
 plt.show()
 
 # Plot Silhouette Scores
+    # 1 = well defined clusters
+    # .5 = reasonable clusters
+    # 0 = overlapping clusters
+    # -1 = incorrect clustering
 plt.subplots(figsize=(12,5))
 sns.lineplot(x=K_VALS, y=silhouette_scores, marker='o')
 plt.title('Silhouette Scores For Optimal K')
