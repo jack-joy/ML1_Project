@@ -22,10 +22,7 @@ import seaborn as sns
 # Load Data
 nba = pd.read_csv('DATA/nba_data_with_salaries.csv')
 
-len(nba.columns.tolist())
-sorted(nba.columns.tolist())
-
-
+######################################################################################
 # We will try to group players in a few different ways:
     # Player Archetypes -- shooters, defenders, rim defenders, etc.
     # Offensive Style (Efficiency vs Volume Scorers, Playmakers, etc.)
@@ -39,99 +36,161 @@ feature_map = {
     'REB': 'Rebounds',
     'DREB': 'Defensive Rebounds',
     'STL': 'Steals',
+    'OFF_RATING': 'Offensive Rating',
     'DEF_RATING': 'Defensive Rating',
     'OREB_PCT': 'Offensive Rebound Percentage',
     'DREB_PCT': 'Defensive Rebound Percentage',
     'TS_PCT': 'True Shooting Percentage',
     'USG_PCT': 'Usage Percentage', 
-    'FG3A' : '3 Point Attempts',
-    'FG3_PCT' : '3 Point Percentage',
+    'FG3A' : '3 Pointer Attempts',
+    'FG3M' : '3 Pointer Made',
+    'FG3_PCT' : '3 Pointer Percentage',
     'SALARY': 'Salary',
     'NET_RATING': 'Net Rating'
 }
-nba = nba[[key for key in feature_map.keys()]] 
+subset = nba[list(feature_map.keys())]
+
+# Feature Selection:
+FEATURES = {
+    'Player Archetype' : ['PTS', 'AST', 'REB', 'DREB', 'TS_PCT', 'USG_PCT', 'DEF_RATING', 
+                          'OFF_RATING', 'FG3A', 'FG3M', 'STL'],
+    'Player Valuation' : ['SALARY', 'PTS', 'AST', 'REB', 'DREB', 'STL', 'FG3M']
+} # User will choose one of these options in the app
+K_VALUES = {
+    'Player Archetype' : 4, 
+    'Player Valuation' : 4
+}
+# Label Interpretation:
+LABEL_INTERPRET = {
+    'Player Archetype' : {
+        0 : 'Benchwarmer',
+        1 : 'Defender',
+        2 : 'Frontcourt Player',
+        3 : 'Volume Scorer'
+        },
+    'Player Valuation' : {
+        0 : 'Well Paid All-Rounder',
+        1 : 'Well Paid Benchwarmer',
+        2 : 'Overpaid Star',
+        3 : 'Underpaid Defender'
+}}
+
+# MODEL TYPE
+MODEL_TYPE = 'Player Valuation' # Options: 'Player Archetype', 'Player Valuation'
+X = nba[FEATURES[MODEL_TYPE]]
 
 ###########################################################################
 # ML PIPELINE AND MODEL
-FEATURES = ['PTS', 'AST', 'REB', 'DREB', 'TS_PCT', 'USG_PCT']
-X = nba[FEATURES]
-
 # Pipeline
-pipeline = Pipeline([
-    ('scaler', StandardScaler()),
-    ('kmeans', KMeans(n_clusters=3, 
-                      init='k-means++',
-                      n_init=10,
-                      random_state=42))
-])
+def create_pipeline(n_clusters=4):
+    '''Function to create SKLearn Pipeline for KMeans Clustering'''
+    pipeline = Pipeline([
+        ('scaler', StandardScaler()),
+        ('kmeans', KMeans(n_clusters=n_clusters, 
+                          init='k-means++',
+                          n_init=10,
+                          random_state=42))
+    ])
+    return pipeline
 
 # Choose Best K using Silhouette Score and Elbow Method
-K_VALS = range(2,12)
-silhouette_scores = []
-wcss = []
+def test_k_values(parameters, range_k = range(2,12)):
+    '''Function to test different K values for KMeans'''
+    silhouette_scores = []
+    wcss = []
+    for k in range_k:
+        pipeline = create_pipeline(n_clusters=k)
+        pipeline.fit(parameters)
+        labels = pipeline['kmeans'].labels_
+        inertia = pipeline['kmeans'].inertia_
+        wcss.append(inertia)
+        scaled_x = pipeline['scaler'].transform(parameters)
+        sil_score = silhouette_score(scaled_x, labels)
+        silhouette_scores.append(sil_score)
+    optimal_k = range_k[np.argmax(silhouette_scores)]
+    print(f'Optimal K based on Silhouette Score: {optimal_k}')
+    return silhouette_scores, wcss, optimal_k
 
-for k in K_VALS:
-    pipeline.set_params(kmeans__n_clusters=k)
-    pipeline.fit(X)
-    labels = pipeline['kmeans'].labels_
-    inertia = pipeline['kmeans'].inertia_
-    wcss.append(inertia)
-    scaled_x = pipeline['scaler'].transform(X)
-    sil_score = silhouette_score(scaled_x, labels)
-    silhouette_scores.append(sil_score)
+def graph_elbow_silhouette(wcss_scores, sil_scores, range_k = range(2,12)):
+    '''Function to graph Eblow and Silhouette Scores'''
+    # Elbow First
+    plt.subplots(figsize=(12,5))
+    sns.lineplot(x=range_k, y=wcss_scores, marker='o')
+    plt.title('Elbow Method For Optimal K', fontweight='bold')
+    plt.xlabel('Number of Clusters K')
+    plt.ylabel('Within Cluster Sum of Squares (WCSS)')
+    plt.xticks(range_k)
+    plt.show()
+    # Silhouette Next
+        # 1 = well defined clusters
+        # .5 = reasonable clusters
+        # 0 = overlapping clusters
+        # -1 = incorrect clustering
+    plt.subplots(figsize=(12,5))
+    sns.lineplot(x=range_k, y=sil_scores, marker='o')
+    plt.title('Silhouette Scores For Optimal K', fontweight='bold')
+    plt.xlabel('Number of Clusters K')
+    plt.ylabel('Silhouette Score')
+    plt.xticks(range_k)
+    plt.show()
 
-# Plot Elbow: Based on this, it looks like optimal K is 5
-plt.subplots(figsize=(12,5))
-sns.lineplot(x=K_VALS, y=wcss, marker='o')
-plt.title('Elbow Method For Optimal K')
-plt.xlabel('Number of Clusters K')
-plt.ylabel('Within Cluster Sum of Squares (WCSS)')
-plt.xticks(K_VALS)
-plt.show()
+# Function Calls to Get Optimal K
+sil_score, wcss, optimal_k = test_k_values(X)
+graph_elbow_silhouette(wcss, sil_score)
 
-# Plot Silhouette Scores
-    # 1 = well defined clusters
-    # .5 = reasonable clusters
-    # 0 = overlapping clusters
-    # -1 = incorrect clustering
-plt.subplots(figsize=(12,5))
-sns.lineplot(x=K_VALS, y=silhouette_scores, marker='o')
-plt.title('Silhouette Scores For Optimal K')
-plt.xlabel('Number of Clusters K')
-plt.ylabel('Silhouette Score')
-plt.xticks(K_VALS)
-plt.show()
-
-# Get Optimal K
-optimal_k = K_VALS[np.argmax(silhouette_scores)]
-print(f'Optimal K Based on Silhouette Score: {optimal_k}')
-
-# Final Model
-pipeline.set_params(kmeans__n_clusters=optimal_k)
+# Final Model (with chosen K to override)
+pipeline = create_pipeline(K_VALUES[MODEL_TYPE])
 pipeline.fit(X)
 labels = pipeline['kmeans'].labels_
-nba['cluster'] = labels
-
+subset['Cluster'] = labels
+subset['Cluster Name'] = subset['Cluster'].map(LABEL_INTERPRET[MODEL_TYPE])
 
 
 #############################################################################
 # Assess Results and Analyze Clusters
 # Analyze Clusters
-cluster_summary = nba.groupby('cluster').mean().reset_index()
-cluster_summary.style.format("{:,.2f}", subset=cluster_summary.columns[1:])
+def summarize_clusters(subset):
+    '''Function to summarize clusters'''
+    summary = subset.groupby('Cluster').mean().reset_index()
+    return summary
 
-# Scatter of Salery vs Points Colored by Cluster
-plt.subplots(figsize=(12,6))
-sns.scatterplot(data=nba, x='PTS', y='SALARY', hue='cluster', palette='Set2')
-plt.title('Player Clusters: Salary vs Points')
-plt.xlabel('Points Per Game')
-plt.ylabel('Salary')
-plt.show()
+summary = summarize_clusters(subset)
+summary.style.format("{:,.2f}", subset=summary.columns[2:])
 
-# Scatter of DREB vs OREB Colored by Cluster
-plt.subplots(figsize=(12,6))
-sns.scatterplot(data=nba, x='DREB', y='OREB_PCT', hue='cluster', palette='Set2')
-plt.title('Player Clusters: Defensive Rebounds vs Offensive Rebound Percentage')
-plt.xlabel('Defensive Rebounds Per Game')
-plt.ylabel('Offensive Rebound Percentage')
-plt.show()
+
+# Plots based on Model Type:
+def graph_results(MODEL_TYPE, subset):
+    '''Function to graph results based on model type'''
+    ALPHA = .85
+    if MODEL_TYPE == 'Player Archetype':
+        # Scatter of 3 Point Attempts vs 3 Point Made Colored by Cluster
+        plt.subplots(figsize=(12,6))
+        sns.scatterplot(data=subset, x='3 Pointer Attempts', y='3 Pointer Made', 
+                        hue='Cluster Name', palette='Set2', 
+                        alpha=ALPHA)
+        plt.title('Player Clusters: 3 Point Attempts vs Made', 
+                fontweight='bold')
+        plt.xlabel('3 Point Attempts Per Game')
+        plt.ylabel('3 Point Made Per Game')
+        plt.show()
+        # Scatter of Assists vs Points Colored by Cluster
+        plt.subplots(figsize=(12,6))
+        sns.scatterplot(data=subset, x='Assists', y='Points', 
+                        hue='Cluster Name', palette='Set2', 
+                        alpha=ALPHA)
+        plt.title('Player Clusters: Assists vs Points', fontweight='bold')
+        plt.xlabel('Assists Per Game')
+        plt.ylabel('Points Per Game')
+        plt.show()
+    elif MODEL_TYPE == 'Player Valuation':
+        # Scattery of Salery vs Points
+        plt.subplots(figsize=(12,6))
+        sns.scatterplot(data=subset, x='Points', y='Salary', 
+                        hue='Cluster Name', palette='Set2', 
+                        alpha=ALPHA)
+        plt.title('Player Clusters: Salary vs Points', fontweight='bold')
+        plt.xlabel('Points Per Game')
+        plt.ylabel('Salary')
+        plt.show()
+
+graph_results(MODEL_TYPE, subset)
