@@ -139,19 +139,26 @@ sil_score, wcss, optimal_k = test_k_values(X)
 graph_elbow_silhouette(wcss, sil_score)
 
 # Final Model (with chosen K to override)
-pipeline = create_pipeline(K_VALUES[MODEL_TYPE])
+if MODEL_TYPE in K_VALUES.keys():
+    pipeline = create_pipeline(K_VALUES[MODEL_TYPE])
+else: 
+    pipeline = create_pipeline(optimal_k)
 pipeline.fit(X)
 labels = pipeline['kmeans'].labels_
-subset['Cluster'] = labels
-subset['Cluster Name'] = subset['Cluster'].map(LABEL_INTERPRET[MODEL_TYPE])
 
+subset['Cluster'] = labels
+if MODEL_TYPE in LABEL_INTERPRET.keys():
+    subset['Cluster Name'] = subset['Cluster'].map(LABEL_INTERPRET[MODEL_TYPE])
+else:
+    subset['Cluster Name'] = 0
+subset.rename(columns=feature_map, inplace=True)
 
 #############################################################################
 # Assess Results and Analyze Clusters
 # Analyze Clusters
 def summarize_clusters(subset):
     '''Function to summarize clusters'''
-    summary = subset.groupby('Cluster').mean().reset_index()
+    summary = subset.groupby(['Cluster', 'Cluster Name']).mean().reset_index()
     return summary
 
 summary = summarize_clusters(subset)
@@ -192,5 +199,12 @@ def graph_results(MODEL_TYPE, subset):
         plt.xlabel('Points Per Game')
         plt.ylabel('Salary')
         plt.show()
+    else:
+        print('No Graphs Available for This Model Type')
 
 graph_results(MODEL_TYPE, subset)
+
+######################################################################################
+# Main Function
+if __name__ == '__main__':
+    pass
