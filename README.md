@@ -19,7 +19,11 @@ Using all of the models we have used this semester, we will analyze NBA player d
 2. Logistic Regression -- Tim
 3. KNN: K-Nearest Neighbors -- Chase
 4. K-Means Clustering -- Eddie
-5. Model Extension -- Harrison
+    - Clustering players into different archetypes based on performance metrics
+    - Clustering players based on their valuation to identify undervalued/overvalued players
+5. PCA Model -- 
+6. MLP Neural Network --
+7. Model Extension -- Harrison
 
 ### **PROJECT/FILE STRUCTURE**
 
