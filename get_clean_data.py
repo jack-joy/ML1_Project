@@ -49,3 +49,40 @@ output_path = os.path.join(project_dir, "DATA/player_stats.csv")
 nba_df.to_csv(output_path, index=False)
 
 print(f"Saved data to: {output_path}")
+
+
+###############################################################
+# DATA CLEANING AND MERGING WITH SALARIES
+# Load Data
+nba = pd.read_csv('DATA/player_stats.csv')
+salaries = pd.read_csv('DATA/24-25_salaries.csv')
+
+nba['helper'] = nba['PLAYER_NAME'].str.lower()\
+    .str.replace('.', '', regex=False)\
+        .str.replace("'", '', regex=False)\
+            .str.replace(' ', '', regex=False)
+            
+salaries['helper'] = salaries['PLAYER_NAME'].str.lower()\
+    .str.replace('.', '', regex=False)\
+        .str.replace("'", '', regex=False)\
+            .str.replace(' ', '', regex=False)
+
+merged = pd.merge(
+    nba, 
+    salaries[['helper', 'SALARY']],
+    on='helper',
+    how='outer', 
+    validate='one_to_one', 
+    indicator=True
+)
+
+merged = merged[merged['_merge'] == 'both']
+merged = merged.drop(columns=['helper', '_merge'])
+
+merged['SALARY'] = merged['SALARY']\
+    .astype(str).str.replace('$', '', regex=False)\
+        .str.replace(',', '', regex=False)
+merged['SALARY'] = pd.to_numeric(merged['SALARY'], errors='coerce')
+
+merged.to_csv('DATA/nba_data_with_salaries.csv', index=False)
+print('\n\nFinalized Data Cleaning!')
