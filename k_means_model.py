@@ -4,6 +4,7 @@
 # Then will create a more modularlized approach that can be called by the Streamlit app
 
 
+
 ######################################################################################
 # Import Libraries
 # Data Manipulation
@@ -82,14 +83,14 @@ def test_k_values(parameters, range_k = range(2,12)):
 def graph_elbow_silhouette(wcss_scores, sil_scores, range_k=range(2,12)):
     """Graph Elbow and Silhouette Scores and return both figures."""
     # --- Elbow Plot ---
-    fig1, ax1 = plt.subplots(figsize=(12,5))
+    fig1, ax1 = plt.subplots(figsize=(12,5), dpi=300)
     sns.lineplot(x=range_k, y=wcss_scores, marker='o', ax=ax1)
     ax1.set_title("Elbow Method For Optimal K", fontweight="bold")
     ax1.set_xlabel("Number of Clusters K")
     ax1.set_ylabel("Within Cluster Sum of Squares (WCSS)")
     ax1.set_xticks(range_k)
     # --- Silhouette Plot ---
-    fig2, ax2 = plt.subplots(figsize=(12,5))
+    fig2, ax2 = plt.subplots(figsize=(12,5), dpi=300)
     sns.lineplot(x=range_k, y=sil_scores, marker='o', ax=ax2)
     ax2.set_title("Silhouette Scores For Optimal K", fontweight="bold")
     ax2.set_xlabel("Number of Clusters K")
@@ -107,9 +108,9 @@ def final_model_and_labels(data, n_clusters):
     return pipeline, labels
 
 # Final Graph Function
-def graph_clusters(data, x_axis, y_axis, color, alpha=0.8):
+def graph_clusters(data, x_axis, y_axis, color, model_type, alpha=0.8):
     '''Function to graph clusters'''
-    fig, ax = plt.subplots(figsize=(12,6))
+    fig, ax = plt.subplots(figsize=(12,6), dpi=300)
     sns.scatterplot(
         data=data, 
         x=x_axis, 
@@ -118,7 +119,7 @@ def graph_clusters(data, x_axis, y_axis, color, alpha=0.8):
         palette='Set2', 
         alpha=alpha
         )
-    ax.set_title(f'K-Means Clustering: {MODEL_TYPE}', fontweight='bold')
+    ax.set_title(f'K-Means Clustering: {model_type}', fontweight='bold')
     ax.set_xlabel(f'{x_axis}')
     ax.set_ylabel(f'{y_axis}')
     return fig
@@ -128,45 +129,47 @@ def graph_clusters(data, x_axis, y_axis, color, alpha=0.8):
 
 #######################################################################################
 # FUNCTION CALLS AND MODEL EXECUTION
-df = load_and_clean_data()
-attribute_options = sorted(df.columns.tolist())
+# This prevents the code from running if this file is imported as a module
+if __name__ == "__main__":
+    df = load_and_clean_data()
+    attribute_options = sorted(df.columns.tolist())
 
-# Feature & Model Selection
-FEATURES = {
-    'Player Archetype' : ['Points', 'Assists', 'Rebounds', 'Defensive Rebounds', 'True Shooting Percentage', 
-                          'Usage Percentage', 'Defensive Rating', 'Offensive Rating', 
-                          '3 Pointer Attempts', '3 Pointer Made', 'Steals'],
-    'Player Valuation' : ['Salary', 'Points', 'Assists', 'Rebounds', 'Defensive Rebounds', 
-                          'Steals', '3 Pointer Made'],
-    'Custom Model' : [] # User input features (dropdown of all features)
-} # User will choose one of these options in the app
-K_VALUE = 'Auto' # User can choose Auto or specify K integer value
-MODEL_TYPE = 'Player Archetype'
+    # Feature & Model Selection
+    FEATURES = {
+        'Player Archetype' : ['Points', 'Assists', 'Rebounds', 'Defensive Rebounds', 'True Shooting Percentage', 
+                            'Usage Percentage', 'Defensive Rating', 'Offensive Rating', 
+                            '3 Pointer Attempts', '3 Pointer Made', 'Steals'],
+        'Player Valuation' : ['Salary', 'Points', 'Assists', 'Rebounds', 'Defensive Rebounds', 
+                            'Steals', '3 Pointer Made'],
+        'Custom Model' : [] # User input features (dropdown of all features)
+    } # User will choose one of these options in the app
+    K_VALUE = 'Auto' # User can choose Auto or specify K integer value
+    MODEL_TYPE = 'Player Archetype'
 
-X = df[FEATURES[MODEL_TYPE]]
+    X = df[FEATURES[MODEL_TYPE]]
 
-# Test Different K Values
-sil_scores, wcssm, opt_k = test_k_values(X)
-elbow_graph, sil_graph = graph_elbow_silhouette(wcssm, sil_scores)
-elbow_graph.show()
-sil_graph.show()
+    # Test Different K Values
+    sil_scores, wcssm, opt_k = test_k_values(X)
+    elbow_graph, sil_graph = graph_elbow_silhouette(wcssm, sil_scores)
+    elbow_graph.show()
+    sil_graph.show()
 
-# Build Final Model
-k_value = opt_k if K_VALUE == 'Auto' else int(K_VALUE)
-pipeline, labels = final_model_and_labels(X, k_value)
-df['Cluster'] = labels
+    # Build Final Model
+    k_value = opt_k if K_VALUE == 'Auto' else int(K_VALUE)
+    pipeline, labels = final_model_and_labels(X, k_value)
+    df['Cluster'] = labels
 
-# Final Assessment
-# Styled DataFrame Summary
-summary = df.groupby(['Cluster'])[FEATURES[MODEL_TYPE]].mean().reset_index()
-summary.style.format("{:,.1f}", subset=summary.columns[1:])
+    # Final Assessment
+    # Styled DataFrame Summary
+    summary = df.groupby(['Cluster'])[FEATURES[MODEL_TYPE]].mean().reset_index()
+    summary.style.format("{:,.1f}", subset=summary.columns[1:])
 
-# Plot
-options = summary.columns.tolist()
-X_AXIS = 'Points'
-Y_AXIS = 'Assists'
-COLOR = 'Cluster'
-ALPHA = .8
+    # Plot
+    options = summary.columns.tolist()
+    X_AXIS = 'Points'
+    Y_AXIS = 'Assists'
+    COLOR = 'Cluster'
+    ALPHA = .8
 
-cluster_graph = graph_clusters(df, X_AXIS, Y_AXIS, COLOR, ALPHA)
-cluster_graph.show()
+    cluster_graph = graph_clusters(df, X_AXIS, Y_AXIS, COLOR, MODEL_TYPE, ALPHA)
+    cluster_graph.show()
