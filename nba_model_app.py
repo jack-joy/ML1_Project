@@ -3,30 +3,101 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
+# -------------------------------------------------------------------------------------------------------------------------------------
 # Title
+# -------------------------------------------------------------------------------------------------------------------------------------
 st.title("NBA Dashboard")
 
-# Sidebar controls
-st.sidebar.header("Controls")
-# CHANGE THE OPTIONS WITHIN THE VIEW ONCE CODE COMPLETED
-option = st.sidebar.selectbox("Choose a view:", ["EDA", "Model Results"])
+# -------------------------------------------------------------------------------------------------------------------------------------
+#Side Bar
+# -------------------------------------------------------------------------------------------------------------------------------------
+st.sidebar.title("NBA Dashboard")
+tab = st.sidebar.radio("Navigation", ["README", "Data Table", "Exploratory Data Analysis", 'Models'])
 
-# LOADING DATASET TEMPLATE
-df = pd.DataFrame({
-    "x": [1, 2, 3, 4],
-    "y": [10, 4, 6, 8]
-})
+# -------------------------------------------------------------------------------------------------------------------------------------
+# README
+# -------------------------------------------------------------------------------------------------------------------------------------
+if tab == "README":
+    st.title("**Machine Learning 1 Final Project**: NBA General Manager Trade Simulation")
+    st.write("""
+    **Members:** Eddie, Chase, Adam, Neel, Timothy, Jack, Harrison
 
-# POTENTIAL DASHBOARD VIEW TEMPLATE
-if option == "EDA":
-    st.subheader("Exploratory Data Analysis")
-    fig = px.scatter(df, x="x", y="y", title="Example Scatter Plot")
-    st.plotly_chart(fig)
+### **OVERVIEW**:
+Using all of the models we have used this semester, we will analyze NBA player data from the 2024-2025 seasons to answer various research questions. We clean and transform the data, explore it through descriptive statistics and visualizations, and build multiple predictive models depending on the prediction type. Finally, we deploy a Streamlit app to showcase our findings in an interactive way.
 
-elif option == "Model Results":
-    st.subheader("Model Performance")
-    st.metric("Accuracy", "0.92")
-    st.metric("Log Loss", "0.21")
+### **RESEARCH QUESTIONS & OBJECTIVES**:
+1. Can we accurately predict player salary, all-star nominations, and other accomplishment features?
+2. Assess which players are undervalued/overvalued in order to build a new team and predict transfers.
+3. Can we predict the categorical variable of whether a player will be an all-star based on their season statistics?
+4. KNN: Can we classify players into different archetypes based on their playing style and performance metrics?
+5. Create a trade analysis model based on projected evaluated salaries + other evaluative metrics.
+6. Predict win/loss for next season based on current roster and player statistics.
+
+
+### **MODELS**:
+1. Multiple Linear Regression (Add Polynomial?) -- Adam 
+2. Logistic Regression -- Tim
+3. KNN: K-Nearest Neighbors -- Chase
+4. K-Means Clustering -- Eddie
+    - Clustering players into different archetypes based on performance metrics
+    - Clustering players based on their valuation to identify undervalued/overvalued players
+5. PCA Model -- 
+6. MLP Neural Network --
+7. Model Extension -- Harrison
+
+### **PROJECT/FILE STRUCTURE**
+
+
+### **INSTRUCTIONS FOR VIEWERS - HOW TO RUN**
+Our x file does y
+Our z file does a
+...
+
+### **DATA SOURCES**: 
+1. *NBA API:* https://github.com/swar/nba_api
+2. ESPN Salary Data -- Scraped from https://www.espn.com/nba/salaries
+3. `2012-2023 NBA Stats.csv
+             
+### ** Viewing Data**
+1. Run get_data.py
+2. Run scrape_salaries.py
+3. Run data_cleaning.py
+    """)
+
+# -------------------------------------------------------------------------------------------------------------------------------------
+# Data Table
+# -------------------------------------------------------------------------------------------------------------------------------------
+#if tab == "Data Table":
+    
+# -------------------------------------------------------------------------------------------------------------------------------------
+# Exploratory Data Analysis
+# -------------------------------------------------------------------------------------------------------------------------------------
+#if tab == "Exploratory Data Analysis":
+    
+# -------------------------------------------------------------------------------------------------------------------------------------
+# Models
+# -------------------------------------------------------------------------------------------------------------------------------------
+if tab == "Models":
+    st.title("Model Training & Prediction")
+    st.subheader("Select Model")
+    model_choice = st.radio("Choose a model:", 
+                            ["Logistic Regression", "K-Means", "KNN", "PCA"])
+
+# Logistic Regression
+    if model_choice == "Logistic Regression":
+        st.write("Logistic Regression")
+
+# K-Means
+    if model_choice == "K-Means":
+        st.write("K-Means")
+
+# KNN
+    if model_choice == "KNN":
+        st.write("KNN")
+
+# PCA
+    if model_choice == "PCA":
+        st.write("PCA")
 
 # To run this dashboard, use the terminal command:
 # streamlit run nba_model_app.py
