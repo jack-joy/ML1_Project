@@ -19,10 +19,13 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
+
 ######################################################################################
-# Load Data
-df = pd.read_csv('DATA/nba_data_with_salaries.csv')
-feature_map = {
+# FUNCTION BASED MODEL
+def load_and_clean_data():
+    '''Function to load NBA data with salaries'''
+    df = pd.read_csv('DATA/nba_data_with_salaries.csv')
+    feature_map = {
     'PTS': 'Points',
     'FGA_base' : 'Shots Attempted',
     'FGM_base' : 'Shots Made',
@@ -41,28 +44,12 @@ feature_map = {
     'FG3_PCT' : '3 Pointer Percentage',
     'SALARY': 'Salary',
     'NET_RATING': 'Net Rating'
-}
-df.rename(columns=feature_map, inplace=True)
-all_cols = list(feature_map.values())
+    }
+    df.rename(columns=feature_map, inplace=True)
+    return df
 
-# Feature Selection:
-FEATURES = {
-    'Player Archetype' : ['Points', 'Assists', 'Rebounds', 'Defensive Rebounds', 'True Shooting Percentage', 
-                          'Usage Percentage', 'Defensive Rating', 'Offensive Rating', 
-                          '3 Pointer Attempts', '3 Pointer Made', 'Steals'],
-    'Player Valuation' : ['Salary', 'Points', 'Assists', 'Rebounds', 'Defensive Rebounds', 
-                          'Steals', '3 Pointer Made'],
-    'Custom Model' : [] # User input features (dropdown of all features)
-} # User will choose one of these options in the app
-K_VALUE_OVERRIDE = np.nan
-MODEL_TYPE = 'Player Archetype'
-
-
-###########################################################################
-# ML PIPELINE AND MODEL
-X = df[FEATURES[MODEL_TYPE]]
 # Pipeline
-def create_pipeline(n_clusters=4):
+def create_pipeline(n_clusters):
     '''Function to create SKLearn Pipeline for KMeans Clustering'''
     pipeline = Pipeline([
         ('scaler', StandardScaler()),
@@ -73,7 +60,7 @@ def create_pipeline(n_clusters=4):
     ])
     return pipeline
 
-# Choose Best K using Silhouette Score and Elbow Method
+# Test K Vals with Silhouette Score and Elbow Method
 def test_k_values(parameters, range_k = range(2,12)):
     '''Function to test different K values for KMeans'''
     silhouette_scores = []
@@ -92,28 +79,45 @@ def test_k_values(parameters, range_k = range(2,12)):
     return silhouette_scores, wcss, optimal_k
 
 # Graphing Functions
-def graph_elbow_silhouette(wcss_scores, sil_scores, range_k = range(2,12)):
-    '''Function to graph Eblow and Silhouette Scores'''
-    # Elbow First
-    plt.subplots(figsize=(12,5))
-    sns.lineplot(x=range_k, y=wcss_scores, marker='o')
-    plt.title('Elbow Method For Optimal K', fontweight='bold')
-    plt.xlabel('Number of Clusters K')
-    plt.ylabel('Within Cluster Sum of Squares (WCSS)')
-    plt.xticks(range_k)
-    plt.show()
-    # Silhouette Next
-        # 1 = well defined clusters
-        # .5 = reasonable clusters
-        # 0 = overlapping clusters
-        # -1 = incorrect clustering
-    plt.subplots(figsize=(12,5))
-    sns.lineplot(x=range_k, y=sil_scores, marker='o')
-    plt.title('Silhouette Scores For Optimal K', fontweight='bold')
-    plt.xlabel('Number of Clusters K')
-    plt.ylabel('Silhouette Score')
-    plt.xticks(range_k)
-    plt.show()
+def graph_elbow_silhouette(wcss_scores, sil_scores, range_k=range(2,12)):
+    """Graph Elbow and Silhouette Scores and return both figures."""
+    # --- Elbow Plot ---
+    fig1, ax1 = plt.subplots(figsize=(12,5))
+    sns.lineplot(x=range_k, y=wcss_scores, marker='o', ax=ax1)
+    ax1.set_title("Elbow Method For Optimal K", fontweight="bold")
+    ax1.set_xlabel("Number of Clusters K")
+    ax1.set_ylabel("Within Cluster Sum of Squares (WCSS)")
+    ax1.set_xticks(range_k)
+    # --- Silhouette Plot ---
+    fig2, ax2 = plt.subplots(figsize=(12,5))
+    sns.lineplot(x=range_k, y=sil_scores, marker='o', ax=ax2)
+    ax2.set_title("Silhouette Scores For Optimal K", fontweight="bold")
+    ax2.set_xlabel("Number of Clusters K")
+    ax2.set_ylabel("Silhouette Score")
+    ax2.set_xticks(range_k)
+    # Returns Plots    
+    return fig1, fig2
+
+
+
+
+# FUNCTION CALLS AND MODEL EXECUTION
+FEATURES = {
+    'Player Archetype' : ['Points', 'Assists', 'Rebounds', 'Defensive Rebounds', 'True Shooting Percentage', 
+                          'Usage Percentage', 'Defensive Rating', 'Offensive Rating', 
+                          '3 Pointer Attempts', '3 Pointer Made', 'Steals'],
+    'Player Valuation' : ['Salary', 'Points', 'Assists', 'Rebounds', 'Defensive Rebounds', 
+                          'Steals', '3 Pointer Made'],
+    'Custom Model' : [] # User input features (dropdown of all features)
+} # User will choose one of these options in the app
+K_VALUE_OVERRIDE = np.nan
+MODEL_TYPE = 'Player Archetype'
+
+X = df[FEATURES[MODEL_TYPE]]
+###########################################################################
+# ML PIPELINE AND MODEL
+
+
 
 # Function Calls to Get Optimal K
 sil_score, wcss, optimal_k = test_k_values(X)
