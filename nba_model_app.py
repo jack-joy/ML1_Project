@@ -81,7 +81,11 @@ if tab == "Models":
     st.title("Model Training & Prediction")
     st.subheader("Select Model")
     model_choice = st.radio("Choose a model:", 
-                            ["Logistic Regression", "K-Means", "KNN", "PCA"])
+                            ["Multiple Linear Regression", "Logistic Regression", "K-Means", "KNN", "PCA", "MLP Neural Network"])
+
+# Multiple Linear Regression
+    if model_choice == "Multiple Linear Regression":
+        st.write("Multiple Linear Regression")
 
 # Logistic Regression
     if model_choice == "Logistic Regression":
@@ -98,6 +102,10 @@ if tab == "Models":
 # PCA
     if model_choice == "PCA":
         st.write("PCA")
+
+# MLP Neural Network
+    if model_choice == "MLP Neural Network":
+        st.write("MLP Neural Network")
 
 # To run this dashboard, use the terminal command:
 # streamlit run nba_model_app.py
