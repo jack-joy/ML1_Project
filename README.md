@@ -42,6 +42,4 @@ Using all of the models we have used this semester, we will analyze NBA player d
 3. `2012-2023 NBA Stats.csv`
 
 ### ** Viewing Data**
-1. Run get_data.py
-2. Run scrape_salaries.py
-3. Run data_cleaning.py
+1. Run get_clean_data.py
