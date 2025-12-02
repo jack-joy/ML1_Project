@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 # Load Data
-nba = pd.read_csv('DATA/nba_base_data.csv')
+nba = pd.read_csv('DATA/player_stats.csv')
 salaries = pd.read_csv('DATA/24-25_salaries.csv')
 
 nba['helper'] = nba['PLAYER_NAME'].str.lower()\
