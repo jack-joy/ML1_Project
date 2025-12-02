@@ -24,3 +24,5 @@ dependencies:
       - nba_api
       - unidecode
       - dash
+      - ipywidgets
+      - ydata_profiling
