@@ -37,3 +37,8 @@ Our z file does a
 1. *NBA API:* https://github.com/swar/nba_api
 2. ESPN Salary Data -- Scraped from https://www.espn.com/nba/salaries
 3. `2012-2023 NBA Stats.csv`
+
+### ** Viewing Data**
+1. Run get_data.py
+2. Run scrape_salaries.py
+3. Run data_cleaning.py
