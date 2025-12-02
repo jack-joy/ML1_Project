@@ -22,16 +22,19 @@ Using all of the models we have used this semester, we will analyze NBA player d
     - Clustering players into different archetypes based on performance metrics
     - Clustering players based on their valuation to identify undervalued/overvalued players
 5. PCA Model -- 
-6. MLP Neural Network --
+6. MLP Neural Network -- Jack 
 7. Model Extension -- Harrison
 
 ### **PROJECT/FILE STRUCTURE**
 
-
-### **INSTRUCTIONS FOR VIEWERS - HOW TO RUN**
-Our x file does y
-Our z file does a
-...
+1. README.md
+2. data_cleaning.py
+3. data_cleaning.ipynb
+4. get_data.py
+5. get_data.ipynb
+6. k_means_model.py
+7. k_means_model.ipynb
+8. knn_model.py
 
 ### **DATA SOURCES**: 
 1. *NBA API:* https://github.com/swar/nba_api
