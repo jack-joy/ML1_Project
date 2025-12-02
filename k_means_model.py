@@ -98,10 +98,40 @@ def graph_elbow_silhouette(wcss_scores, sil_scores, range_k=range(2,12)):
     # Returns Plots    
     return fig1, fig2
 
+# Final Model Function
+def final_model_and_labels(data, n_clusters):
+    '''Function to create final KMeans model and return labels'''
+    pipeline = create_pipeline(n_clusters)
+    pipeline.fit(data)
+    labels = pipeline['kmeans'].labels_
+    return pipeline, labels
+
+# Final Graph Function
+def graph_clusters(data, x_axis, y_axis, color, alpha=0.8):
+    '''Function to graph clusters'''
+    fig, ax = plt.subplots(figsize=(12,6))
+    sns.scatterplot(
+        data=data, 
+        x=x_axis, 
+        y=y_axis,
+        hue=color, 
+        palette='Set2', 
+        alpha=alpha
+        )
+    ax.set_title(f'K-Means Clustering: {MODEL_TYPE}', fontweight='bold')
+    ax.set_xlabel(f'{x_axis}')
+    ax.set_ylabel(f'{y_axis}')
+    return fig
 
 
 
+
+#######################################################################################
 # FUNCTION CALLS AND MODEL EXECUTION
+df = load_and_clean_data()
+attribute_options = sorted(df.columns.tolist())
+
+# Feature & Model Selection
 FEATURES = {
     'Player Archetype' : ['Points', 'Assists', 'Rebounds', 'Defensive Rebounds', 'True Shooting Percentage', 
                           'Usage Percentage', 'Defensive Rating', 'Offensive Rating', 
@@ -110,36 +140,26 @@ FEATURES = {
                           'Steals', '3 Pointer Made'],
     'Custom Model' : [] # User input features (dropdown of all features)
 } # User will choose one of these options in the app
-K_VALUE_OVERRIDE = np.nan
+K_VALUE = 'Auto' # User can choose Auto or specify K integer value
 MODEL_TYPE = 'Player Archetype'
 
 X = df[FEATURES[MODEL_TYPE]]
-###########################################################################
-# ML PIPELINE AND MODEL
 
+# Test Different K Values
+sil_scores, wcssm, opt_k = test_k_values(X)
+elbow_graph, sil_graph = graph_elbow_silhouette(wcssm, sil_scores)
+elbow_graph.show()
+sil_graph.show()
 
-
-# Function Calls to Get Optimal K
-sil_score, wcss, optimal_k = test_k_values(X)
-graph_elbow_silhouette(wcss, sil_score)
-
-# Final Model (with chosen K to override)
-if K_VALUE_OVERRIDE is not np.nan:
-    print(f'Overriding K to: {K_VALUE_OVERRIDE}')
-    pipeline = create_pipeline(K_VALUE_OVERRIDE)
-else: 
-    print(f'Using Optimal K of: {optimal_k}')
-    pipeline = create_pipeline(optimal_k)
-pipeline.fit(X)
-labels = pipeline['kmeans'].labels_
+# Build Final Model
+k_value = opt_k if K_VALUE == 'Auto' else int(K_VALUE)
+pipeline, labels = final_model_and_labels(X, k_value)
 df['Cluster'] = labels
 
-#############################################################################
-# Assess Results and Analyze Clusters
-
+# Final Assessment
 # Styled DataFrame Summary
 summary = df.groupby(['Cluster'])[FEATURES[MODEL_TYPE]].mean().reset_index()
-summary.style.format("{:,.2f}", subset=summary.columns[2:])
+summary.style.format("{:,.1f}", subset=summary.columns[1:])
 
 # Plot
 options = summary.columns.tolist()
@@ -148,11 +168,5 @@ Y_AXIS = 'Assists'
 COLOR = 'Cluster'
 ALPHA = .8
 
-plt.subplots(figsize=(12,6))
-sns.scatterplot(data=df, x=X_AXIS, y=Y_AXIS,
-                hue=COLOR, palette='Set2', 
-                alpha=ALPHA)
-plt.title(f'K-Means Clustering: {MODEL_TYPE}', fontweight='bold')
-plt.xlabel(f'{X_AXIS} Per Game')
-plt.ylabel(f'{Y_AXIS} Per Game')
-plt.show()
+cluster_graph = graph_clusters(df, X_AXIS, Y_AXIS, COLOR, ALPHA)
+cluster_graph.show()
