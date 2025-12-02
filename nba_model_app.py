@@ -91,9 +91,69 @@ if tab == "Models":
     if model_choice == "Logistic Regression":
         st.write("Logistic Regression")
 
-# K-Means
+# K-Means - Eddie
     if model_choice == "K-Means":
         st.write("K-Means")
+        
+        # Import k_means_model functions
+        import k_means_model as kmm
+        
+        # Load Data and Possible Features
+        df = kmm.load_and_clean_data()
+        attribute_options = sorted(df.columns.tolist())
+
+        # User Input Section
+        FEATURES = {
+            'Player Archetype' : ['Points', 'Assists', 'Rebounds', 'Defensive Rebounds', 'True Shooting Percentage', 
+                                'Usage Percentage', 'Defensive Rating', 'Offensive Rating', 
+                                '3 Pointer Attempts', '3 Pointer Made', 'Steals'],
+            'Player Valuation' : ['Salary', 'Points', 'Assists', 'Rebounds', 'Defensive Rebounds', 
+                                'Steals', '3 Pointer Made'],
+            'Custom Model' : [] # User input features (dropdown of all features)
+        } # User will choose one of these options in the app
+        MODEL_TYPE = st.selectbox("Select Model Type:", list(FEATURES.keys()))
+        if MODEL_TYPE == 'Custom Model':
+            selected_features = st.multiselect("Select Features for Custom Model:", attribute_options)
+            FEATURES['Custom Model'] = selected_features
+        K_VALUE = st.text_input("Enter K Value (or type 'Auto' for optimal K):", 'Auto')
+        
+        # Feature Selection
+        X = df[FEATURES[MODEL_TYPE]]
+        
+        # Test Different K Values
+        sil_scores, wcssm, opt_k = kmm.test_k_values(X)
+        elbow_graph, sil_graph = kmm.graph_elbow_silhouette(wcssm, sil_scores)
+        st.pyplot(elbow_graph)
+        st.pyplot(sil_graph)
+        
+        # Build Final Model
+        k_value = opt_k if K_VALUE == 'Auto' else int(K_VALUE)
+        pipeline, labels = kmm.final_model_and_labels(X, k_value)
+        df['Cluster'] = labels
+        st.write(f'Final K-Means Model with K={k_value} Fitted!')
+        
+        # Show Styled DataFrame
+        st.write("Cluster Summary:")
+        summary = df.groupby(['Cluster'])[FEATURES[MODEL_TYPE]].mean().reset_index()
+        summary.set_index('Cluster', inplace=True)
+        styled = (
+            summary.style
+            .format("{:,.1f}")
+            .background_gradient(cmap='Blues', axis=0)
+        )
+        st.dataframe(styled)
+        
+        # Interactive Plotting
+        st.subheader("Cluster Visualization")
+        options = summary.columns.tolist()
+        X_AXIS = st.selectbox("Select X-Axis:", options, index=1)
+        Y_AXIS = st.selectbox("Select Y-Axis:", options, index=2)
+        COLOR = 'Cluster'
+        ALPHA = st.slider("Scatterplot Transparency:", 0.0, 1.0, 0.8, 0.05)
+        cluster_plot = kmm.graph_clusters(df, X_AXIS, Y_AXIS, COLOR, MODEL_TYPE, ALPHA)
+        st.pyplot(cluster_plot)
+        
+        
 
 # KNN
     if model_choice == "KNN":
