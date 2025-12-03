@@ -3,6 +3,12 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 from PIL import Image
+from knn_pca_model import train_knn
+
+# -------------------------------------------------------------------------------------------------------------------------------------
+# Data
+# -------------------------------------------------------------------------------------------------------------------------------------
+nba = pd.read_csv("DATA/nba_data_with_salaries.csv")
 
 # -------------------------------------------------------------------------------------------------------------------------------------
 # Title
@@ -162,6 +168,136 @@ if tab == "Models":
 # KNN --------------------------------------------------------------------------------------------------------------------------------
     if model_choice == "KNN":
         st.write("KNN")
+
+        default_features = [
+            'PTS', 'AST', 'REB', 'TS_PCT', 'USG_PCT',
+            'DEF_RATING', 'OFF_RATING', 'FG3M', 'STL'
+        ]
+
+        # --- User controls ---
+        selection = st.selectbox(
+            "Feature Selection Method",
+            ["default", "pca", "selectk"]
+        )
+
+        # Reset model metrics if user changes feature selection method
+        if "prev_selection" not in st.session_state:
+            st.session_state["prev_selection"] = selection
+
+        if selection != st.session_state["prev_selection"]:
+            st.session_state["knn_trained"] = False
+            st.session_state["knn_results"] = None
+            st.session_state["knn_model"] = None
+            st.session_state["knn_selection"] = None
+
+        st.session_state["prev_selection"] = selection
+
+        test_size = st.slider(
+            "Test Size (0.1 to 0.5)",
+            min_value=0.1, max_value=0.5, value=0.2, step=0.05
+        )
+
+        tier_count = st.selectbox(
+            "Number of Salary Tiers",
+            [2, 3, 4, 5]
+        )
+
+        # Search mode
+        search_mode = st.radio(
+            "Training Mode",
+            ["Grid Search", "Manual Parameters"]
+        )
+
+        use_grid_search = search_mode == "Grid Search"
+
+        manual_params = None
+        if not use_grid_search:
+            st.markdown("### Manual Hyperparameters")
+
+            n_neighbors = st.slider("K (neighbors)", 1, 50, 5)
+            metric = st.selectbox("Distance Metric", ["euclidean", "manhattan"])
+            weights = st.selectbox("Weights", ["uniform", "distance"])
+
+            manual_params = {
+                "knn__n_neighbors": n_neighbors,
+                "knn__metric": metric,
+                "knn__weights": weights
+            }
+
+        if st.button("Train KNN Model"):
+            results = train_knn(
+                nba=nba,
+                selection=selection,
+                test_size=test_size,
+                tier_count=tier_count,
+                use_grid_search=use_grid_search,
+                manual_params=manual_params
+            )
+
+            st.session_state["knn_trained"] = True
+            st.session_state["knn_results"] = results 
+            st.session_state["knn_model"] = results["model"]
+            st.session_state["knn_selection"] = selection
+
+        if st.session_state.get("knn_trained", False):
+            results = st.session_state["knn_results"]
+
+            st.success("Training complete!")
+
+            st.write("### Accuracy:", results["metrics"]["accuracy"])
+
+            st.write("### Parameters used:", results["parameters"])
+
+            st.write("### Classification Report")
+            st.json(results["metrics"]["classification_report"])
+
+            st.write("### Confusion Matrix")
+            st.write(results["confusion_matrix"])
+        
+        if (
+            "knn_model" in st.session_state
+            and st.session_state["knn_selection"] == "default"
+        ):
+            st.markdown("---")
+            st.header("Predict Salary Tier for a New Player")
+
+            with st.form("prediction_form"):
+                st.write("Enter player stats:")
+
+                # Layout inputs in two columns for cleaner UI
+                col1, col2 = st.columns(2)
+
+                PTS = col1.number_input("Points (PTS)", 0.0, 50.0, 10.0)
+                AST = col2.number_input("Assists (AST)", 0.0, 20.0, 5.0)
+                REB = col1.number_input("Rebounds (REB)", 0.0, 20.0, 6.0)
+                TS_PCT = col2.number_input("True Shooting % (TS_PCT)", 0.2, 0.8, 0.55)
+                USG_PCT = col1.number_input("Usage % (USG_PCT)", 5.0, 40.0, 22.0)
+                DEF_RATING = col2.number_input("Defensive Rating", 80.0, 130.0, 110.0)
+                OFF_RATING = col1.number_input("Offensive Rating", 80.0, 140.0, 115.0)
+                FG3M = col2.number_input("3-Pointers Made (FG3M)", 0.0, 10.0, 2.0)
+                STL = col1.number_input("Steals (STL)", 0.0, 5.0, 1.0)
+
+                submitted = st.form_submit_button("Predict Tier")
+
+            if submitted:
+                model = st.session_state["knn_model"]
+
+                # Convert to DataFrame in correct order
+                X_new = pd.DataFrame([{
+                    "PTS": PTS,
+                    "AST": AST,
+                    "REB": REB,
+                    "TS_PCT": TS_PCT,
+                    "USG_PCT": USG_PCT,
+                    "DEF_RATING": DEF_RATING,
+                    "OFF_RATING": OFF_RATING,
+                    "FG3M": FG3M,
+                    "STL": STL
+                }], columns=default_features)
+
+                pred = model.predict(X_new)[0]
+
+                st.success(f"Predicted Salary Tier: **{pred}**")
 
 # PCA --------------------------------------------------------------------------------------------------------------------------------
     if model_choice == "PCA":
