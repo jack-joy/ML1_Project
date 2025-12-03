@@ -2,6 +2,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+from PIL import Image
 
 # -------------------------------------------------------------------------------------------------------------------------------------
 # Title
@@ -12,7 +13,10 @@ st.title("NBA Dashboard")
 #Side Bar
 # -------------------------------------------------------------------------------------------------------------------------------------
 st.sidebar.title("NBA Dashboard")
+logo = Image.open('Logo.png')
+st.sidebar.image(logo, use_container_width=True)
 tab = st.sidebar.radio("Navigation", ["README", "Data Table", "Exploratory Data Analysis", 'Models'])
+
 
 # -------------------------------------------------------------------------------------------------------------------------------------
 # README
@@ -69,6 +73,7 @@ Our z file does a
 # -------------------------------------------------------------------------------------------------------------------------------------
 #if tab == "Data Table":
     
+
 # -------------------------------------------------------------------------------------------------------------------------------------
 # Exploratory Data Analysis
 # -------------------------------------------------------------------------------------------------------------------------------------
@@ -83,15 +88,15 @@ if tab == "Models":
     model_choice = st.radio("Choose a model:", 
                             ["Multiple Linear Regression", "Logistic Regression", "K-Means", "KNN", "PCA", "MLP Neural Network"])
 
-# Multiple Linear Regression
+# Multiple Linear Regression ----------------------------------------------------------------------------------------------------------
     if model_choice == "Multiple Linear Regression":
         st.write("Multiple Linear Regression")
 
-# Logistic Regression
+# Logistic Regression ----------------------------------------------------------------------------------------------------------------
     if model_choice == "Logistic Regression":
         st.write("Logistic Regression")
 
-# K-Means - Eddie
+# K-Means ----------------------------------------------------------------------------------------------------------------------------
     if model_choice == "K-Means":
         st.write("K-Means")
         
@@ -155,15 +160,15 @@ if tab == "Models":
         
         
 
-# KNN
+# KNN --------------------------------------------------------------------------------------------------------------------------------
     if model_choice == "KNN":
         st.write("KNN")
 
-# PCA
+# PCA --------------------------------------------------------------------------------------------------------------------------------
     if model_choice == "PCA":
         st.write("PCA")
 
-# MLP Neural Network
+# MLP Neural Network -----------------------------------------------------------------------------------------------------------------
     if model_choice == "MLP Neural Network":
         st.write("MLP Neural Network")
 
