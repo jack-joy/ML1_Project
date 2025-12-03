@@ -146,13 +146,12 @@ if tab == "Models":
         # Interactive Plotting
         st.subheader("Cluster Visualization")
         options = summary.columns.tolist()
-        X_AXIS = st.selectbox("Select X-Axis:", options, index=1)
-        Y_AXIS = st.selectbox("Select Y-Axis:", options, index=2)
+        X_AXIS = st.selectbox("Select X-Axis:", options)
+        Y_AXIS = st.selectbox("Select Y-Axis:", options)
         COLOR = 'Cluster'
         ALPHA = st.slider("Scatterplot Transparency:", 0.0, 1.0, 0.8, 0.05)
         cluster_plot = kmm.graph_clusters(df, X_AXIS, Y_AXIS, COLOR, MODEL_TYPE, ALPHA)
         st.pyplot(cluster_plot)
-        
         
 
 # KNN
