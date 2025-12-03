@@ -21,7 +21,7 @@ Using all of the models we have used this semester, we will analyze NBA player d
 4. K-Means Clustering -- Eddie
     - Clustering players into different archetypes based on performance metrics
     - Clustering players based on their valuation to identify undervalued/overvalued players
-5. PCA Model -- 
+5. PCA Model -- Neel
 6. MLP Neural Network -- Jack 
 7. Model Extension -- Harrison
 
