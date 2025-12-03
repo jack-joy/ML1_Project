@@ -42,7 +42,7 @@ Using all of the models we have used this semester, we will analyze NBA player d
     - Clustering players into different archetypes based on performance metrics
     - Clustering players based on their valuation to identify undervalued/overvalued players
 5. PCA Model -- 
-6. MLP Neural Network --
+6. MLP Neural Network --6
 7. Model Extension -- Harrison
 
 ### **PROJECT/FILE STRUCTURE**
