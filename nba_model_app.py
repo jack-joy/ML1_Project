@@ -77,7 +77,56 @@ Our z file does a
 # -------------------------------------------------------------------------------------------------------------------------------------
 # Data Table
 # -------------------------------------------------------------------------------------------------------------------------------------
-#if tab == "Data Table":
+if tab == "Data Table":
+    st.subheader("NBA Data Table")
+
+    # Rows per page
+    rows_per_page = 25
+    total_rows = nba.shape[0]
+    total_pages = (total_rows - 1) // rows_per_page + 1
+
+    # Initialize page number
+    if "page_number" not in st.session_state:
+        st.session_state.page_number = 0
+    if "page_slider" not in st.session_state:
+        st.session_state.page_slider = 1
+
+    # -----------------------------------------------------------------
+    # Pagination controls
+    # -----------------------------------------------------------------
+    st.write("")  # spacing
+    col1, col2, col3 = st.columns([1, 2, 1])
+
+    with col1:
+        if st.button("Previous"):
+            st.session_state.page_number = (st.session_state.page_number - 1) % total_pages
+            st.session_state.page_slider = st.session_state.page_number + 1
+
+    with col3:
+        if st.button("Next"):
+            st.session_state.page_number = (st.session_state.page_number + 1) % total_pages
+            st.session_state.page_slider = st.session_state.page_number + 1
+
+    # Jump-to-page slider
+    new_page = st.slider(
+        "Jump to page",
+        min_value=1,
+        max_value=total_pages,
+        step=1,
+        key='page_slider'
+    )
+    st.session_state.page_number = new_page - 1 
+
+    # Calculate start and end indices
+    start_idx = st.session_state.page_number * rows_per_page
+    end_idx = start_idx + rows_per_page
+    df_page = nba.iloc[start_idx:end_idx]
+
+    # Display the page (scrollable horizontally)
+    st.dataframe(df_page, width=1500, height=400)
+
+    # Page info
+    st.write(f"Page {st.session_state.page_number + 1} of {total_pages} — Showing rows {start_idx + 1} to {min(end_idx, total_rows)} of {total_rows}")
     
 
 # -------------------------------------------------------------------------------------------------------------------------------------
