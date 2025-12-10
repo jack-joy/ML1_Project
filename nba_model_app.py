@@ -272,7 +272,11 @@ if tab == "Models":
 
 # K-Means ----------------------------------------------------------------------------------------------------------------------------
     if model_choice == "K-Means":
-        st.write("K-Means")
+        st.title("K-Means: Clustering Player Archetypes and Valuations")
+        st.write('''
+                 With the K-Means clustering below, we group players into distinct groups, 
+                 identifying unique player archetypes, valuations, or custom groupings.
+                 ''')
         
         # Import k_means_model functions
         import k_means_model as kmm
