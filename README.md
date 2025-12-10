@@ -4,37 +4,45 @@
 ---------------------------------------------------------------------------------------------------------------------
 
 ### **OVERVIEW**:
-Using all of the models we have used this semester, we will analyze NBA player data from the 2024-2025 seasons to answer various research questions. We clean and transform the data, explore it through descriptive statistics and visualizations, and build multiple predictive models depending on the prediction type. Finally, we deploy a Streamlit app to showcase our findings in an interactive way.
+Using all of the models we have used this semester, we will analyze NBA player data from the 2024-2025 seasons to answer various research questions. We will clean and transform the data, explore it through descriptive statistics and visualizations, and build multiple predictive models depending on the prediction type. Finally, we deploy a Streamlit app to showcase our findings in an interactive way.
 
 ### **RESEARCH QUESTIONS & OBJECTIVES**:
-1. Can we accurately predict player salary, all-star nominations, and other accomplishment features?
-2. Assess which players are undervalued/overvalued in order to build a new team and predict transfers.
-3. Can we predict the categorical variable of whether a player will be an all-star based on their season statistics?
-4. KNN: Can we classify players into different archetypes based on their playing style and performance metrics?
-5. Create a trade analysis model based on projected evaluated salaries + other evaluative metrics.
-6. Predict win/loss for next season based on current roster and player statistics.
+1.
 
 ### **MODELS**:
-1. Multiple Linear Regression -- Adam 
-2. Logistic Regression -- Tim
-3. KNN: K-Nearest Neighbors -- Chase
-4. K-Means Clustering -- Eddie
+1. Multiple Linear Regression
+2. Logistic Regression
+3. KNN: K-Nearest Neighbors
+4. K-Means Clustering
     - Clustering players into different archetypes based on performance metrics
     - Clustering players based on their valuation to identify undervalued/overvalued players
-5. PCA Model -- Neel
-6. MLP Neural Network -- Jack 
-7. Model Extension -- Harrison
+5. PCA Model
+6. MLP Neural Network
+7. Model Extension
 
 ### **PROJECT/FILE STRUCTURE**
-
-1. README.md
-2. data_cleaning.py
-3. data_cleaning.ipynb
-4. get_data.py
-5. get_data.ipynb
+1. DATA
+    1. 24-25_salaries.csv
+    2. nba_data_with_salaries.csv
+    3. player_stats
+2. eda.ipynb
+3. environment.yml
+4. FINAL_PROJECT_INSTRUCTIONS.pdf
+5. get_clean_data.py
 6. k_means_model.py
-7. k_means_model.ipynb
-8. knn_model.py
+7. knn_pca_model.py
+8. LEBRON Data - Sheet1.csv
+9. logistic_regression_model.ipynb
+10. Logo.png
+11. ml1pca.ipynb
+12. MLP_Test.ipynb
+13. MLP.py
+14. mlr_model.py
+15. nba_model.py
+16. nba_model_app.py
+17. README.md
+18. scrape_salaries.py
+
 
 ### **DATA SOURCES**: 
 1. *NBA API:* https://github.com/swar/nba_api
