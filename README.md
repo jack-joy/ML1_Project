@@ -35,6 +35,7 @@ Using all of the models we have used this semester, we will analyze NBA player d
 6. k_means_model.py
 7. k_means_model.ipynb
 8. knn_model.py
+9. ml1pca.ipynb
 
 ### **DATA SOURCES**: 
 1. *NBA API:* https://github.com/swar/nba_api
