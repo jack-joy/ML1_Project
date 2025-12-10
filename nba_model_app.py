@@ -289,9 +289,9 @@ if tab == "Models":
         FEATURES = {
             'Player Archetype' : ['Points', 'Assists', 'Rebounds', 'Defensive Rebounds', 'True Shooting Percentage', 
                                 'Usage Percentage', 'Defensive Rating', 'Offensive Rating', 
-                                '3 Pointer Attempts', '3 Pointer Made', 'Steals'],
+                                '3 Pointer Attempts', '3 Pointer Made', 'Steals', 'Blocks'],
             'Player Valuation' : ['Salary', 'Points', 'Assists', 'Rebounds', 'Defensive Rebounds', 
-                                'Steals', '3 Pointer Made'],
+                                'Steals', '3 Pointer Made', 'Blocks'],
             'Custom Model' : [] # User input features (dropdown of all features)
         } # User will choose one of these options in the app
         MODEL_TYPE = st.selectbox("Select Model Type:", list(FEATURES.keys()))
