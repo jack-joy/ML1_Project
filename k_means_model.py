@@ -44,7 +44,8 @@ def load_and_clean_data():
     'FG3M' : '3 Pointer Made',
     'FG3_PCT' : '3 Pointer Percentage',
     'SALARY': 'Salary',
-    'NET_RATING': 'Net Rating'
+    'NET_RATING': 'Net Rating', 
+    'BLK': 'Blocks'
     }
     df.rename(columns=feature_map, inplace=True)
     return df

@@ -9,15 +9,26 @@ from sklearn.decomposition import PCA
 import requests
 import time
 
-# -------------------------------------
-# STREAMLIT PAGE
-# -------------------------------------
+# Title
 st.title("NBA PCA Explorer (2024–25)")
 
 st.write("""
-This app fetches 2024–25 NBA data, merges salaries, runs PCA,  
-and displays the resulting components for clustering or KNN.
+Fetches 2024–25 NBA data, merges salary data from ESPN,  
+runs PCA, and displays the resulting components for modeling.
 """)
+
+# -------------------------------------
+# SESSION STATE INIT
+# -------------------------------------
+
+if "df_merged" not in st.session_state:
+    st.session_state.df_merged = None
+
+if "pca_df" not in st.session_state:
+    st.session_state.pca_df = None
+
+if "pca_model" not in st.session_state:
+    st.session_state.pca_model = None
 
 # -------------------------------------
 # FUNCTIONS
@@ -57,18 +68,14 @@ def scrape_salaries():
         html = requests.get(url, headers=headers).text
         soup = BeautifulSoup(html, "html.parser")
 
-        names = [a.text.strip()
-                 for a in soup.select("td:has(a)")[::2]]
-
-        salaries = [td.text.strip()
-                    for td in soup.select('td[style*="text-align:right"]:not([width])')]
+        names = [a.text.strip() for a in soup.select("td:has(a)")[::2]]
+        salaries = [td.text.strip() for td in soup.select('td[style*="text-align:right"]:not([width])')]
 
         df = pd.DataFrame({"PLAYER_NAME": names, "SALARY": salaries})
         all_rows.append(df)
 
     df_salaries = pd.concat(all_rows, ignore_index=True)
 
-    # salary cleaning
     df_salaries["SALARY"] = (
         df_salaries["SALARY"]
         .str.replace("$", "", regex=False)
@@ -106,7 +113,6 @@ def merge_stats_salaries(stats, salaries):
 
 
 def run_pca(df):
-    # filters
     df_model = df[df["MIN_base"] >= 15].copy()
 
     pca_features = [
@@ -133,38 +139,45 @@ def run_pca(df):
 
     return pca, pca_df
 
-
 # -------------------------------------
-# INTERFACE
+# UI BUTTONS
 # -------------------------------------
 
-if st.button("Fetch & Process Data (Takes ~10 seconds)"):
-    with st.spinner("Loading NBA base & advanced stats..."):
+st.header("Step 1: Fetch NBA Data")
+
+if st.button("Fetch & Merge Data"):
+    with st.spinner("Loading NBA statistics..."):
         stats = get_nba_stats()
-
-    with st.spinner("Scraping salary data..."):
+    with st.spinner("Scraping ESPN salaries..."):
         salaries = scrape_salaries()
-
     with st.spinner("Merging datasets..."):
-        df_merged = merge_stats_salaries(stats, salaries)
+        st.session_state.df_merged = merge_stats_salaries(stats, salaries)
 
-    st.success("Data successfully merged!")
-    st.write(df_merged.head())
+    st.success("Merged data loaded!")
+    st.dataframe(st.session_state.df_merged.head())
 
-    with st.spinner("Running PCA..."):
-        pca, pca_df = run_pca(df_merged)
 
-    st.success("PCA completed!")
+st.header("Step 2: Run PCA")
 
-    st.write("### PCA Components (PC1–PC5)")
-    st.dataframe(pca_df)
+if st.button("Run PCA"):
+    if st.session_state.df_merged is None:
+        st.error("Please fetch data first!")
+    else:
+        with st.spinner("Running PCA..."):
+            pca, pca_df = run_pca(st.session_state.df_merged)
 
-    st.write("### Explained Variance")
-    st.bar_chart(pca.explained_variance_ratio_)
+        st.session_state.pca_df = pca_df
+        st.session_state.pca_model = pca
 
-    st.download_button(
-        "Download PCA CSV",
-        pca_df.to_csv(index=False),
-        "pca_components.csv",
-        "text/csv"
-    )
+        st.success("PCA complete!")
+        st.dataframe(pca_df)
+
+        st.write("### Explained Variance")
+        st.bar_chart(pca.explained_variance_ratio_)
+
+        st.download_button(
+            "Download PCA CSV",
+            pca_df.to_csv(index=False),
+            "pca_components.csv",
+            "text/csv"
+        )
