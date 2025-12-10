@@ -4,6 +4,19 @@ import pandas as pd
 import plotly.express as px
 from PIL import Image
 from knn_pca_model import train_knn
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import (
+    accuracy_score,
+    log_loss,
+    roc_auc_score,
+    confusion_matrix,
+    ConfusionMatrixDisplay,
+)
+import matplotlib.pyplot as plt
+
 import plotly.graph_objects as go
 import joblib
 from MLP import prep_data, train_model_mlp
@@ -80,7 +93,56 @@ Our z file does a
 # -------------------------------------------------------------------------------------------------------------------------------------
 # Data Table
 # -------------------------------------------------------------------------------------------------------------------------------------
-#if tab == "Data Table":
+if tab == "Data Table":
+    st.subheader("NBA Data Table")
+
+    # Rows per page
+    rows_per_page = 25
+    total_rows = nba.shape[0]
+    total_pages = (total_rows - 1) // rows_per_page + 1
+
+    # Initialize page number
+    if "page_number" not in st.session_state:
+        st.session_state.page_number = 0
+    if "page_slider" not in st.session_state:
+        st.session_state.page_slider = 1
+
+    # -----------------------------------------------------------------
+    # Pagination controls
+    # -----------------------------------------------------------------
+    st.write("")  # spacing
+    col1, col2, col3 = st.columns([1, 2, 1])
+
+    with col1:
+        if st.button("Previous"):
+            st.session_state.page_number = (st.session_state.page_number - 1) % total_pages
+            st.session_state.page_slider = st.session_state.page_number + 1
+
+    with col3:
+        if st.button("Next"):
+            st.session_state.page_number = (st.session_state.page_number + 1) % total_pages
+            st.session_state.page_slider = st.session_state.page_number + 1
+
+    # Jump-to-page slider
+    new_page = st.slider(
+        "Jump to page",
+        min_value=1,
+        max_value=total_pages,
+        step=1,
+        key='page_slider'
+    )
+    st.session_state.page_number = new_page - 1 
+
+    # Calculate start and end indices
+    start_idx = st.session_state.page_number * rows_per_page
+    end_idx = start_idx + rows_per_page
+    df_page = nba.iloc[start_idx:end_idx]
+
+    # Display the page (scrollable horizontally)
+    st.dataframe(df_page, width=1500, height=400)
+
+    # Page info
+    st.write(f"Page {st.session_state.page_number + 1} of {total_pages} — Showing rows {start_idx + 1} to {min(end_idx, total_rows)} of {total_rows}")
     
 
 # -------------------------------------------------------------------------------------------------------------------------------------
@@ -101,9 +163,113 @@ if tab == "Models":
     if model_choice == "Multiple Linear Regression":
         st.write("Multiple Linear Regression")
 
+
+        
 # Logistic Regression ----------------------------------------------------------------------------------------------------------------
     if model_choice == "Logistic Regression":
-        st.write("Logistic Regression")
+        
+        st.title("Logistic Regression: Predicting All-Star Status")
+
+        players = nba.copy()
+
+        # Create target variable: top 24 by PIE_RANK = All-Star
+        players["all_star"] = (players["PIE_RANK"] <= 24).astype(int)
+
+        st.write("An All-Star is any player ranked in the top 24 by PIE_RANK. Player Impact Estimate (PIE) measures a player's statistical contribution as a percent of all games played, combining positive actions and subtracting it from negative ones.")
+        st.write(players["all_star"].value_counts())
+
+        num_cols = players.select_dtypes("number").columns.tolist()
+
+        # Columns we DO NOT want to include as features
+        drop_cols = [
+            "all_star",
+            "PLAYER_ID",
+            "TEAM_ID_base",
+            "TEAM_ID_adv",
+            "TEAM_COUNT_base",
+            "TEAM_COUNT_adv",
+            "PIE",
+            "PIE_RANK",
+        ]
+
+        # Final feature set
+        X_cols = [c for c in num_cols if c not in drop_cols]
+        X = players[X_cols]
+        y = players["all_star"]
+
+        st.write(f"Number of numeric features used: {len(X_cols)}")
+
+        # User can control these parameters
+        test_size = st.slider(
+            "Test Set Size",
+            min_value=0.1, max_value=0.5, value=0.2, step=0.05
+        )
+
+        random_state = st.number_input(
+            "Random State",
+            min_value=0, max_value=999, value=42
+        )
+
+        if st.button("Train Logistic Regression Model"):
+
+            # Train-test split
+            X_train, X_test, y_train, y_test = train_test_split(
+                X, y,
+                test_size=test_size,
+                stratify=y,
+                random_state=random_state
+            )
+
+            # Build model pipeline
+            logit_pipe = Pipeline([
+                ("scaler", StandardScaler()),
+                ("model", LogisticRegression(
+                    class_weight="balanced",
+                    solver="liblinear",
+                    max_iter=1000
+                ))
+            ])
+
+            logit_pipe.fit(X_train, y_train)
+
+            # Predictions
+            proba_test = logit_pipe.predict_proba(X_test)[:, 1]
+            y_pred = (proba_test >= 0.5).astype(int)
+
+            # Confusion matrix
+            cm = confusion_matrix(y_test, y_pred)
+            TN, FP, FN, TP = cm.ravel()
+
+            # Metrics
+            accuracy = (TP + TN) / (TP + TN + FP + FN)
+            precision = TP / (TP + FP) if (TP + FP) > 0 else 0
+            recall = TP / (TP + FN) if (TP + FN) > 0 else 0
+            f1 = 2*precision*recall / (precision + recall) if (precision + recall) else 0
+            ll = log_loss(y_test, proba_test)
+            auc = roc_auc_score(y_test, proba_test)
+
+            st.subheader("Model Performance")
+            st.write("Accuracy:", round(accuracy, 3))
+            st.write("Precision:", round(precision, 3))
+            st.write("Recall:", round(recall, 3))
+            st.write("F1 Score:", round(f1, 3))
+            st.write("Log Loss:", round(ll, 3))
+            st.write("ROC AUC:", round(auc, 3))
+
+            st.subheader("Confusion Matrix")
+            st.write(f"True Negatives: {TN}")
+            st.write(f"False Positives: {FP}")
+            st.write(f"False Negatives: {FN}")
+            st.write(f"True Positives: {TP}")
+
+            fig, ax = plt.subplots()
+            disp = ConfusionMatrixDisplay(
+                confusion_matrix=cm,
+                display_labels=["Not All-Star", "All-Star"]
+            )
+            disp.plot(ax=ax)
+            st.pyplot(fig)
+
 
 # K-Means ----------------------------------------------------------------------------------------------------------------------------
     if model_choice == "K-Means":

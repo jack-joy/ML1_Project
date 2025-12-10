@@ -15,7 +15,7 @@ Using all of the models we have used this semester, we will analyze NBA player d
 6. Predict win/loss for next season based on current roster and player statistics.
 
 ### **MODELS**:
-1. Multiple Linear Regression (Add Polynomial?) -- Adam 
+1. Multiple Linear Regression -- Adam 
 2. Logistic Regression -- Tim
 3. KNN: K-Nearest Neighbors -- Chase
 4. K-Means Clustering -- Eddie
