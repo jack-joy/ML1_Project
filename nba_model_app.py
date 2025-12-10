@@ -4,6 +4,9 @@ import pandas as pd
 import plotly.express as px
 from PIL import Image
 from knn_pca_model import train_knn
+import plotly.graph_objects as go
+import joblib
+from MLP import prep_data, train_model_mlp
 
 # -------------------------------------------------------------------------------------------------------------------------------------
 # Data
@@ -92,7 +95,7 @@ if tab == "Models":
     st.title("Model Training & Prediction")
     st.subheader("Select Model")
     model_choice = st.radio("Choose a model:", 
-                            ["Multiple Linear Regression", "Logistic Regression", "K-Means", "KNN", "PCA", "MLP Neural Network"])
+                            ["Multiple Linear Regression", "Logistic Regression", "K-Means", "KNN", "PCA", "MLP Trade Analysis"])
 
 # Multiple Linear Regression ----------------------------------------------------------------------------------------------------------
     if model_choice == "Multiple Linear Regression":
@@ -304,8 +307,103 @@ if tab == "Models":
         st.write("PCA")
 
 # MLP Neural Network -----------------------------------------------------------------------------------------------------------------
-    if model_choice == "MLP Neural Network":
-        st.write("MLP Neural Network")
+    if model_choice == "MLP Trade Analysis":
+        #Load data and model
+        df = prep_data("DATA/nba_data_with_salaries.csv")
+        model, scaler, df = train_model_mlp(df)
+
+
+        #Title
+        st.title("MLP NBA Trade Analyzer")
+        st.write("Choose players for Side A and Side B and compare trade value.")
+
+        # Select Players
+        all_players = nba["PLAYER_NAME"].tolist()
+
+        col1, col2 = st.columns(2)
+
+        with col1:
+            team_a = st.multiselect("Select players for Team A", all_players)
+
+        with col2:
+            team_b = st.multiselect("Select players for Team B", all_players)
+
+        # Calculate Trade Value
+        A_out = df[df["PLAYER_NAME"].isin(team_a)]["final_score_pred"].sum()
+        B_out = df[df["PLAYER_NAME"].isin(team_b)]["final_score_pred"].sum()
+
+        A_in = B_out
+        B_in = A_out
+
+        A_net = A_in - A_out
+        B_net = B_in - B_out
+
+        #Trade Data Summary
+        st.subheader("Trade Summary")
+
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown("### Team A")
+            st.write(f"Outgoing Trade Value: **{A_out:.2f}**")
+            st.write(f"Incoming Trade Value: **{A_in:.2f}**")
+            st.write(f"Net Value: **{A_net:+.2f}**")
+
+        with col2:
+            st.markdown("### Team B")
+            st.write(f"Outgoing Trade Value: **{B_out:.2f}**")
+            st.write(f"Incoming Trade Value: **{B_in:.2f}**")
+            st.write(f"Net Value: **{B_net:+.2f}**")
+
+        # Trade Graph
+        fig = go.Figure()
+
+        fig.add_trace(go.Bar(
+            name="Outgoing Trade Value",
+            x=["Team A", "Team B"],
+            y=[A_out, B_out],
+            marker_color="red"
+        ))
+
+        fig.add_trace(go.Bar(
+            name="Incoming Trade Value",
+            x=["Team A", "Team B"],
+            y=[A_in, B_in],
+            marker_color="green"
+        ))
+
+        fig.update_layout(
+            title="Trade Value Comparison",
+            barmode="group",
+            yaxis_title="Trade Value"
+        )
+
+        st.plotly_chart(fig)
+
+        st.subheader("Player Details")
+
+        #List Player Info
+        def show_player_info(player):
+            row = df[df["PLAYER_NAME"] == player].iloc[0]
+            st.markdown(
+                f"""
+                **{player}**  
+                - Trade Value: **{row['final_score_pred']:.2f}**  
+                - PTS: {row['PTS']}  
+                - REB: {row['REB']}  
+                - AST: {row['AST']}  
+                - TS%: {row['TS_PCT']:.3f}  
+                - Salary: ${row['SALARY']:,.0f}  
+                """
+            )
+
+        st.write("### Team A Players")
+        for p in team_a:
+            show_player_info(p)
+
+        st.write("### Team B Players")
+        for p in team_b:
+            show_player_info(p)
+
 
 # To run this dashboard, use the terminal command:
 # streamlit run nba_model_app.py
