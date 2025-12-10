@@ -30,6 +30,7 @@ Using all of the models we have used this semester, we will analyze NBA player d
 4. FINAL_PROJECT_INSTRUCTIONS.pdf
 5. get_clean_data.py
 6. k_means_model.py
+<<<<<<< HEAD
 7. knn_pca_model.py
 8. LEBRON Data - Sheet1.csv
 9. logistic_regression_model.ipynb
@@ -43,6 +44,11 @@ Using all of the models we have used this semester, we will analyze NBA player d
 17. README.md
 18. scrape_salaries.py
 
+=======
+7. k_means_model.ipynb
+8. knn_model.py
+9. ml1pca.ipynb
+>>>>>>> d5d3f26df2df3415fafda771b388c6313a8ff190
 
 ### **DATA SOURCES**: 
 1. *NBA API:* https://github.com/swar/nba_api
