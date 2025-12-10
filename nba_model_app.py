@@ -172,7 +172,7 @@ if tab == "Models":
         # Create target variable: top 24 by PIE_RANK = All-Star
         players["all_star"] = (players["PIE_RANK"] <= 24).astype(int)
 
-        st.write("We define an All-Star as any player ranked in the top 24 by PIE_RANK.")
+        st.write("An All-Star is any player ranked in the top 24 by PIE_RANK. Player Impact Estimate (PIE) measures a player's statistical contribution as a percent of all games played, combining positive actions and subtracting it from negative ones.")
         st.write(players["all_star"].value_counts())
 
         num_cols = players.select_dtypes("number").columns.tolist()
