@@ -2,6 +2,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
 from PIL import Image
 from knn_pca_model import train_knn
 from sklearn.model_selection import train_test_split
@@ -14,11 +15,71 @@ from sklearn.metrics import (
     roc_auc_score,
     confusion_matrix,
     ConfusionMatrixDisplay,
+    mean_squared_error,
+    r2_score
 )
 import matplotlib.pyplot as plt
-
+import numpy as np
+import statsmodels.api as sm
 import plotly.graph_objects as go
+import seaborn as sns
 from MLP import prep_data, train_model_mlp
+
+# -------------------------------------------------------------------------------------------------------------------------------------
+# Data Prep for MLR
+# -------------------------------------------------------------------------------------------------------------------------------------
+
+# Helper function to handle multi-team players
+def select_player_row(group):
+    if len(group) == 1:
+        return group
+    else:
+        multi_team_rows = group[group['Team'].isin(['2TM', '3TM', '4TM'])]
+        if len(multi_team_rows) > 0:
+            return multi_team_rows
+        else:
+            return group.head(1)
+
+# Caching the data load so it doesn't re-scrape every time you click a button
+@st.cache_data
+def load_mlr_data():
+    # 1. Scrape Per Game Stats
+    url_pg = "https://www.basketball-reference.com/leagues/NBA_2025_per_game.html#per_game_stats"
+    nba_pg = pd.read_html(url_pg, header=0)[0]
+    nba_pg = nba_pg[nba_pg['Player'] != 'Player']
+    nba_pg = nba_pg.groupby('Player').apply(select_player_row).reset_index(drop=True)
+    
+    # 2. Scrape Advanced Stats
+    url_adv = "https://www.basketball-reference.com/leagues/NBA_2025_advanced.html#advanced"
+    nba_value = pd.read_html(url_adv, header=0)[0]
+    nba_value = nba_value[nba_value['Player'] != 'Player']
+    nba_value = nba_value.groupby('Player').apply(select_player_row).reset_index(drop=True)
+    
+    # Clean Columns
+    nba_pg = nba_pg.drop(columns=['Rk', 'Age', 'GS', 'MP', 'Team'], errors='ignore')
+    nba_value = nba_value.drop(columns=['Rk', 'Age', 'G', 'GS', 'MP', 'Team', 'Pos', 'Awards'], errors='ignore')
+
+    # 3. Load LEBRON Data (Update this path to your repo structure!)
+    # Ideally, put this CSV in your 'DATA' folder
+    try:
+        nba_lebron = pd.read_csv('DATA/LEBRON Data - Sheet1.csv') 
+    except FileNotFoundError:
+        # Fallback for local testing if path varies
+        nba_lebron = pd.read_csv('LEBRON Data - Sheet1.csv') 
+
+    nba_lebron = nba_lebron.rename(columns={'Rank': 'LEBRON_Rank'})
+
+    # 4. Merge
+    nba_df = nba_pg.merge(nba_value, on='Player', how='inner')\
+                .merge(nba_lebron, on='Player', how='inner')
+    
+    # Convert numeric columns that might be strings
+    cols_to_numeric = ['3P%', '3PAr', 'eFG%', 'FT%', 'AST', 'TRB', 'STL', 'BLK', 'USG%', 'WS/48', 'VORP', 'Age', 'Minutes', 'LEBRON']
+    for col in cols_to_numeric:
+        if col in nba_df.columns:
+            nba_df[col] = pd.to_numeric(nba_df[col], errors='coerce')
+            
+    return nba_df
 
 # -------------------------------------------------------------------------------------------------------------------------------------
 # Data
@@ -160,9 +221,140 @@ if tab == "Models":
 
 # Multiple Linear Regression ----------------------------------------------------------------------------------------------------------
     if model_choice == "Multiple Linear Regression":
-        st.write("Multiple Linear Regression")
+        st.title("LEBRON Impact Predictor")
+        st.divider()
 
+        # --- LOAD DATA ---
+        with st.spinner('Accessing Real-Time NBA Data...'):
+            try:
+                nba = load_mlr_data()
+                
+                # Define Features
+                final_features = ['3P%', '3PAr', 'eFG%', 'FT%', 'AST', 'TRB', 'STL', 'BLK', 
+                                  'USG%', 'WS/48', 'VORP', 'Age', 'Minutes']
+                
+                # Prepare Model Data
+                model_data = nba[final_features + ['LEBRON']].dropna()
+                X = model_data[final_features]
+                y = model_data['LEBRON']
+                
+                # Split & Train
+                X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+                X_train_const = sm.add_constant(X_train)
+                X_test_const = sm.add_constant(X_test)
+                
+                model = sm.OLS(y_train, X_train_const).fit()
+                
+                # Predictions
+                y_pred = model.predict(X_test_const)
+                
+            except Exception as e:
+                st.error(f"Error loading or processing data: {e}")
+                st.stop()
 
+        # --- TAB INTERFACE ---
+        # Separating the view into distinct sections for clarity
+        tab1, tab2 = st.tabs(["Model Overview", "Feature Analysis"])
+
+        # TAB 1: EXECUTIVE SUMMARY & PERFORMANCE
+        with tab1:
+            st.subheader("Model Performance Executive Summary")
+            
+            # Metrics Row
+            col1, col2, col3 = st.columns(3)
+            test_r2 = r2_score(y_test, y_pred)
+            test_mse = mean_squared_error(y_test, y_pred)
+            
+            col1.metric("Predictive Power (R²)", f"{test_r2:.3f}", 
+                        help="How much of the LEBRON variance is explained by stats. Closer to 1.0 is better.")
+            col2.metric("Error Margin (MSE)", f"{test_mse:.3f}",
+                        help="Average squared difference between predicted and actual score.")
+            col3.metric("Sample Size", f"{len(model_data)} Players",
+                        help="Number of NBA players included in this analysis.")
+            
+            st.markdown("### Synopsis")
+            st.info("""
+            This model uses a **Multiple Linear Regression (MLR)** approach. It takes 13 key statistical inputs (like VORP, Shooting Splits, and Usage) 
+            to predict a player's **LEBRON** score.
+                    
+            **LEBRON**: From the creators of the metric, "LEBRON evaluates a player’s contributions using the box score (weighted using boxPIPM’s weightings stabilized using Offensive Archetypes) and advanced on/off calculations (using Luck-Adjusted RAPM methodology) for a holistic evaluation of player impact per 100 possessions on-court."
+            
+            **Why this matters:** By isolating the relationship between these box-score stats and the LEBRON metric, we can objectively evaluate 
+            if a player is underperforming or overperforming their 'expected' impact based on their raw production.
+            """)
+            
+            # Scatter Plot: Actual vs Predicted
+            st.markdown("#### Actual vs. Predicted LEBRON Scores")
+            fig = go.Figure()
+            player_names = X_test.index
+
+            # Add scatter plot for actual vs predicted
+            fig.add_trace(go.Scatter(
+                x=y_test,
+                y=y_pred,
+                mode='markers',
+                name='Predictions',
+                marker=dict(size=8, opacity=0.6),
+                text=player_names,
+                hovertemplate='<b>%{text}</b><br>Actual: %{x:.2f}<br>Predicted: %{y:.2f}<br>Error: %{customdata:.2f}<extra></extra>',
+                customdata=[abs(a - p) for a, p in zip(y_test, y_pred)]
+            ))
+
+            # Add diagonal line (perfect prediction line)
+            min_val = min(y_test.min(), y_pred.min())
+            max_val = max(y_test.max(), y_pred.max())
+            fig.add_trace(go.Scatter(
+                x=[min_val, max_val],
+                y=[min_val, max_val],
+                mode='lines',
+                name='Perfect Prediction',
+                line=dict(color='gray', dash='dash')
+            ))
+
+            # Add red vertical lines showing the difference between actual and predicted
+            for actual, predicted in zip(y_test, y_pred):
+                fig.add_trace(go.Scatter(
+                    x=[actual, actual],
+                    y=[actual, predicted],
+                    mode='lines',
+                    line=dict(color='red', width=1),
+                    showlegend=False,
+                    hoverinfo='skip'
+                ))
+
+            fig.update_layout(
+                xaxis_title='Actual LEBRON',
+                yaxis_title='Predicted LEBRON',
+                height=500
+            )
+
+            st.plotly_chart(fig, use_container_width=True)
+            
+            with st.expander("View Detailed Statistical Summary (Raw Output)"):
+                st.text(model.summary())
+
+        # TAB 2: INTERPRETATION (COEFFICIENTS)
+        with tab2:
+            st.subheader("What Drives a High LEBRON Score?")
+            st.markdown("The chart below shows the **weight** the model assigns to each stat. Bigger bars mean that stat is *more important* for a high LEBRON rating.")
+            
+            # Extract coefficients
+            coef_df = pd.DataFrame({
+                'Feature': final_features,
+                'Weight': model.params[1:] # Exclude constant
+            }).sort_values(by='Weight', ascending=False)
+            
+            # Color code positive vs negative impact
+            coef_df['Impact'] = coef_df['Weight'].apply(lambda x: 'Positive' if x > 0 else 'Negative')
+            
+            # Display readable bar chart
+            st.bar_chart(coef_df.set_index('Feature')['Weight'], color="#FF4B4B")
+            
+            st.markdown("""
+            **Key Takeaways for Coaching Staff:**
+            * **Positive Bars:** Focus development here. Increasing these stats directly correlates with a higher LEBRON impact score.
+            * **Negative Bars:** These stats might have diminishing returns or are negatively correlated with impact in this specific model structure.
+            """)
         
 # Logistic Regression ----------------------------------------------------------------------------------------------------------------
     if model_choice == "Logistic Regression":
