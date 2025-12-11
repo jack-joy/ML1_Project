@@ -825,29 +825,28 @@ if tab == "Models":
             st.write(f"Net Value: **{B_net:+.2f}**")
 
         # Trade Graph
-        fig = go.Figure()
+        teams = ["Team A", "Team B"]
+        out_vals = [A_out, B_out]
+        in_vals = [A_in, B_in]
 
-        fig.add_trace(go.Bar(
-            name="Outgoing Trade Value",
-            x=["Team A", "Team B"],
-            y=[A_out, B_out],
-            marker_color="red"
-        ))
+        x = np.arange(len(teams))  
+        width = 0.35               
 
-        fig.add_trace(go.Bar(
-            name="Incoming Trade Value",
-            x=["Team A", "Team B"],
-            y=[A_in, B_in],
-            marker_color="green"
-        ))
+        fig, ax = plt.subplots(figsize=(8, 5))
 
-        fig.update_layout(
-            title="Trade Value Comparison",
-            barmode="group",
-            yaxis_title="Trade Value"
-        )
+        ax.bar(x - width/2, out_vals, width, label="Outgoing Trade Value", color="red")
 
-        st.plotly_chart(fig)
+        ax.bar(x + width/2, in_vals, width, label="Incoming Trade Value", color="green")
+
+        ax.set_ylabel("Trade Value")
+        ax.set_title("Trade Value Comparison")
+        ax.set_xticks(x)
+        ax.set_xticklabels(teams)
+        ax.legend()
+
+        plt.tight_layout()
+        st.pyplot(fig)
+
 
         st.subheader("Player Details")
 
