@@ -535,14 +535,15 @@ if tab == "Models":
         st.write("KNN")
 
         default_features = [
-            'PTS', 'AST', 'REB', 'TS_PCT', 'USG_PCT',
-            'DEF_RATING', 'OFF_RATING', 'FG3M', 'STL'
+            'MIN_base', 'FGM_base', 'FG3M', 'FTM', 
+            'FG_PCT_base', 'FG3_PCT', 'FT_PCT', 'REB', 'AST', 
+            'TOV', 'STL', 'BLK', 'PF', 'PTS', 'PLUS_MINUS', 'TD3'
         ]
 
         # --- User controls ---
         selection = st.selectbox(
             "Feature Selection Method",
-            ["default", "pca", "selectk"]
+            ["default", "selectk"]
         )
 
         # Reset model metrics if user changes feature selection method
@@ -618,6 +619,18 @@ if tab == "Models":
 
             st.write("### Confusion Matrix")
             st.write(results["confusion_matrix"])
+
+            st.write("### Salary Tiers")
+            bins = results["bins"]
+
+            for i in range(len(bins) - 1):
+                lower = bins[i]
+                upper = bins[i + 1]
+
+                st.write(
+                    f"**Tier {i}:** \${lower:,.0f} → \${upper:,.0f}"
+                )
+            
         
         if (
             "knn_model" in st.session_state
@@ -632,15 +645,25 @@ if tab == "Models":
                 # Layout inputs in two columns for cleaner UI
                 col1, col2 = st.columns(2)
 
-                PTS = col1.number_input("Points (PTS)", 0.0, 50.0, 10.0)
-                AST = col2.number_input("Assists (AST)", 0.0, 20.0, 5.0)
-                REB = col1.number_input("Rebounds (REB)", 0.0, 20.0, 6.0)
-                TS_PCT = col2.number_input("True Shooting % (TS_PCT)", 0.2, 0.8, 0.55)
-                USG_PCT = col1.number_input("Usage % (USG_PCT)", 5.0, 40.0, 22.0)
-                DEF_RATING = col2.number_input("Defensive Rating", 80.0, 130.0, 110.0)
-                OFF_RATING = col1.number_input("Offensive Rating", 80.0, 140.0, 115.0)
-                FG3M = col2.number_input("3-Pointers Made (FG3M)", 0.0, 10.0, 2.0)
+                MIN_base = col1.number_input("Minutes (MIN)", 0.0, 48.0, 28.0)
+                FGM_base = col2.number_input("Field Goals Made (FGM)", 0.0, 20.0, 5.0)
+                FG3M = col1.number_input("3-Pointers Made (FG3M)", 0.0, 10.0, 2.0)
+                FTM = col2.number_input("Free Throws Made (FTM)", 0.0, 15.0, 3.0)
+
+                FG_PCT_base = col1.number_input("FG% (FG_PCT)", 0.0, 1.0, 0.45)
+                FG3_PCT = col2.number_input("3P% (FG3_PCT)", 0.0, 1.0, 0.36)
+                FT_PCT = col1.number_input("FT% (FT_PCT)", 0.0, 1.0, 0.80)
+
+                REB = col2.number_input("Rebounds (REB)", 0.0, 20.0, 6.0)
+                AST = col1.number_input("Assists (AST)", 0.0, 15.0, 4.0)
+                TOV = col2.number_input("Turnovers (TOV)", 0.0, 10.0, 2.0)
                 STL = col1.number_input("Steals (STL)", 0.0, 5.0, 1.0)
+                BLK = col2.number_input("Blocks (BLK)", 0.0, 5.0, 1.0)
+                PF = col1.number_input("Personal Fouls (PF)", 0.0, 6.0, 2.0)
+
+                PTS = col2.number_input("Points (PTS)", 0.0, 60.0, 15.0)
+                PLUS_MINUS = col1.number_input("Plus/Minus (PLUS_MINUS)", -20, 20, 0)
+                TD3 = col2.number_input("Triple Doubles (TD3)", 0, 40, 0)
 
                 submitted = st.form_submit_button("Predict Tier")
 
@@ -649,15 +672,22 @@ if tab == "Models":
 
                 # Convert to DataFrame in correct order
                 X_new = pd.DataFrame([{
-                    "PTS": PTS,
-                    "AST": AST,
-                    "REB": REB,
-                    "TS_PCT": TS_PCT,
-                    "USG_PCT": USG_PCT,
-                    "DEF_RATING": DEF_RATING,
-                    "OFF_RATING": OFF_RATING,
+                    "MIN_base": MIN_base,
+                    "FGM_base": FGM_base,
                     "FG3M": FG3M,
-                    "STL": STL
+                    "FTM": FTM,
+                    "FG_PCT_base": FG_PCT_base,
+                    "FG3_PCT": FG3_PCT,
+                    "FT_PCT": FT_PCT,
+                    "REB": REB,
+                    "AST": AST,
+                    "TOV": TOV,
+                    "STL": STL,
+                    "BLK": BLK,
+                    "PF": PF,
+                    "PTS": PTS,
+                    "PLUS_MINUS": PLUS_MINUS,
+                    "TD3": TD3
                 }], columns=default_features)
 
                 pred = model.predict(X_new)[0]
