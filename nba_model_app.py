@@ -23,6 +23,7 @@ import numpy as np
 import statsmodels.api as sm
 import plotly.graph_objects as go
 import seaborn as sns
+import base64
 from MLP import prep_data, train_model_mlp
 from pca_app import get_nba_stats, scrape_salaries, merge_stats_salaries, run_pca
 
