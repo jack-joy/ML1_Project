@@ -2,26 +2,6 @@
 
 **Members:** Eddie, Chase, Adam, Neel, Timothy, Jack, Harrison
 
----
-
-<<<<<<< HEAD
-### **RESEARCH QUESTIONS & OBJECTIVES**:
-1. Can we accurately predict player salary, all-star nominations, and other accomplishment features?  
-2. Can we classify whether a player will be an all-star using season statistics?  
-3. Can we cluster players based on performance metrics and valuation to identify archetypes or undervalued players?  
-4. Can we classify players into different salary tiers using per game performance metrics?  
-5. Can we predict players trade value based on player statistics to determine the possible outcomes of trade scenarios.
-
-
-### **MODELS**:
-1. Multiple Linear Regression
-2. Logistic Regression
-3. KNN: K-Nearest Neighbors
-4. K-Means Clustering
-    - Clustering players into different archetypes based on performance metrics
-    - Clustering players based on their valuation to identify undervalued/overvalued players
-5. PCA Model
-6. MLP Neural Network
 =======
 ## **Overview**
 Using all of the models we have used this semester, we analyze NBA player data from the 2024–2025 seasons to answer a set of research questions. We clean and transform the data, explore it with descriptive statistics and visualizations, and build multiple predictive models depending on the task. Finally, we deploy a Streamlit app to showcase our findings interactively.
@@ -32,8 +12,8 @@ Using all of the models we have used this semester, we analyze NBA player data f
 ## **Research Questions & Objectives**
 1. Can we accurately predict player salary, all-star nominations, and other accomplishment features?  
 2. Can we classify whether a player will be an all-star using season statistics?  
-3. **K-Means:** Can we cluster players based on performance metrics and valuation to identify archetypes or undervalued players?  
-4. **KNN:** Can we classify players into different salary tiers using per game performance metrics?  
+3. Can we cluster players based on performance metrics and valuation to identify archetypes or undervalued players?  
+4. Can we classify players into different salary tiers using per game performance metrics?  
 5. Build a trade analysis model based on projected evaluated salaries and other evaluative metrics.  
 6. Predict next season’s win/loss record based on current roster and player statistics.
 
