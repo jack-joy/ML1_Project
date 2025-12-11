@@ -531,7 +531,17 @@ if tab == "Models":
 
 # KNN --------------------------------------------------------------------------------------------------------------------------------
     if model_choice == "KNN":
-        st.write("KNN")
+        st.title("K-Nearest Neighbors: Predicting Player Salary")
+        st.write('''
+                 Using a player's per game performance metrics, can we accurately classify
+                 players into different salary tiers in order to predict a salary range for new players
+                 to be paid based on their peformance.
+
+                 Below, the default features include a player's per game statistics for 
+                 fitting a KNN model, but users also have the option of selecting 
+                 the k best features from all columns in the dataset based on mutual information
+                 before fitting a KNN model.
+                 ''')
 
         default_features = [
             'MIN_base', 'FGM_base', 'FG3M', 'FTM', 
