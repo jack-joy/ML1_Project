@@ -13,7 +13,7 @@ Using all of the models we have used this semester, we analyze NBA player data f
 1. Can we accurately predict player salary, all-star nominations, and other accomplishment features?  
 2. Can we classify whether a player will be an all-star using season statistics?  
 3. **K-Means:** Can we cluster players based on performance metrics and valuation to identify archetypes or undervalued players?  
-4. **KNN:** Can we classify players into archetypes using playing style and performance metrics?  
+4. **KNN:** Can we classify players into different salary tiers using per game performance metrics?  
 5. Build a trade analysis model based on projected evaluated salaries and other evaluative metrics.  
 6. Predict next season’s win/loss record based on current roster and player statistics.
 
