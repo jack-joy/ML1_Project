@@ -28,4 +28,3 @@ dependencies:
       - ydata_profiling
       - pdfkit
       - wkhtmltopdf
-      - base64
