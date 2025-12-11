@@ -2,12 +2,11 @@
 
 **Members:** Eddie, Chase, Adam, Neel, Timothy, Jack, Harrison
 
-=======
+---
 ## **Overview**
 Using all of the models we have used this semester, we analyze NBA player data from the 2024–2025 seasons to answer a set of research questions. We clean and transform the data, explore it with descriptive statistics and visualizations, and build multiple predictive models depending on the task. Finally, we deploy a Streamlit app to showcase our findings interactively.
 
 ---
->>>>>>> 64e7703968b10405aefa7852841b3bdc1fa9111b
 
 ## **Research Questions & Objectives**
 1. Can we accurately predict player salary, all-star nominations, and other accomplishment features?  
@@ -45,7 +44,7 @@ Using all of the models we have used this semester, we analyze NBA player data f
 3. Run Data Processing Scripts: `python scrape_salaries.py` and `python get_clean_data.py`
 4. Run Streamlit App: `streamlit run nba_model_app.py`
 
---
+---
 
 ## **Data Sources**
 1. NBA API: https://github.com/swar/nba_api
