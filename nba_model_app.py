@@ -208,7 +208,36 @@ if tab == "Data Table":
 # -------------------------------------------------------------------------------------------------------------------------------------
 # Exploratory Data Analysis
 # -------------------------------------------------------------------------------------------------------------------------------------
-#if tab == "Exploratory Data Analysis":
+if tab == "Exploratory Data Analysis":
+    # Setting path to the EDA PDF
+    pdf_path = "FULL_NBA_EDA.pdf"
+
+    st.header("Exploratory Data Analysis")
+
+    # Reading the PDF file
+    with open(pdf_path, "rb") as f:
+        pdf_bytes = f.read()
+
+    # 1) Inline viewer in the app
+    # Converting to base64 so it can be embedded in an iframe
+    base64_pdf = base64.b64encode(pdf_bytes).decode("utf-8")
+    pdf_display = f"""
+        <iframe
+            src="data:application/pdf;base64,{base64_pdf}"
+            width="100%"
+            height="800"
+            type="application/pdf">
+        </iframe>
+    """
+    st.markdown(pdf_display, unsafe_allow_html=True)
+
+    # 2) Download button for the PDF
+    st.download_button(
+        label="Download full EDA report (PDF)",
+        data=pdf_bytes,
+        file_name="EDA_ON_ALL_DATA.pdf",
+        mime="application/pdf",
+    )
     
 # -------------------------------------------------------------------------------------------------------------------------------------
 # Models
