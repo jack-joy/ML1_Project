@@ -111,7 +111,7 @@ if tab == "README":
     **Members:** Eddie, Chase, Adam, Neel, Timothy, Jack, Harrison
 
 ### **OVERVIEW**:
-Using all of the models we have used this semester, we will analyze NBA player data from the 2024-2025 seasons to answer various research questions. We clean and transform the data, explore it through descriptive statistics and visualizations, and build multiple predictive models depending on the prediction type. Finally, we deploy a Streamlit app to showcase our findings in an interactive way.
+Using all of the models we have used this semester, we will analyze NBA player data from the 2024-2025 seasons to answer various research questions. We will clean and transform the data, explore it through descriptive statistics and visualizations, and build multiple predictive models depending on the prediction type. Finally, we deploy a Streamlit app to showcase our findings in an interactive way.
 
 ### **RESEARCH QUESTIONS & OBJECTIVES**:
 1. Can we accurately predict player salary, all-star nominations, and other accomplishment features?
@@ -146,7 +146,7 @@ Using all of the models we have used this semester, we will analyze NBA player d
 ### **DATA SOURCES**: 
 1. *NBA API:* https://github.com/swar/nba_api
 2. ESPN Salary Data -- Scraped from https://www.espn.com/nba/salaries
-3. `2012-2023 NBA Stats.csv
+3. 2012-2023 NBA Stats.csv
 
     """)
 
