@@ -106,7 +106,8 @@ tab = st.sidebar.radio("Navigation", ["README", "Data Table", "Exploratory Data 
 # -------------------------------------------------------------------------------------------------------------------------------------
 if tab == "README":
     st.title("**Machine Learning 1 Final Project**: NBA General Manager Trade Simulation")
-    st.write("""
+    st.write(
+        """
     **Members:** Eddie, Chase, Adam, Neel, Timothy, Jack, Harrison
 
 ### **OVERVIEW**:
@@ -114,41 +115,39 @@ Using all of the models we have used this semester, we will analyze NBA player d
 
 ### **RESEARCH QUESTIONS & OBJECTIVES**:
 1. Can we accurately predict player salary, all-star nominations, and other accomplishment features?
-2. Assess which players are undervalued/overvalued in order to build a new team and predict transfers.
-3. Can we predict the categorical variable of whether a player will be an all-star based on their season statistics?
+2. Can we predict the categorical variable of whether a player will be an all-star based on their season statistics?
+3. K-Means: Can we cluster players based on their performance metrics and valuation to get a sense of player archetypes and undervalued players? 
 4. KNN: Can we classify players into different archetypes based on their playing style and performance metrics?
 5. Create a trade analysis model based on projected evaluated salaries + other evaluative metrics.
 6. Predict win/loss for next season based on current roster and player statistics.
 
-
 ### **MODELS**:
-1. Multiple Linear Regression (Add Polynomial?) -- Adam 
-2. Logistic Regression -- Tim
-3. KNN: K-Nearest Neighbors -- Chase
-4. K-Means Clustering -- Eddie
+1. Multiple Linear Regression (Add Polynomial?)
+2. Logistic Regression
+3. KNN: K-Nearest Neighbors
+4. K-Means Clustering
     - Clustering players into different archetypes based on performance metrics
     - Clustering players based on their valuation to identify undervalued/overvalued players
-5. PCA Model -- 
-6. MLP Neural Network --6
-7. Model Extension -- Harrison
+5. PCA Model
+6. MLP Neural Network -- Trade Analysis
 
-### **PROJECT/FILE STRUCTURE**
-
+### **App Structure**:
+1. Page 1: This ReadMe file.
+2. Page 2: Interactive data table to view the data.
+3. Page 3: Exploratory Data Analysis (EDA) to get a better understanding of the data.
+4. Page 4: Statistical model to evaluate research questions.
 
 ### **INSTRUCTIONS FOR VIEWERS - HOW TO RUN**
-Our x file does y
-Our z file does a
-...
+1. Create Conda Environment: `conda env create -f environment.yml`
+2. Activate conda environment: conda activate nba_ml_project
+3. Run `scrape_salaries.py` and `get_clean_data.py`
+4. Run App: `streamlit run nba_model_app.py` 
 
 ### **DATA SOURCES**: 
 1. *NBA API:* https://github.com/swar/nba_api
 2. ESPN Salary Data -- Scraped from https://www.espn.com/nba/salaries
 3. `2012-2023 NBA Stats.csv
-             
-### ** Viewing Data**
-1. Run get_data.py
-2. Run scrape_salaries.py
-3. Run data_cleaning.py
+
     """)
 
 # -------------------------------------------------------------------------------------------------------------------------------------

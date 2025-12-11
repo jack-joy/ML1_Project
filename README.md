@@ -1,53 +1,53 @@
-# **Machine Learning 1 Final Project**: NBA General Manager Trade Simulation
-#### **Members** Eddie, Chase, Adam, Neel, Timothy, Jack, Harrison
+# **Machine Learning 1 Final Project: NBA General Manager Trade Simulation**
 
----------------------------------------------------------------------------------------------------------------------
+**Members:** Eddie, Chase, Adam, Neel, Timothy, Jack, Harrison
 
-### **OVERVIEW**:
-Using all of the models we have used this semester, we will analyze NBA player data from the 2024-2025 seasons to answer various research questions. We will clean and transform the data, explore it through descriptive statistics and visualizations, and build multiple predictive models depending on the prediction type. Finally, we deploy a Streamlit app to showcase our findings in an interactive way.
+---
 
-### **RESEARCH QUESTIONS & OBJECTIVES**:
-1.
+## **Overview**
+Using all of the models we have used this semester, we analyze NBA player data from the 2024–2025 seasons to answer a set of research questions. We clean and transform the data, explore it with descriptive statistics and visualizations, and build multiple predictive models depending on the task. Finally, we deploy a Streamlit app to showcase our findings interactively.
 
-### **MODELS**:
-1. Multiple Linear Regression
-2. Logistic Regression
-3. KNN: K-Nearest Neighbors
-4. K-Means Clustering
-    - Clustering players into different archetypes based on performance metrics
-    - Clustering players based on their valuation to identify undervalued/overvalued players
-5. PCA Model
-6. MLP Neural Network
-7. Model Extension
+---
 
-### **PROJECT/FILE STRUCTURE**
-1. DATA
-    1. 24-25_salaries.csv
-    2. nba_data_with_salaries.csv
-    3. player_stats
-2. eda.ipynb
-3. environment.yml
-4. FINAL_PROJECT_INSTRUCTIONS.pdf
-5. get_clean_data.py
-6. k_means_model.py
-7. knn_pca_model.py
-8. LEBRON Data - Sheet1.csv
-9. logistic_regression_model.ipynb
-10. Logo.png
-11. ml1pca.ipynb
-12. MLP_Test.ipynb
-13. MLP.py
-14. mlr_model.py
-15. nba_model.py
-16. nba_model_app.py
-17. README.md
-18. scrape_salaries.py
+## **Research Questions & Objectives**
+1. Can we accurately predict player salary, all-star nominations, and other accomplishment features?  
+2. Can we classify whether a player will be an all-star using season statistics?  
+3. **K-Means:** Can we cluster players based on performance metrics and valuation to identify archetypes or undervalued players?  
+4. **KNN:** Can we classify players into archetypes using playing style and performance metrics?  
+5. Build a trade analysis model based on projected evaluated salaries and other evaluative metrics.  
+6. Predict next season’s win/loss record based on current roster and player statistics.
 
+---
 
-### **DATA SOURCES**: 
-1. *NBA API:* https://github.com/swar/nba_api
-2. ESPN Salary Data -- Scraped from https://www.espn.com/nba/salaries
-3. `2012-2023 NBA Stats.csv`
+## **Models**
+1. Multiple Linear Regression (Polynomial extensions optional)  
+2. Logistic Regression  
+3. K-Nearest Neighbors (KNN)  
+4. K-Means Clustering  
+   - Clustering players into performance archetypes  
+   - Clustering by valuation to identify overvalued/undervalued players  
+5. Principal Component Analysis (PCA)  
+6. MLP Neural Network — Trade Analysis
 
-### ** Viewing Data**
-1. Run get_clean_data.py
+---
+
+## **App Structure**
+1. **Page 1:** README  
+2. **Page 2:** Interactive data table  
+3. **Page 3:** Exploratory Data Analysis (EDA)  
+4. **Page 4:** Statistical model pages
+
+---
+
+## **Instructions for Viewers — How to Run**
+1. Create the Conda environment: `conda env create -f environment.yml`
+2. Activate Environment: `conda activate nba_ml_project`
+3. Run Data Processing Scripts: `python scrape_salaries.py` and `python get_clean_data.py`
+4. Run Streamlit App: `streamlit run nba_model_app.py`
+
+--
+
+## **Data Sources**
+1. NBA API: https://github.com/swar/nba_api
+2. ESPN Salary Data: https://www.espn.com/nba/salaries
+3. 2012–2023 NBA Stats.csv
