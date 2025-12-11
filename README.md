@@ -7,7 +7,12 @@
 Using all of the models we have used this semester, we will analyze NBA player data from the 2024-2025 seasons to answer various research questions. We will clean and transform the data, explore it through descriptive statistics and visualizations, and build multiple predictive models depending on the prediction type. Finally, we deploy a Streamlit app to showcase our findings in an interactive way.
 
 ### **RESEARCH QUESTIONS & OBJECTIVES**:
-1.
+1. Can we accurately predict player salary, all-star nominations, and other accomplishment features?  
+2. Can we classify whether a player will be an all-star using season statistics?  
+3. Can we cluster players based on performance metrics and valuation to identify archetypes or undervalued players?  
+4. Can we classify players into different salary tiers using per game performance metrics?  
+5. Can we predict players trade value based on player statistics to determine the possible outcomes of trade scenarios.
+
 
 ### **MODELS**:
 1. Multiple Linear Regression
@@ -18,7 +23,6 @@ Using all of the models we have used this semester, we will analyze NBA player d
     - Clustering players based on their valuation to identify undervalued/overvalued players
 5. PCA Model
 6. MLP Neural Network
-7. Model Extension
 
 ### **PROJECT/FILE STRUCTURE**
 1. DATA
