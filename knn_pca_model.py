@@ -111,10 +111,24 @@ def train_knn(
     # Predictions
     y_pred = model.predict(X_test)
 
+    cr = classification_report(y_test, y_pred, output_dict=True)
+    rounded_cr = {}
+
+    for key, value in cr.items():
+        if isinstance(value, dict):
+            # Round inner metrics
+            rounded_cr[key] = {
+                m: round(v, 3) if isinstance(v, float) else v
+                for m, v in value.items()
+            }
+        else:
+            # Accuracy (a float)
+            rounded_cr[key] = round(value, 3)
+
     # Metrics
     metrics = {
-        "accuracy": accuracy_score(y_test, y_pred),
-        "classification_report": classification_report(y_test, y_pred, output_dict=True),
+        "accuracy": round(accuracy_score(y_test, y_pred), 3),
+        "classification_report": rounded_cr,
     }
 
     cm = confusion_matrix(y_test, y_pred)
