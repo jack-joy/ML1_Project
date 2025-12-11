@@ -146,7 +146,7 @@ Using all of the models we have used this semester, we will analyze NBA player d
 ### **DATA SOURCES**: 
 1. *NBA API:* https://github.com/swar/nba_api
 2. ESPN Salary Data -- Scraped from https://www.espn.com/nba/salaries
-3. `2012-2023 NBA Stats.csv
+3. 2012-2023 NBA Stats.csv
 
     """)
 
