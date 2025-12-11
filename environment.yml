@@ -27,3 +27,4 @@ dependencies:
       - ipywidgets
       - ydata_profiling
       - pdfkit
+      - wkhtmltopdf
