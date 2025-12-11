@@ -106,62 +106,48 @@ tab = st.sidebar.radio("Navigation", ["README", "Data Table", "Exploratory Data 
 # -------------------------------------------------------------------------------------------------------------------------------------
 if tab == "README":
     st.title("**Machine Learning 1 Final Project**: NBA General Manager Trade Simulation")
-    st.write("""
+    st.write(
+        """
     **Members:** Eddie, Chase, Adam, Neel, Timothy, Jack, Harrison
 
 ### **OVERVIEW**:
 Using all of the models we have used this semester, we will analyze NBA player data from the 2024-2025 seasons to answer various research questions. We will clean and transform the data, explore it through descriptive statistics and visualizations, and build multiple predictive models depending on the prediction type. Finally, we deploy a Streamlit app to showcase our findings in an interactive way.
 
 ### **RESEARCH QUESTIONS & OBJECTIVES**:
-1. Can we accurately predict player salary, all-star nominations, and other accomplishment features?  
-2. Can we classify whether a player will be an all-star using season statistics?  
-3. Can we cluster players based on performance metrics and valuation to identify archetypes or undervalued players?  
-4. Can we classify players into different salary tiers using per game performance metrics?  
-5. Can we predict players trade value based on player statistics to determine the possible outcomes of trade scenarios.
-
-
+1. Can we accurately predict player salary, all-star nominations, and other accomplishment features?
+2. Can we predict the categorical variable of whether a player will be an all-star based on their season statistics?
+3. K-Means: Can we cluster players based on their performance metrics and valuation to get a sense of player archetypes and undervalued players? 
+4. KNN: Can we classify players into different archetypes based on their playing style and performance metrics?
+5. Create a trade analysis model based on projected evaluated salaries + other evaluative metrics.
+6. Predict win/loss for next season based on current roster and player statistics.
 
 ### **MODELS**:
-1. Multiple Linear Regression
+1. Multiple Linear Regression (Add Polynomial?)
 2. Logistic Regression
-3. KNN: K-Nearest Neighbors 
+3. KNN: K-Nearest Neighbors
 4. K-Means Clustering
     - Clustering players into different archetypes based on performance metrics
     - Clustering players based on their valuation to identify undervalued/overvalued players
 5. PCA Model
-6. MLP Neural Network
+6. MLP Neural Network -- Trade Analysis
 
+### **App Structure**:
+1. Page 1: This ReadMe file.
+2. Page 2: Interactive data table to view the data.
+3. Page 3: Exploratory Data Analysis (EDA) to get a better understanding of the data.
+4. Page 4: Statistical model to evaluate research questions.
 
-### **PROJECT/FILE STRUCTURE**
-1. DATA
-    1. 24-25_salaries.csv
-    2. nba_data_with_salaries.csv
-    3. player_stats
-2. eda.ipynb
-3. environment.yml
-4. FINAL_PROJECT_INSTRUCTIONS.pdf
-5. get_clean_data.py
-6. k_means_model.py
-7. knn_pca_model.py
-8. LEBRON Data - Sheet1.csv
-9. logistic_regression_model.ipynb
-10. Logo.png
-11. ml1pca.ipynb
-12. MLP_Test.ipynb
-13. MLP.py
-14. mlr_model.py
-15. nba_model.py
-16. nba_model_app.py
-17. README.md
-18. scrape_salaries.py
+### **INSTRUCTIONS FOR VIEWERS - HOW TO RUN**
+1. Create Conda Environment: `conda env create -f environment.yml`
+2. Activate conda environment: conda activate nba_ml_project
+3. Run `scrape_salaries.py` and `get_clean_data.py`
+4. Run App: `streamlit run nba_model_app.py` 
 
 ### **DATA SOURCES**: 
 1. *NBA API:* https://github.com/swar/nba_api
 2. ESPN Salary Data -- Scraped from https://www.espn.com/nba/salaries
-3. `2012-2023 NBA Stats.csv`
-             
-### ** Viewing Data**
-1. Provided in github repo under DATA folder
+3. `2012-2023 NBA Stats.csv
+
     """)
 
 # -------------------------------------------------------------------------------------------------------------------------------------
@@ -545,17 +531,28 @@ if tab == "Models":
 
 # KNN --------------------------------------------------------------------------------------------------------------------------------
     if model_choice == "KNN":
-        st.write("KNN")
+        st.title("K-Nearest Neighbors: Predicting Player Salary")
+        st.write('''
+                 Using a player's per game performance metrics, can we accurately classify
+                 players into different salary tiers in order to predict a salary range for new players
+                 to be paid based on their peformance.
+
+                 Below, the default features include a player's per game statistics for 
+                 fitting a KNN model, but users also have the option of selecting 
+                 the k best features from all columns in the dataset based on mutual information
+                 before fitting a KNN model.
+                 ''')
 
         default_features = [
-            'PTS', 'AST', 'REB', 'TS_PCT', 'USG_PCT',
-            'DEF_RATING', 'OFF_RATING', 'FG3M', 'STL'
+            'MIN_base', 'FGM_base', 'FG3M', 'FTM', 
+            'FG_PCT_base', 'FG3_PCT', 'FT_PCT', 'REB', 'AST', 
+            'TOV', 'STL', 'BLK', 'PF', 'PTS', 'PLUS_MINUS', 'TD3'
         ]
 
         # --- User controls ---
         selection = st.selectbox(
             "Feature Selection Method",
-            ["default", "pca", "selectk"]
+            ["default", "selectk"]
         )
 
         # Reset model metrics if user changes feature selection method
@@ -631,6 +628,18 @@ if tab == "Models":
 
             st.write("### Confusion Matrix")
             st.write(results["confusion_matrix"])
+
+            st.write("### Salary Tiers")
+            bins = results["bins"]
+
+            for i in range(len(bins) - 1):
+                lower = bins[i]
+                upper = bins[i + 1]
+
+                st.write(
+                    f"**Tier {i}:** \${lower:,.0f} → \${upper:,.0f}"
+                )
+            
         
         if (
             "knn_model" in st.session_state
@@ -645,15 +654,25 @@ if tab == "Models":
                 # Layout inputs in two columns for cleaner UI
                 col1, col2 = st.columns(2)
 
-                PTS = col1.number_input("Points (PTS)", 0.0, 50.0, 10.0)
-                AST = col2.number_input("Assists (AST)", 0.0, 20.0, 5.0)
-                REB = col1.number_input("Rebounds (REB)", 0.0, 20.0, 6.0)
-                TS_PCT = col2.number_input("True Shooting % (TS_PCT)", 0.2, 0.8, 0.55)
-                USG_PCT = col1.number_input("Usage % (USG_PCT)", 5.0, 40.0, 22.0)
-                DEF_RATING = col2.number_input("Defensive Rating", 80.0, 130.0, 110.0)
-                OFF_RATING = col1.number_input("Offensive Rating", 80.0, 140.0, 115.0)
-                FG3M = col2.number_input("3-Pointers Made (FG3M)", 0.0, 10.0, 2.0)
+                MIN_base = col1.number_input("Minutes (MIN)", 0.0, 48.0, 28.0)
+                FGM_base = col2.number_input("Field Goals Made (FGM)", 0.0, 20.0, 5.0)
+                FG3M = col1.number_input("3-Pointers Made (FG3M)", 0.0, 10.0, 2.0)
+                FTM = col2.number_input("Free Throws Made (FTM)", 0.0, 15.0, 3.0)
+
+                FG_PCT_base = col1.number_input("FG% (FG_PCT)", 0.0, 1.0, 0.45)
+                FG3_PCT = col2.number_input("3P% (FG3_PCT)", 0.0, 1.0, 0.36)
+                FT_PCT = col1.number_input("FT% (FT_PCT)", 0.0, 1.0, 0.80)
+
+                REB = col2.number_input("Rebounds (REB)", 0.0, 20.0, 6.0)
+                AST = col1.number_input("Assists (AST)", 0.0, 15.0, 4.0)
+                TOV = col2.number_input("Turnovers (TOV)", 0.0, 10.0, 2.0)
                 STL = col1.number_input("Steals (STL)", 0.0, 5.0, 1.0)
+                BLK = col2.number_input("Blocks (BLK)", 0.0, 5.0, 1.0)
+                PF = col1.number_input("Personal Fouls (PF)", 0.0, 6.0, 2.0)
+
+                PTS = col2.number_input("Points (PTS)", 0.0, 60.0, 15.0)
+                PLUS_MINUS = col1.number_input("Plus/Minus (PLUS_MINUS)", -20, 20, 0)
+                TD3 = col2.number_input("Triple Doubles (TD3)", 0, 40, 0)
 
                 submitted = st.form_submit_button("Predict Tier")
 
@@ -662,15 +681,22 @@ if tab == "Models":
 
                 # Convert to DataFrame in correct order
                 X_new = pd.DataFrame([{
-                    "PTS": PTS,
-                    "AST": AST,
-                    "REB": REB,
-                    "TS_PCT": TS_PCT,
-                    "USG_PCT": USG_PCT,
-                    "DEF_RATING": DEF_RATING,
-                    "OFF_RATING": OFF_RATING,
+                    "MIN_base": MIN_base,
+                    "FGM_base": FGM_base,
                     "FG3M": FG3M,
-                    "STL": STL
+                    "FTM": FTM,
+                    "FG_PCT_base": FG_PCT_base,
+                    "FG3_PCT": FG3_PCT,
+                    "FT_PCT": FT_PCT,
+                    "REB": REB,
+                    "AST": AST,
+                    "TOV": TOV,
+                    "STL": STL,
+                    "BLK": BLK,
+                    "PF": PF,
+                    "PTS": PTS,
+                    "PLUS_MINUS": PLUS_MINUS,
+                    "TD3": TD3
                 }], columns=default_features)
 
                 pred = model.predict(X_new)[0]
@@ -681,43 +707,43 @@ if tab == "Models":
     if model_choice == "PCA":
         st.write("PCA")
 
-    if "df_merged" not in st.session_state:
-        st.session_state.df_merged = None
+        if "df_merged" not in st.session_state:
+            st.session_state.df_merged = None
 
-    if st.button("Fetch & Process Data"):
-        with st.spinner("Loading NBA base & advanced stats..."):
-            stats = get_nba_stats()
+        if st.button("Fetch & Process Data"):
+            with st.spinner("Loading NBA base & advanced stats..."):
+                stats = get_nba_stats()
 
-        with st.spinner("Scraping salary data..."):
-            salaries = scrape_salaries()
+            with st.spinner("Scraping salary data..."):
+                salaries = scrape_salaries()
 
-        with st.spinner("Merging datasets..."):
-            st.session_state.df_merged = merge_stats_salaries(stats, salaries)
+            with st.spinner("Merging datasets..."):
+                st.session_state.df_merged = merge_stats_salaries(stats, salaries)
 
-        st.success("Data successfully merged!")
+            st.success("Data successfully merged!")
 
-    # Only show df_merged if it actually exists
-    if st.session_state.df_merged is not None:
-        df_merged = st.session_state.df_merged
-        st.write(df_merged.head())
+        # Only show df_merged if it actually exists
+        if st.session_state.df_merged is not None:
+            df_merged = st.session_state.df_merged
+            st.write(df_merged.head())
 
-        with st.spinner("Running PCA..."):
-            pca, pca_df = run_pca(df_merged)
+            with st.spinner("Running PCA..."):
+                pca, pca_df = run_pca(df_merged)
 
-        st.success("PCA completed!")
+            st.success("PCA completed!")
 
-        st.write("### PCA Components (PC1–PC5)")
-        st.dataframe(pca_df)
+            st.write("### PCA Components (PC1–PC5)")
+            st.dataframe(pca_df)
 
-        st.write("### Explained Variance")
-        st.bar_chart(pca.explained_variance_ratio_)
+            st.write("### Explained Variance")
+            st.bar_chart(pca.explained_variance_ratio_)
 
-        st.download_button(
-            "Download PCA CSV",
-            pca_df.to_csv(index=False),
-            "pca_components.csv",
-            "text/csv"
-        )
+            st.download_button(
+                "Download PCA CSV",
+                pca_df.to_csv(index=False),
+                "pca_components.csv",
+                "text/csv"
+            )
 
 
 # MLP Neural Network -----------------------------------------------------------------------------------------------------------------

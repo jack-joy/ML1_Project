@@ -26,3 +26,5 @@ dependencies:
       - dash
       - ipywidgets
       - ydata_profiling
+      - pdfkit
+      - wkhtmltopdf

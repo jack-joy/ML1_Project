@@ -1,1 +1,3 @@
-DATA/*
+# Ignore ydata-profiling reports
+EDA_ON_ALL_DATA.html
+EDA_ON_TOP_5_FEATURES.html
