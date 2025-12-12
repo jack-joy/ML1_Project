@@ -858,15 +858,14 @@ if tab == "Models":
         # ============================
         # WHY PCA
         # ============================
-        st.subheader("Why PCA?")
+        st.subheader("Why we need PCA:")
 
         st.markdown("""
-        We’re working with a large set of overlapping basketball statistics, many of which measure similar ideas
-        in different ways. PCA helps reduce this complexity by identifying a smaller number of
+        Since we are working with a large set of overlapping basketball statistics, we need to reduce the complexity this presents. PCA helps by identifying a smaller number of
         core dimensions that explain how players differ.
 
-        Instead of comparing players stat-by-stat, PCA gives us a structured way to understand
-        how players impact the game at a higher level.
+        Instead of comparing players on a per-stat basis, PCA gives us a better way to understand
+        how players impact the game at a grander scale.
         """)
 
         # ============================
