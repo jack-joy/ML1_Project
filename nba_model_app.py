@@ -852,7 +852,7 @@ if tab == "Models":
                 st.success(f"Predicted Salary Tier: **{pred}**")
 
 # PCA --------------------------------------------------------------------------------------------------------------------------------
-if model_choice == "PCA":
+    if model_choice == "PCA":
     st.header("Principal Component Analysis (PCA)")
 
     # Initialize once
