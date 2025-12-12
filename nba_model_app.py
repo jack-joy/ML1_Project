@@ -20,6 +20,8 @@ from sklearn.metrics import (
     r2_score
 )
 import matplotlib.pyplot as plt
+from ydata_profiling import ProfileReport
+from streamlit.components.v1 import html
 import numpy as np
 import statsmodels.api as sm
 import plotly.graph_objects as go
@@ -211,35 +213,17 @@ if tab == "Data Table":
 # Exploratory Data Analysis
 # -------------------------------------------------------------------------------------------------------------------------------------
 if tab == "Exploratory Data Analysis":
-    # Setting path to the EDA PDF
-    pdf_path = "FULL_NBA_EDA.pdf"
-
     st.header("Exploratory Data Analysis")
 
-    # Reading the PDF file
-    with open(pdf_path, "rb") as f:
-        pdf_bytes = f.read()
+    # Path to your already-generated HTML file
+    html_path = "EDA.html"   # <-- use your filename
 
-    # 1) Inline viewer in the app
-    # Converting to base64 so it can be embedded in an iframe
-    base64_pdf = base64.b64encode(pdf_bytes).decode("utf-8")
-    pdf_display = f"""
-        <iframe
-            src="data:application/pdf;base64,{base64_pdf}"
-            width="100%"
-            height="800"
-            type="application/pdf">
-        </iframe>
-    """
-    st.markdown(pdf_display, unsafe_allow_html=True)
+    # Load the HTML file as a string
+    with open(html_path, "r", encoding="utf-8") as f:
+        report_html = f.read()
 
-    # 2) Download button for the PDF
-    st.download_button(
-        label="Download full EDA report (PDF)",
-        data=pdf_bytes,
-        file_name="EDA_ON_ALL_DATA.pdf",
-        mime="application/pdf",
-    )
+    # Display the HTML inside Streamlit
+    html(report_html, height=900, scrolling=True)
     
 # -------------------------------------------------------------------------------------------------------------------------------------
 # Models
