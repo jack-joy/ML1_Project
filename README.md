@@ -50,3 +50,9 @@ Using all of the models we have used this semester, we analyze NBA player data f
 1. NBA API: https://github.com/swar/nba_api
 2. ESPN Salary Data: https://www.espn.com/nba/salaries
 3. 2012–2023 NBA Stats.csv
+
+
+---
+**Link to app dashboard**: https://ml1project-nba.streamlit.app/
+
+**Link to presentation slides**: https://docs.google.com/presentation/d/19ICyufQWbHA0C849dZXp_vIfJSb9GIW_mdxjlFuhz7A/edit?usp=sharing
