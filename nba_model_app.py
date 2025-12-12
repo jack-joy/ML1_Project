@@ -879,77 +879,48 @@ if model_choice == "PCA":
         st.success("PCA completed!")
 
         # ============================
-        # INTERPRETATION (TEXT)
+        # WHY PCA (CLEAN, DIRECT)
         # ============================
         st.subheader("Why PCA?")
 
         st.markdown("""
-With a large number of overlapping basketball statistics, **Principal Component Analysis (PCA)** helps us
-identify a smaller set of *core dimensions* that explain how players differ from one another.
+We’re working with a large set of overlapping basketball statistics, many of which measure similar ideas
+in different ways. PCA helps reduce this complexity by identifying a smaller number of
+**core dimensions** that explain how players differ.
 
-Rather than evaluating players stat-by-stat, PCA reveals the **underlying structure** of player impact.
-""")
-
-        st.markdown("""
-- **PC1 (Scoring & Usage):**  
-  Explains the most variation and largely reflects scoring volume and offensive responsibility,
-  separating high-usage creators from role players.
-
-- **PC2 (Rebounding & Interior Presence):**  
-  Captures rebounding and size-related impact, helping distinguish bigs from guards.
-
-- **PC3 (Efficiency & Positive Impact):**  
-  Reflects players who score efficiently, take care of the ball, and consistently drive winning outcomes.
-
-- **PC4 (Defensive Style):**  
-  Separates defensive archetypes, such as rim-protecting centers versus steal-heavy perimeter defenders.
-
-- **PC5 (Pace & System Effects):**  
-  More sensitive to team context and pace, capturing stylistic or system-driven differences.
-""")
-
-        st.info("""
-**Together, these components give us a clean, interpretable structure for how players actually impact the game.**
+Instead of comparing players stat-by-stat, PCA gives us a structured way to understand
+**how players impact the game at a higher level**.
 """)
 
         # ============================
-        # PROFESSIONAL PCA VISUAL
-        # ============================
-        st.subheader("Player Landscape: PC1 vs PC2")
-
-        viz_df = pca_df.merge(
-            df_merged[["PLAYER_NAME", "SALARY"]],
-            on="PLAYER_NAME",
-            how="left"
-        )
-
-        st.markdown("""
-Each point represents a player projected into a lower-dimensional space.
-Players closer together have **similar statistical profiles**.
-""")
-
-        st.scatter_chart(
-            viz_df,
-            x="PC1",
-            y="PC2",
-            size="SALARY",
-            height=500
-        )
-
-        # ============================
-        # EXPLAINED VARIANCE
+        # EXPLAINED VARIANCE + INTERPRETATION
         # ============================
         st.subheader("Explained Variance by Component")
-
         st.bar_chart(pca.explained_variance_ratio_)
 
         explained = pca.explained_variance_ratio_
-        st.markdown(f"""
-- **PC1:** {explained[0]*100:.1f}% of total variance  
-- **PC2:** {explained[1]*100:.1f}% of total variance  
-- **PC3–PC5:** capture more subtle but meaningful differences  
 
-Even the first two components already explain a substantial portion of how NBA players differ.
+        st.markdown(f"""
+- **PC1 – Scoring & Usage ({explained[0]*100:.1f}%)**  
+  Captures offensive volume and responsibility — points, shots, free throws, and usage.
+  This component cleanly separates primary creators from role players.
+
+- **PC2 – Rebounding & Interior Presence ({explained[1]*100:.1f}%)**  
+  Driven by rebounding and size-related stats, helping distinguish bigs from guards.
+
+- **PC3 – Efficiency & Positive Impact**  
+  Reflects players who score efficiently, limit turnovers, and consistently contribute to winning outcomes.
+
+- **PC4 – Defensive Style**  
+  Separates different defensive archetypes, such as rim protection versus perimeter disruption.
+
+- **PC5 – Pace & System Effects**  
+  More sensitive to team context and tempo, capturing stylistic or system-driven differences.
+""")
+
+        st.info("""
+Taken together, these components give us a compact and interpretable structure
+for understanding how NBA players differ in terms of role, impact, and style.
 """)
 
         # ============================
