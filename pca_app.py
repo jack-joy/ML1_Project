@@ -9,7 +9,14 @@ from sklearn.decomposition import PCA
 import requests
 import time
 
-# Title
+# -------------------------------------
+# PAGE SETUP
+# -------------------------------------
+st.set_page_config(layout="wide")
+
+# -------------------------------------
+# TITLE
+# -------------------------------------
 st.title("NBA PCA Explorer (2024–25)")
 
 st.write("""
@@ -20,7 +27,6 @@ runs PCA, and displays the resulting components for modeling.
 # -------------------------------------
 # SESSION STATE INIT
 # -------------------------------------
-
 if "df_merged" not in st.session_state:
     st.session_state.df_merged = None
 
@@ -31,27 +37,29 @@ if "pca_model" not in st.session_state:
     st.session_state.pca_model = None
 
 # -------------------------------------
-# FUNCTIONS
+# DATA FUNCTIONS
 # -------------------------------------
 
 def get_nba_stats():
     stats_base = LeagueDashPlayerStats(
-        season='2024-25',
-        per_mode_detailed='PerGame'
+        season="2024-25",
+        per_mode_detailed="PerGame"
     ).get_data_frames()[0]
     time.sleep(1)
 
     stats_adv = LeagueDashPlayerStats(
-        season='2024-25',
-        per_mode_detailed='PerGame',
-        measure_type_detailed_defense='Advanced'
+        season="2024-25",
+        per_mode_detailed="PerGame",
+        measure_type_detailed_defense="Advanced"
     ).get_data_frames()[0]
     time.sleep(1)
 
     stats_base["PLAYER_NAME"] = stats_base["PLAYER_NAME"].apply(unidecode)
     stats_adv["PLAYER_NAME"] = stats_adv["PLAYER_NAME"].apply(unidecode)
 
-    nba_df = stats_base.merge(stats_adv, on="PLAYER_ID", suffixes=("_base", "_adv"))
+    nba_df = stats_base.merge(
+        stats_adv, on="PLAYER_ID", suffixes=("_base", "_adv")
+    )
 
     if "PLAYER_NAME_adv" in nba_df.columns:
         nba_df.drop(columns=["PLAYER_NAME_adv"], inplace=True)
@@ -62,6 +70,7 @@ def get_nba_stats():
 
 def scrape_salaries():
     all_rows = []
+
     for i in range(1, 14):
         url = f"https://www.espn.com/nba/salaries/_/year/2025/page/{i}"
         headers = {"User-Agent": "Mozilla/5.0"}
@@ -69,9 +78,15 @@ def scrape_salaries():
         soup = BeautifulSoup(html, "html.parser")
 
         names = [a.text.strip() for a in soup.select("td:has(a)")[::2]]
-        salaries = [td.text.strip() for td in soup.select('td[style*="text-align:right"]:not([width])')]
+        salaries = [
+            td.text.strip()
+            for td in soup.select('td[style*="text-align:right"]:not([width])')
+        ]
 
-        df = pd.DataFrame({"PLAYER_NAME": names, "SALARY": salaries})
+        df = pd.DataFrame({
+            "PLAYER_NAME": names,
+            "SALARY": salaries
+        })
         all_rows.append(df)
 
     df_salaries = pd.concat(all_rows, ignore_index=True)
@@ -81,21 +96,25 @@ def scrape_salaries():
         .str.replace("$", "", regex=False)
         .str.replace(",", "", regex=False)
     )
-    df_salaries["SALARY"] = pd.to_numeric(df_salaries["SALARY"], errors="coerce")
+    df_salaries["SALARY"] = pd.to_numeric(
+        df_salaries["SALARY"], errors="coerce"
+    )
 
     return df_salaries
 
 
 def merge_stats_salaries(stats, salaries):
     stats["helper"] = (
-        stats["PLAYER_NAME"].str.lower()
+        stats["PLAYER_NAME"]
+        .str.lower()
         .str.replace(".", "", regex=False)
         .str.replace("'", "", regex=False)
         .str.replace(" ", "", regex=False)
     )
 
     salaries["helper"] = (
-        salaries["PLAYER_NAME"].str.lower()
+        salaries["PLAYER_NAME"]
+        .str.lower()
         .str.replace(".", "", regex=False)
         .str.replace("'", "", regex=False)
         .str.replace(" ", "", regex=False)
@@ -112,18 +131,31 @@ def merge_stats_salaries(stats, salaries):
     return merged
 
 
+# -------------------------------------
+# CACHED DATA LOADER (IMPORTANT)
+# -------------------------------------
+@st.cache_data(show_spinner=False)
+def load_merged_data():
+    stats = get_nba_stats()
+    salaries = scrape_salaries()
+    return merge_stats_salaries(stats, salaries)
+
+
+# -------------------------------------
+# PCA FUNCTION
+# -------------------------------------
 def run_pca(df):
     df_model = df[df["MIN_base"] >= 15].copy()
 
     pca_features = [
-        'PTS', 'FGA_base', 'FG3A', 'FTM', 'FTA',
-        'TS_PCT', 'EFG_PCT',
-        'OREB', 'DREB', 'OREB_PCT', 'DREB_PCT',
-        'AST', 'AST_TO',
-        'TOV', 'PF',
-        'STL', 'BLK', 'DEF_RATING',
-        'USG_PCT', 'PACE',
-        'PLUS_MINUS'
+        "PTS", "FGA_base", "FG3A", "FTM", "FTA",
+        "TS_PCT", "EFG_PCT",
+        "OREB", "DREB", "OREB_PCT", "DREB_PCT",
+        "AST", "AST_TO",
+        "TOV", "PF",
+        "STL", "BLK", "DEF_RATING",
+        "USG_PCT", "PACE",
+        "PLUS_MINUS"
     ]
 
     df_model = df_model.dropna(subset=pca_features)
@@ -134,24 +166,23 @@ def run_pca(df):
     pca = PCA(n_components=5)
     X_pca = pca.fit_transform(X_scaled)
 
-    pca_df = pd.DataFrame(X_pca, columns=[f"PC{i+1}" for i in range(5)])
+    pca_df = pd.DataFrame(
+        X_pca,
+        columns=[f"PC{i+1}" for i in range(5)]
+    )
     pca_df["PLAYER_NAME"] = df_model["PLAYER_NAME"].values
 
     return pca, pca_df
 
-# -------------------------------------
-# UI BUTTONS
-# -------------------------------------
 
+# -------------------------------------
+# UI
+# -------------------------------------
 st.header("Step 1: Fetch NBA Data")
 
 if st.button("Fetch & Merge Data"):
-    with st.spinner("Loading NBA statistics..."):
-        stats = get_nba_stats()
-    with st.spinner("Scraping ESPN salaries..."):
-        salaries = scrape_salaries()
-    with st.spinner("Merging datasets..."):
-        st.session_state.df_merged = merge_stats_salaries(stats, salaries)
+    with st.spinner("Fetching & merging NBA data (cached)..."):
+        st.session_state.df_merged = load_merged_data()
 
     st.success("Merged data loaded!")
     st.dataframe(st.session_state.df_merged.head())
