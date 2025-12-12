@@ -65,10 +65,10 @@ def prep_data(path="DATA/nba_data_with_salaries.csv"):
 
     #Final Score
     df["final"] = (
-        1.3 * df["impact_z"] 
-        + 1.0 * df["salary_surplus_norm"]
-        + 0.5 * df["age_score"]
-        + 0.3 * df["freq_score"]
+        1.4 * df["impact_z"] 
+        + 0.7 * df["salary_surplus_norm"]
+        + 0.6 * df["age_score"]
+        + 0.8 * df["freq_score"]
     )
 
     final_mean = df["final"].mean()

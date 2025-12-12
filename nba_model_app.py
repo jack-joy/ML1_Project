@@ -826,25 +826,19 @@ if tab == "Models":
 
         # Trade Graph
         teams = ["Team A", "Team B"]
-        out_vals = [A_out, B_out]
-        in_vals = [A_in, B_in]
+        net_vals = [A_in - A_out, B_in - B_out]
 
-        x = np.arange(len(teams))  
-        width = 0.35               
+        fig, ax = plt.subplots(figsize=(7, 4))
 
-        fig, ax = plt.subplots(figsize=(8, 5))
+        colors = ["red" if v < 0 else "green" for v in net_vals]
 
-        ax.bar(x - width/2, out_vals, width, label="Outgoing Trade Value", color="red")
+        ax.bar(teams, net_vals, color=colors)
+        ax.set_ylabel("Net Trade Value")
+        ax.set_title("Net Trade Value by Team")
 
-        ax.bar(x + width/2, in_vals, width, label="Incoming Trade Value", color="green")
 
-        ax.set_ylabel("Trade Value")
-        ax.set_title("Trade Value Comparison")
-        ax.set_xticks(x)
-        ax.set_xticklabels(teams)
-        ax.legend()
+        ax.axhline(0, color="black", linewidth=1)
 
-        plt.tight_layout()
         st.pyplot(fig)
 
 
@@ -856,11 +850,15 @@ if tab == "Models":
             st.markdown(
                 f"""
                 **{player}**  
-                - Trade Value: **{row['final_score_pred']:.2f}**  
+                - Trade Value: **{row['final_score_pred']:.2f}** 
+                - AGE: {row['AGE_base']}  
                 - PTS: {row['PTS']}  
                 - REB: {row['REB']}  
-                - AST: {row['AST']}  
-                - TS%: {row['TS_PCT']:.3f}  
+                - AST: {row['AST']} 
+                - STL: {row['STL']}
+                - BLK: {row['BLK']} 
+                - TS%: {row['TS_PCT']:.3f} 
+                - 3P%: {row['FG3_PCT']:.3f} 
                 - Salary: ${row['SALARY']:,.0f}  
                 """
             )
