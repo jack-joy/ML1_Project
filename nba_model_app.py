@@ -284,7 +284,7 @@ if tab == "Models":
 
         # --- TAB INTERFACE ---
         # Separating the view into distinct sections for clarity
-        tab1, tab2 = st.tabs(["Model Overview", "Feature Analysis"])
+        tab1, tab2, tab3 = st.tabs(["Model Overview", "Feature Analysis", "Scouting Tool"])
 
         # TAB 1: EXECUTIVE SUMMARY & PERFORMANCE
         with tab1:
@@ -307,59 +307,34 @@ if tab == "Models":
             This model uses a **Multiple Linear Regression (MLR)** approach. It takes 13 key statistical inputs (like VORP, Shooting Splits, and Usage) 
             to predict a player's **LEBRON** score.
                     
-            **LEBRON**: From the creators of the metric, "LEBRON evaluates a player’s contributions using the box score (weighted using boxPIPM’s weightings stabilized using Offensive Archetypes) and advanced on/off calculations (using Luck-Adjusted RAPM methodology) for a holistic evaluation of player impact per 100 possessions on-court."
+            **LEBRON**: From the creators of the metric, "LEBRON evaluates a player's contributions using the box score (weighted using boxPIPM's weightings stabilized using Offensive Archetypes) and advanced on/off calculations (using Luck-Adjusted RAPM methodology) for a holistic evaluation of player impact per 100 possessions on-court." From Basketball Index.
             
             **Why this matters:** By isolating the relationship between these box-score stats and the LEBRON metric, we can objectively evaluate 
             if a player is underperforming or overperforming their 'expected' impact based on their raw production.
             """)
             
-            # Scatter Plot: Actual vs Predicted
+            # Scatter Plot: Actual vs Predicted using st.scatter_chart
             st.markdown("#### Actual vs. Predicted LEBRON Scores")
-            fig = go.Figure()
-            player_names = X_test.index
-
-            # Add scatter plot for actual vs predicted
-            fig.add_trace(go.Scatter(
-                x=y_test,
-                y=y_pred,
-                mode='markers',
-                name='Predictions',
-                marker=dict(size=8, opacity=0.6),
-                text=player_names,
-                hovertemplate='<b>%{text}</b><br>Actual: %{x:.2f}<br>Predicted: %{y:.2f}<br>Error: %{customdata:.2f}<extra></extra>',
-                customdata=[abs(a - p) for a, p in zip(y_test, y_pred)]
-            ))
-
-            # Add diagonal line (perfect prediction line)
-            min_val = min(y_test.min(), y_pred.min())
-            max_val = max(y_test.max(), y_pred.max())
-            fig.add_trace(go.Scatter(
-                x=[min_val, max_val],
-                y=[min_val, max_val],
-                mode='lines',
-                name='Perfect Prediction',
-                line=dict(color='gray', dash='dash')
-            ))
-
-            # Add red vertical lines showing the difference between actual and predicted
-            for actual, predicted in zip(y_test, y_pred):
-                fig.add_trace(go.Scatter(
-                    x=[actual, actual],
-                    y=[actual, predicted],
-                    mode='lines',
-                    line=dict(color='red', width=1),
-                    showlegend=False,
-                    hoverinfo='skip'
-                ))
-
-            fig.update_layout(
-                xaxis_title='Actual LEBRON',
-                yaxis_title='Predicted LEBRON',
+            player_names = y_test.index.tolist()
+            
+            # Prepare data for scatter chart
+            scatter_data = pd.DataFrame({
+                'Actual LEBRON': y_test,
+                'Predicted LEBRON': y_pred,
+                'Player': player_names,
+                'Error': abs(y_test - y_pred)
+            }).reset_index(drop=True)
+            
+            # Create scatter chart
+            st.scatter_chart(
+                scatter_data,
+                x='Actual LEBRON',
+                y='Predicted LEBRON',
+                color='#FF4B4B',
+                size='Error',
                 height=500
             )
 
-            st.plotly_chart(fig, use_container_width=True)
-            
             with st.expander("View Detailed Statistical Summary (Raw Output)"):
                 st.text(model.summary())
 
@@ -385,6 +360,151 @@ if tab == "Models":
             * **Positive Bars:** Focus development here. Increasing these stats directly correlates with a higher LEBRON impact score.
             * **Negative Bars:** These stats might have diminishing returns or are negatively correlated with impact in this specific model structure.
             """)
+
+        # TAB 3: SCOUTING TOOL
+        with tab3:
+            st.markdown("Input player statistics to predict their LEBRON impact score and projected role.")
+            
+            # Create two columns for input organization
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                st.markdown("#### Shooting & Efficiency")
+                three_pct = st.slider("3P%", 0.0, 1.0, 0.35, 0.01, help="Three-point percentage")
+                three_par = st.slider("3PAr", 0.0, 0.8, 0.35, 0.01, help="Three-point attempt rate (3PA / FGA)")
+                efg_pct = st.slider("eFG%", 0.0, 1.0, 0.50, 0.01, help="Effective field goal percentage")
+                ft_pct = st.slider("FT%", 0.0, 1.0, 0.75, 0.01, help="Free throw percentage")
+                
+                st.markdown("#### Box Score Stats")
+                ast = st.slider("AST", 0.0, 12.0, 3.0, 0.1, help="Assists per game")
+                trb = st.slider("TRB", 0.0, 15.0, 4.0, 0.1, help="Total rebounds per game")
+                stl = st.slider("STL", 0.0, 3.0, 0.8, 0.1, help="Steals per game")
+                blk = st.slider("BLK", 0.0, 3.0, 0.3, 0.1, help="Blocks per game")
+                
+            with col2:
+                st.markdown("#### Advanced Metrics")
+                usg_pct = st.slider("USG%", 0.0, 40.0, 20.0, 0.5, help="Usage percentage")
+                ws48 = st.slider("WS/48", -0.1, 0.3, 0.08, 0.01, help="Win shares per 48 minutes")
+                vorp = st.slider("VORP", -2.0, 10.0, 0.5, 0.1, help="Value over replacement player")
+                
+                st.markdown("#### Player Info")
+                age = st.slider("Age", 18, 40, 25, 1, help="Player age")
+                minutes = st.slider("Minutes", 0.0, 40.0, 20.0, 0.5, help="Minutes per game")
+                
+                st.markdown("---")
+                player_name = st.text_input("Player Name (Optional)", placeholder="Enter player name for report...")
+            
+            # Create prediction button
+            predict_button = st.button("📊 Predict LEBRON & Role", type="primary", use_container_width=True)
+            
+            if predict_button:
+                # Create input array for prediction
+                input_data = pd.DataFrame({
+                    '3P%': [three_pct],
+                    '3PAr': [three_par],
+                    'eFG%': [efg_pct],
+                    'FT%': [ft_pct],
+                    'AST': [ast],
+                    'TRB': [trb],
+                    'STL': [stl],
+                    'BLK': [blk],
+                    'USG%': [usg_pct],
+                    'WS/48': [ws48],
+                    'VORP': [vorp],
+                    'Age': [age],
+                    'Minutes': [minutes]
+                })
+                
+                # Add constant and make prediction
+                input_data_const = sm.add_constant(input_data, has_constant='add')
+                predicted_leborn = model.predict(input_data_const)[0]
+                
+                # Define role classification based on LEBRON ranges
+                if predicted_leborn < -2.0:
+                    role = "G-League"
+                elif predicted_leborn < -1.0:
+                    role = "End-of-Bench"
+                elif predicted_leborn < 0.0:
+                    role = "Solid Bench"
+                elif predicted_leborn < 0.5:
+                    role = "6-Man Caliber"
+                elif predicted_leborn < 1.0:
+                    role = "Solid Starter"
+                elif predicted_leborn < 2.0:
+                    role = "Above Average Starter"
+                elif predicted_leborn < 3.0:
+                    role = "All-Star"
+                elif predicted_leborn < 4.0:
+                    role = "All-NBA"
+                else:
+                    role = "MVP"
+                
+                # Display results
+                st.markdown("---")
+                st.subheader("Prediction Results")
+                
+                # Create result columns
+                res_col1, res_col2, res_col3 = st.columns([1, 2, 1])
+                
+                with res_col2:
+                    # Display LEBRON value
+                    st.markdown(f"""
+                    <div style='text-align: center; padding: 25px; border-radius: 10px; background-color: #000000; border-left: 6px solid #FF4B4B;'>
+                    <p style='margin-bottom: 8px; color: #aaaaaa; font-size: 25px; text-transform: uppercase; letter-spacing: 1px;'>LEBRON IMPACT SCORE</p>
+                    <h1 style='color: #ffffff; margin: 0; font-weight: 700; font-size: 48px;'>{predicted_leborn:.2f}</h1>
+                    </div>
+                    """, unsafe_allow_html=True)
+                
+                # Detailed breakdown
+                with st.expander("View Detailed Breakdown", expanded=True):
+                    # Create comparison with average player
+                    avg_leborn = y.mean()
+                    comparison = predicted_leborn - avg_leborn
+                                        
+                    if comparison > 0:
+                        st.success(f"**+{comparison:.2f}** above average LEBRON (Average: {avg_leborn:.2f})")
+                    else:
+                        st.error(f"**{comparison:.2f}** below average LEBRON (Average: {avg_leborn:.2f})")
+                    
+                    # Key strengths analysis
+                    st.markdown("#### Key Contributing Factors")
+                    
+                    # Identify top 3 positive contributors
+                    contributions = {}
+                    for feature in final_features:
+                        coef = model.params[feature]
+                        value = input_data[feature].iloc[0]
+                        
+                        # Get approximate average for context
+                        if feature in X.mean().index:
+                            avg_value = X[feature].mean()
+                            contribution = coef * (value - avg_value)
+                            contributions[feature] = contribution
+                    
+                    # Sort by absolute contribution
+                    top_contributors = sorted(contributions.items(), key=lambda x: abs(x[1]), reverse=True)[:3]
+                    
+                    for feature, contribution in top_contributors:
+                        if contribution > 0:
+                            st.write(f"**{feature}**: +{contribution:.3f}")
+                        else:
+                            st.write(f"**{feature}**: {contribution:.3f}")
+                    
+                    # Role description
+                    st.markdown("#### Role Evaluation")
+                    role_descriptions = {
+                        "G-League": "Player likely needs development in G-League before NBA consideration.",
+                        "End-of-Bench": "Depth player for injury replacement or specific situational use.",
+                        "Solid Bench": "Reliable rotation player who can contribute meaningful minutes.",
+                        "6-Man Caliber": "Elite bench player capable of leading second unit, potential starter.",
+                        "Solid Starter": "Reliable starting-caliber player for most NBA teams.",
+                        "Above Average Starter": "Impactful starter who elevates team performance.",
+                        "All-Star": "One of the league's top players, perennial All-Star candidate.",
+                        "All-NBA": "Elite player, among the very best at their position.",
+                        "MVP": "Franchise cornerstone, league MVP candidate."
+                    }
+                    
+                    st.info(f"**{role}**: {role_descriptions.get(role, '')}")
         
 # Logistic Regression ----------------------------------------------------------------------------------------------------------------
     if model_choice == "Logistic Regression":
