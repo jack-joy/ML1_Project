@@ -5,6 +5,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from PIL import Image
 from knn_pca_model import train_knn
+from pca_app import load_merged_data, run_pca
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
@@ -851,47 +852,41 @@ if tab == "Models":
                 st.success(f"Predicted Salary Tier: **{pred}**")
 
 # PCA --------------------------------------------------------------------------------------------------------------------------------
-    if model_choice == "PCA":
-        st.write("PCA")
+if model_choice == "PCA":
+    st.write("PCA")
 
-        if "df_merged" not in st.session_state:
-            st.session_state.df_merged = None
+    if "df_merged" not in st.session_state:
+        st.session_state.df_merged = None
 
-        if st.button("Fetch & Process Data"):
-            with st.spinner("Loading NBA base & advanced stats..."):
-                stats = get_nba_stats()
+    # Load merged data ONCE (cached)
+    if st.button("Fetch & Process Data"):
+        with st.spinner("Loading PCA data (cached)…"):
+            st.session_state.df_merged = load_merged_data()
 
-            with st.spinner("Scraping salary data..."):
-                salaries = scrape_salaries()
+        st.success("Data successfully merged!")
 
-            with st.spinner("Merging datasets..."):
-                st.session_state.df_merged = merge_stats_salaries(stats, salaries)
+    # Run PCA only if data exists
+    if st.session_state.df_merged is not None:
+        df_merged = st.session_state.df_merged
+        st.write(df_merged.head())
 
-            st.success("Data successfully merged!")
+        with st.spinner("Running PCA..."):
+            pca, pca_df = run_pca(df_merged)
 
-        # Only show df_merged if it actually exists
-        if st.session_state.df_merged is not None:
-            df_merged = st.session_state.df_merged
-            st.write(df_merged.head())
+        st.success("PCA completed!")
 
-            with st.spinner("Running PCA..."):
-                pca, pca_df = run_pca(df_merged)
+        st.write("### PCA Components (PC1–PC5)")
+        st.dataframe(pca_df)
 
-            st.success("PCA completed!")
+        st.write("### Explained Variance")
+        st.bar_chart(pca.explained_variance_ratio_)
 
-            st.write("### PCA Components (PC1–PC5)")
-            st.dataframe(pca_df)
-
-            st.write("### Explained Variance")
-            st.bar_chart(pca.explained_variance_ratio_)
-
-            st.download_button(
-                "Download PCA CSV",
-                pca_df.to_csv(index=False),
-                "pca_components.csv",
-                "text/csv"
-            )
-
+        st.download_button(
+            "Download PCA CSV",
+            pca_df.to_csv(index=False),
+            "pca_components.csv",
+            "text/csv"
+        )
 
 # MLP Neural Network -----------------------------------------------------------------------------------------------------------------
     if model_choice == "MLP Trade Analysis":
