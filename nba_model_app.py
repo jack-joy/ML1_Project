@@ -390,9 +390,6 @@ if tab == "Models":
                 st.markdown("#### Player Info")
                 age = st.slider("Age", 18, 40, 25, 1, help="Player age")
                 minutes = st.slider("Minutes", 0.0, 40.0, 20.0, 0.5, help="Minutes per game")
-                
-                st.markdown("---")
-                player_name = st.text_input("Player Name (Optional)", placeholder="Enter player name for report...")
             
             # Create prediction button
             predict_button = st.button("📊 Predict LEBRON & Role", type="primary", use_container_width=True)
