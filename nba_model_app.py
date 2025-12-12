@@ -852,77 +852,64 @@ if tab == "Models":
                 st.success(f"Predicted Salary Tier: **{pred}**")
 
 # PCA --------------------------------------------------------------------------------------------------------------------------------
-if model_choice == "PCA":
-    st.header("Principal Component Analysis (PCA)")
+# PCA --------------------------------------------------------------------------------------------------------------------------------
+    if model_choice == "PCA":
+        st.header("Principal Component Analysis (PCA)")
 
-    # Initialize once
-    if "df_merged" not in st.session_state:
-        with st.spinner("Loading PCA data..."):
-            st.session_state.df_merged = load_merged_data()
+        # Initialize once
+        if "df_merged" not in st.session_state:
+            with st.spinner("Loading PCA data..."):
+                st.session_state.df_merged = load_merged_data()
 
-    df_merged = st.session_state.df_merged
+        df_merged = st.session_state.df_merged
 
-    # ----------------------------
-    # Run PCA
-    # ----------------------------
-    with st.spinner("Running PCA..."):
-        pca, pca_df = run_pca(df_merged)
+        # ----------------------------
+        # Run PCA
+        # ----------------------------
+        with st.spinner("Running PCA..."):
+            pca, pca_df = run_pca(df_merged)
 
-    st.success("PCA completed!")
+        st.success("PCA completed!")
 
-    # ============================
-    # WHY PCA
-    # ============================
-    st.subheader("Why PCA?")
+        # ============================
+        # WHY PCA
+        # ============================
+        st.subheader("Why PCA?")
 
-    st.markdown("""
-We’re working with a large set of overlapping basketball statistics, many of which measure similar ideas
-in different ways. PCA helps reduce this complexity by identifying a smaller number of
-core dimensions that explain how players differ.
+        st.markdown("""
+        We’re working with a large set of overlapping basketball statistics, many of which measure similar ideas
+        in different ways. PCA helps reduce this complexity by identifying a smaller number of
+        core dimensions that explain how players differ.
 
-Instead of comparing players stat-by-stat, PCA gives us a structured way to understand
-how players impact the game at a higher level.
-""")
+        Instead of comparing players stat-by-stat, PCA gives us a structured way to understand
+        how players impact the game at a higher level.
+        """)
 
-    # ============================
-    # EXPLAINED VARIANCE
-    # ============================
-    st.subheader("Explained Variance by Component")
-    st.bar_chart(pca.explained_variance_ratio_)
+        # ============================
+        # EXPLAINED VARIANCE
+        # ============================
+        st.subheader("Explained Variance by Component")
+        st.bar_chart(pca.explained_variance_ratio_)
 
-    explained = pca.explained_variance_ratio_
+        explained = pca.explained_variance_ratio_
 
-    st.markdown(f"""
-- **PC1 – Scoring & Usage ({explained[0]*100:.1f}%)**  
-  Separates high-usage creators from role players.
+        st.markdown(f"""
+        - **PC1 – Scoring & Usage ({explained[0]*100:.1f}%)**  
+        - **PC2 – Rebounding & Interior Presence ({explained[1]*100:.1f}%)**  
+        - **PC3 – Efficiency & Positive Impact**  
+        - **PC4 – Defensive Style**  
+        - **PC5 – Pace & System Effects**
+        """)
 
-- **PC2 – Rebounding & Interior Presence ({explained[1]*100:.1f}%)**  
-  Distinguishes bigs from guards.
+        with st.expander("View PCA Component Scores"):
+            st.dataframe(pca_df)
 
-- **PC3 – Efficiency & Positive Impact**  
-  Highlights efficient, low-mistake contributors.
-
-- **PC4 – Defensive Style**  
-  Separates rim protectors from perimeter disruptors.
-
-- **PC5 – Pace & System Effects**  
-  Captures team context and tempo.
-""")
-
-    st.info("""
-Together, these components give us a clean and interpretable structure
-for understanding NBA player roles and impact.
-""")
-
-    with st.expander("View PCA Component Scores"):
-        st.dataframe(pca_df)
-
-    st.download_button(
-        "Download PCA CSV",
-        pca_df.to_csv(index=False),
-        "pca_components.csv",
-        "text/csv"
-    )
+        st.download_button(
+            "Download PCA CSV",
+            pca_df.to_csv(index=False),
+            "pca_components.csv",
+            "text/csv"
+        )
 
 
 # MLP Neural Network -----------------------------------------------------------------------------------------------------------------
